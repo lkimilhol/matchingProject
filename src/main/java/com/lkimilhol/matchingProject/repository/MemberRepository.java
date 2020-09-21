@@ -1,13 +1,13 @@
 package com.lkimilhol.matchingProject.repository;
 
 
-import com.lkimilhol.matchingProject.domain.Member;
+import com.lkimilhol.matchingProject.domain.MemberInfo;
 import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository {
-    Member save(Member member);
-    Optional<Member> findById(Long id);
-    Optional<Member> findByName(String name);
-    List<Member> findAll();
+    MemberInfo save(MemberInfo memberInfo);
+    Optional<MemberInfo> findById(Long id);
+    Optional<MemberInfo> findByNickname(String name);
+    List<MemberInfo> findAll();
 }
