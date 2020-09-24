@@ -18,10 +18,10 @@ public class MemberService {
     /*
      * 회원 가입
      */
-    public Long join(MemberInfo memberInfo) {
-        validateDuplicateMember(memberInfo); // 중복회원검증
+    public Long addMember(MemberInfo memberInfo) {
+//        validateDuplicateMember(memberInfo); // 중복회원검증
         memberRepository.save(memberInfo);
-        return memberInfo.getSeq();
+        return memberInfo.getId();
     }
 
     private void validateDuplicateMember(MemberInfo memberInfo) {
