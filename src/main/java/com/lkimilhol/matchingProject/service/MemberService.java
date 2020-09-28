@@ -4,6 +4,7 @@ import com.lkimilhol.matchingProject.domain.MemberInfo;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,8 @@ public class MemberService {
      */
     public Long addMember(MemberInfo memberInfo) {
 //        validateDuplicateMember(memberInfo); // 중복회원검증
+        memberInfo.setInsertTime(LocalDateTime.now());
+        memberInfo.setUpdateTime(LocalDateTime.now());
         memberRepository.save(memberInfo);
         return memberInfo.getId();
     }

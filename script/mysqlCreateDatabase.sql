@@ -1,8 +1,8 @@
 drop database if exists MATCHING;
 create database MATCHING;
 
-drop table if exists MEMBER_INFO;
-create table MEMBER_INFO
+drop table if exists member_info;
+create table member_info
 (
 	seq bigint auto_increment primary key,
 	nickname varchar(10) not null,

@@ -4,7 +4,6 @@ package com.lkimilhol.matchingProject.repository.JPA;
 import com.lkimilhol.matchingProject.domain.MemberInfo;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
