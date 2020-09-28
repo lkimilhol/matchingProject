@@ -3,9 +3,11 @@ package com.lkimilhol.matchingProject;
 import com.lkimilhol.matchingProject.repository.JPA.MemberInfoRepository;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
 import com.lkimilhol.matchingProject.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 
 
@@ -14,6 +16,7 @@ public class SpringConfig {
 
     private EntityManager em;
 
+    @Autowired
     public SpringConfig(EntityManager em) {
         this.em = em;
     }
@@ -25,7 +28,7 @@ public class SpringConfig {
 
     @Bean
     public MemberRepository memberRepository() {
-        return new MemberInfoRepository();
+        return new MemberInfoRepository(em);
     }
 
 }

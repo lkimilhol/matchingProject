@@ -1,20 +1,50 @@
 package com.lkimilhol.matchingProject.domain;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "MEMBER_INFO")
 public class MemberInfo {
 
-    private Long seq;
+    @Id
+    @Column(name = "seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     private String nickname;
     private String sex;
     private int age;
     private String country;
-    private Address address;
 
-    public Long getSeq() {
-        return seq;
+    @Column(name = "update_time", columnDefinition = "DATETIME")
+    private LocalDateTime updateTime;
+
+    @Column(name = "insert_time", columnDefinition = "DATETIME")
+    private LocalDateTime insertTime;
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
     }
 
-    public void setSeq(Long seq) {
-        this.seq = seq;
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public LocalDateTime getInsertTime() {
+        return insertTime;
+    }
+
+    public void setInsertTime(LocalDateTime insertTime) {
+        this.insertTime = insertTime;
+    }
+//    private Address address;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long seq) {
+        this.id = seq;
     }
 
     public String getNickname() {
@@ -49,12 +79,13 @@ public class MemberInfo {
         this.country = country;
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
 
 }
