@@ -1,8 +1,10 @@
 package com.lkimilhol.matchingProject.domain;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "MEMBER_INFO")
 public class MemberInfo {
 
     @Id
@@ -13,6 +15,28 @@ public class MemberInfo {
     private String sex;
     private int age;
     private String country;
+
+    @Column(name = "update_time", columnDefinition = "DATETIME")
+    private LocalDateTime updateTime;
+
+    @Column(name = "insert_time", columnDefinition = "DATETIME")
+    private LocalDateTime insertTime;
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public LocalDateTime getInsertTime() {
+        return insertTime;
+    }
+
+    public void setInsertTime(LocalDateTime insertTime) {
+        this.insertTime = insertTime;
+    }
 //    private Address address;
 
     public Long getId() {
