@@ -5,7 +5,7 @@ import com.lkimilhol.matchingProject.domain.MemberInfo;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberRepository {
+public interface MemberInfoRepository {
     MemberInfo save(MemberInfo memberInfo);
     Optional<MemberInfo> findById(Long id);
     Optional<MemberInfo> findByNickname(String name);

@@ -1,7 +1,7 @@
 package com.lkimilhol.matchingProject.service;
 
 import com.lkimilhol.matchingProject.domain.MemberInfo;
-import com.lkimilhol.matchingProject.repository.MemberRepository;
+import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -10,10 +10,10 @@ import java.util.Optional;
 
 @Transactional
 public class MemberService {
-    private final MemberRepository memberRepository;
+    private final MemberInfoRepository memberInfoRepository;
 
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
+    public MemberService(MemberInfoRepository memberInfoRepository) {
+        this.memberInfoRepository = memberInfoRepository;
     }
 
     /*
@@ -23,12 +23,12 @@ public class MemberService {
 //        validateDuplicateMember(memberInfo); // 중복회원검증
         memberInfo.setInsertTime(LocalDateTime.now());
         memberInfo.setUpdateTime(LocalDateTime.now());
-        memberRepository.save(memberInfo);
+        memberInfoRepository.save(memberInfo);
         return memberInfo.getId();
     }
 
     private void validateDuplicateMember(MemberInfo memberInfo) {
-        memberRepository.findByNickname(memberInfo.getNickname())
+        memberInfoRepository.findByNickname(memberInfo.getNickname())
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
@@ -38,10 +38,10 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<MemberInfo> findMembers() {
-        return memberRepository.findAll();
+        return memberInfoRepository.findAll();
     }
 
     public Optional<MemberInfo> findOne(Long memberId) {
-        return memberRepository.findById(memberId);
+        return memberInfoRepository.findById(memberId);
     }
 }
