@@ -11,10 +11,15 @@ public class MemberInfo {
     @Column(name = "seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
     private String nickname;
+
     private String sex;
+
     private int age;
+
     private String country;
+
 
     @Column(name = "update_time", columnDefinition = "DATETIME")
     private LocalDateTime updateTime;
