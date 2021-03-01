@@ -2,10 +2,7 @@ package com.lkimilhol.matchingProject.controller;
 
 import com.google.gson.Gson;
 import com.lkimilhol.matchingProject.domain.MemberInfo;
-import com.lkimilhol.matchingProject.dto.MemberInfoDto;
 import com.lkimilhol.matchingProject.service.impl.MemberSerivce;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
