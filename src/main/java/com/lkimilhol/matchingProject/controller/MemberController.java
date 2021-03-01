@@ -26,13 +26,12 @@ public class MemberController {
 
 
     @RequestMapping(value = "/member/new",
-            method = RequestMethod.POST,
-            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
+            method = RequestMethod.POST
     )
     @ResponseBody
     public MemberInfo addMember(
-            @Validated @RequestBody MemberInfoDto memberInfoDto) {
-        Long seq = memberSerivce.addMember(memberInfoDto.dto());
+            @Validated MemberInfo memberInfo) {
+        Long seq = memberSerivce.addMember(memberInfo);
         return null; //response 만든 뒤 수정
     }
 }
