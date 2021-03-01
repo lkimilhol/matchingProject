@@ -1,20 +1,26 @@
 package com.lkimilhol.matchingProject.dto;
 
 import com.lkimilhol.matchingProject.domain.MemberInfo;
-import lombok.Builder;
+import com.sun.istack.NotNull;
 import org.springframework.validation.annotation.Validated;
-
-import java.time.LocalDateTime;
 
 @Validated
 public class MemberInfoDto {
+    @NotNull
     private String nickname;
+    @NotNull
     private String sex;
+    @NotNull
     private int age;
+    @NotNull
     private String country;
 
-    public MemberInfo memberInfo() {
-        MemberInfo memberInfo = new MemberInfo();
-        return memberInfo;
+    public MemberInfo dto() {
+        return MemberInfo.builder()
+                .nickname(this.nickname)
+                .sex(this.sex)
+                .age(this.age)
+                .country(this.country)
+                .build();
     }
 }
