@@ -27,6 +27,10 @@ public class MemberInfo {
     @Column(name = "insert_time", columnDefinition = "DATETIME")
     private LocalDateTime insertTime;
 
+    public MemberInfo() {
+
+    }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
