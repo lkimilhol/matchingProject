@@ -1,11 +1,33 @@
 package com.lkimilhol.matchingProject.domain;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "MEMBER_INFO")
 public class MemberInfo {
+    public MemberInfo() {}
+
+    @Builder
+    public MemberInfo(
+            Long id,
+            String nickname,
+            String sex,
+            int age,
+            String country,
+            LocalDateTime updateTime,
+            LocalDateTime insertTime
+    ) {
+        this.id = id;
+        this.nickname = nickname;
+        this.sex = sex;
+        this.age = age;
+        this.country = country;
+        this.insertTime = insertTime;
+        this.updateTime = updateTime;
+    }
 
     @Id
     @Column(name = "seq")

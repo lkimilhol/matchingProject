@@ -1,18 +1,17 @@
 package com.lkimilhol.matchingProject.controller;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.lkimilhol.matchingProject.domain.MemberInfo;
-import com.lkimilhol.matchingProject.service.MemberService;
-import org.springframework.stereotype.Controller;
+import com.lkimilhol.matchingProject.service.impl.MemberSerivce;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class MemberController {
-    private final MemberService memberService;
+    private final MemberSerivce memberSerivce;
 
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
+    public MemberController(MemberSerivce memberSerivce) {
+        this.memberSerivce = memberSerivce;
     }
     private final Gson gson = new Gson();
 
@@ -23,11 +22,13 @@ public class MemberController {
     }
 
 
-    @RequestMapping(value = "/member/new" , method = RequestMethod.POST, produces = "application/json; charset=utf8")
+    @RequestMapping(value = "/member/new",
+            method = RequestMethod.POST
+    )
     @ResponseBody
-    public MemberInfo addMember(@RequestBody MemberInfo memberInfo) {
-        gson.toJson(memberInfo);
-        memberService.addMember(memberInfo);
-        return memberInfo;
+    public MemberInfo addMember(
+            @Validated MemberInfo memberInfo) {
+        Long seq = memberSerivce.addMember(memberInfo);
+        return null; //response 만든 뒤 수정
     }
 }
