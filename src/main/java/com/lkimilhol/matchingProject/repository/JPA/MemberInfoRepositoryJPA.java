@@ -5,9 +5,11 @@ import com.lkimilhol.matchingProject.domain.MemberInfo;
 import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class MemberInfoRepositoryJPA implements MemberInfoRepository {
     public MemberInfoRepositoryJPA(EntityManager em) {
         this.em = em;

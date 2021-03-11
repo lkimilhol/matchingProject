@@ -24,13 +24,15 @@ public class MemberInfoRepositoryJPATest {
     @Test
     public void save() {
         //given
-        MemberInfo memberInfo = new MemberInfo();
-        memberInfo.setNickname("yy");
-        memberInfo.setAge(81);
-        memberInfo.setCountry("kr");
-        memberInfo.setSex("m");
-        memberInfo.setInsertTime(LocalDateTime.now());
-        memberInfo.setUpdateTime(LocalDateTime.now());
+        MemberInfo memberInfo = MemberInfo.builder()
+                .nickname("test")
+                .age(18)
+                .country("kr")
+                .sex("m")
+                .insertTime(LocalDateTime.now())
+                .updateTime(LocalDateTime.now())
+                .build()
+                ;
 
         //when
         em.persist(memberInfo);

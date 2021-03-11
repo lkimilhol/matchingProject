@@ -1,6 +1,7 @@
 package com.lkimilhol.matchingProject.service.impl;
 
 import com.lkimilhol.matchingProject.domain.MemberInfo;
+import com.lkimilhol.matchingProject.dto.Member;
 import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
 import com.lkimilhol.matchingProject.service.MemberService;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,17 @@ public class MemberSerivce implements MemberService {
     /*
      * 회원 가입
      */
-    public Long addMember(MemberInfo memberInfo) {
-//        validateDuplicateMember(memberInfo); // 중복회원검증
-        memberInfo.setInsertTime(LocalDateTime.now());
-        memberInfo.setUpdateTime(LocalDateTime.now());
+    public MemberInfo addMember(Member member) {
+        MemberInfo memberInfo = MemberInfo.builder()
+                .nickname(member.getNickname())
+                .age(member.getAge())
+                .sex(member.getSex())
+                .country(member.getCountry())
+                .insertTime(LocalDateTime.now())
+                .updateTime(LocalDateTime.now())
+                .build();
         memberInfoRepository.save(memberInfo);
-        return memberInfo.getId();
+        return memberInfo;
     }
 
     private void validateDuplicateMember(MemberInfo memberInfo) {
