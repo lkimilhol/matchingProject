@@ -2,7 +2,9 @@ package com.lkimilhol.matchingProject.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class CustomException extends Exception {
+import java.util.function.Supplier;
+
+public class CustomException extends Exception{
     private ErrorInfo errorInfo;
 
     private Object[] args;
