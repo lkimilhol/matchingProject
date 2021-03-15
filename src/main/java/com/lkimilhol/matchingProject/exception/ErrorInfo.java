@@ -1,7 +1,12 @@
 package com.lkimilhol.matchingProject.exception;
 
 public enum ErrorInfo {
-    SUCCESS(200, "success"),
+    SUCCESS(200, "success")
+    , INVALID_PARAMETER(-99, "invalid parameter")
+
+    //회원
+    , DUPLICATED_NICKNAME(100, "duplicated nickname")
+    ,
     ;
 
     int code;

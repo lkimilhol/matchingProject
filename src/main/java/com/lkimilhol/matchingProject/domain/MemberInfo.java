@@ -1,17 +1,17 @@
 package com.lkimilhol.matchingProject.domain;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "MEMBER_INFO")
-@Builder
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberInfo {
-
     @Id
     @Column(name = "seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -32,3 +32,6 @@ public class MemberInfo {
     @Column(name = "insert_time", columnDefinition = "DATETIME")
     private LocalDateTime insertTime;
 }
+
+
+

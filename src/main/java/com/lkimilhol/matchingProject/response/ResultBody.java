@@ -1,6 +1,7 @@
 package com.lkimilhol.matchingProject.response;
 
 import com.lkimilhol.matchingProject.exception.ErrorInfo;
+import org.springframework.http.HttpStatus;
 
 public class ResultBody {
     private int serverCode;

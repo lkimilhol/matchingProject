@@ -1,19 +1,22 @@
 package com.lkimilhol.matchingProject.controller;
 
-import com.google.gson.Gson;
-import com.lkimilhol.matchingProject.domain.MemberInfo;
 import com.lkimilhol.matchingProject.dto.Member;
+import com.lkimilhol.matchingProject.exception.CustomException;
+import com.lkimilhol.matchingProject.exception.ErrorInfo;
 import com.lkimilhol.matchingProject.response.ResultBody;
-import com.lkimilhol.matchingProject.service.impl.MemberSerivce;
-import org.springframework.validation.annotation.Validated;
+import com.lkimilhol.matchingProject.service.MemberService;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 public class MemberController {
-    private final MemberSerivce memberSerivce;
+    private final MemberService memberService;
 
-    public MemberController(MemberSerivce memberSerivce) {
-        this.memberSerivce = memberSerivce;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
     }
 
     @PostMapping("/")
@@ -21,11 +24,20 @@ public class MemberController {
         return "";
     }
 
-
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/member/new", method = RequestMethod.POST)
     @ResponseBody public ResultBody addMember(
-            @Validated Member member
+            @Valid Member member, BindingResult bindingResult
     ) {
-        return new ResultBody(memberSerivce.addMember(member));
+        try {
+            if (bindingResult.hasErrors()) {
+                throw new CustomException(ErrorInfo.INVALID_PARAMETER, bindingResult.getAllErrors());
+            }
+            return new ResultBody(memberService.addMember(member));
+        } catch (CustomException e) {
+            return new ResultBody(e.getErrorInfo());
+        } catch (Exception e) {
+            return new ResultBody(e.getMessage());
+        }
     }
 }
