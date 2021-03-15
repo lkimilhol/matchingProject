@@ -2,7 +2,7 @@ package com.lkimilhol.matchingProject;
 
 import com.lkimilhol.matchingProject.repository.JPA.MemberInfoRepositoryJPA;
 import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
-import com.lkimilhol.matchingProject.service.impl.MemberSerivce;
+import com.lkimilhol.matchingProject.service.impl.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +21,8 @@ public class SpringConfig {
     }
 
     @Bean
-    public MemberSerivce memberService() {
-        return new MemberSerivce(memberRepository());
+    public MemberServiceImpl memberService() {
+        return new MemberServiceImpl(memberRepository());
     }
 
     @Bean

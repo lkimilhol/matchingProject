@@ -1,8 +1,10 @@
 package com.lkimilhol.matchingProject.response;
 
 import com.lkimilhol.matchingProject.exception.ErrorInfo;
+import org.springframework.http.HttpStatus;
 
 public class ResultBody {
+    HttpStatus httpStatus;
     private int serverCode;
     private String serverMsg;
     private Object results;
@@ -13,6 +15,7 @@ public class ResultBody {
     }
 
     public ResultBody() {
+        this.httpStatus = HttpStatus.OK;
         this.serverCode = ErrorInfo.SUCCESS.getErrorCode();
         this.serverMsg = ErrorInfo.SUCCESS.getErrorMessage();
     }

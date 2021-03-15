@@ -1,7 +1,9 @@
 package com.lkimilhol.matchingProject.exception;
 
 public enum ErrorInfo {
-    SUCCESS(200, "success"),
+    SUCCESS(200, "success")
+    , INVALID_PARAMETER(-99, "invalid parameter")
+    ,
     ;
 
     int code;

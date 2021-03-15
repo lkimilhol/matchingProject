@@ -1,5 +1,7 @@
 package com.lkimilhol.matchingProject.exception;
 
+import org.springframework.http.HttpStatus;
+
 public class CustomException extends Exception {
     private ErrorInfo errorInfo;
 

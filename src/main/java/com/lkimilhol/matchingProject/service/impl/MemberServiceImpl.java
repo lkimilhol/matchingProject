@@ -4,16 +4,15 @@ import com.lkimilhol.matchingProject.domain.MemberInfo;
 import com.lkimilhol.matchingProject.dto.Member;
 import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
 import com.lkimilhol.matchingProject.service.MemberService;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class MemberSerivce implements MemberService {
+public class MemberServiceImpl implements MemberService {
     private final MemberInfoRepository memberInfoRepository;
 
-    public MemberSerivce(MemberInfoRepository memberInfoRepository) {
+    public MemberServiceImpl(MemberInfoRepository memberInfoRepository) {
         this.memberInfoRepository = memberInfoRepository;
     }
 
