@@ -11,6 +11,10 @@ import java.util.Optional;
 @Service
 public interface MemberService {
     MemberInfo addMember(Member member) throws CustomException;
+
     List<MemberInfo> findMembers();
-    Optional<MemberInfo> findOne(Long memberId);
+
+    Optional<MemberInfo> findById(Long memberId);
+
+    Optional<MemberInfo> findByNickname(String nickname);
 }

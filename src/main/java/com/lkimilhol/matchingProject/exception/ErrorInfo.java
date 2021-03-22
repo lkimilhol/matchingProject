@@ -6,6 +6,7 @@ public enum ErrorInfo {
 
     //회원
     , DUPLICATED_NICKNAME(100, "duplicated nickname")
+    , NOT_EXISTS_MEMBER(101, "not exists member by nickname")
     ,
     ;
 
