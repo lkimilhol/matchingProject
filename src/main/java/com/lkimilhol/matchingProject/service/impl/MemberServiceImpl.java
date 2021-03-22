@@ -6,6 +6,7 @@ import com.lkimilhol.matchingProject.exception.CustomException;
 import com.lkimilhol.matchingProject.exception.ErrorInfo;
 import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
 import com.lkimilhol.matchingProject.service.MemberService;
+import com.mysql.cj.exceptions.ConnectionIsClosedException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,8 +20,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /*
-     * 회원 가입
+     회원 가입
      */
+    @Override
     public MemberInfo addMember(Member member) throws CustomException {
         checkDuplicateMember(member);
         MemberInfo memberInfo = MemberInfo.builder()
@@ -35,22 +37,36 @@ public class MemberServiceImpl implements MemberService {
         return memberInfo;
     }
 
-    private void checkDuplicateMember(Member member) throws CustomException {
-        Optional<MemberInfo> memberInfo = memberInfoRepository.findByNickname(member.getNickname());
-
-        if (memberInfo.isPresent()) {
-            throw new CustomException(ErrorInfo.DUPLICATED_NICKNAME);
-        }
-    }
-
     /*
-     * 전체 회원 조회
+     전체 회원 조회
      */
+    @Override
     public List<MemberInfo> findMembers() {
         return memberInfoRepository.findAll();
     }
 
-    public Optional<MemberInfo> findOne(Long memberId) {
-        return memberInfoRepository.findById(memberId);
+    /*
+    회원 정보 by id
+     */
+    @Override
+    public Optional<MemberInfo> findById(Long id) {
+        return memberInfoRepository.findById(id);
+    }
+
+    @Override
+    public Optional<MemberInfo> findByNickname(String nickname) {
+        Optional<MemberInfo> memberInfoByNickname = memberInfoRepository.findByNickname(nickname);
+
+        memberInfoByNickname.orElseThrow();
+
+        return memberInfoRepository.findByNickname(nickname);
+    }
+
+    private void checkDuplicateMember(Member member) throws CustomException {
+        Optional<MemberInfo> memberInfo = findByNickname(member.getNickname());
+
+        if (memberInfo.isPresent()) {
+            throw new CustomException(ErrorInfo.DUPLICATED_NICKNAME);
+        }
     }
 }
