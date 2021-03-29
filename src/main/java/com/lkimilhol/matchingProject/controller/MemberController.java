@@ -29,19 +29,12 @@ public class MemberController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/member/new", method = RequestMethod.POST)
     @ResponseBody
+    @ExceptionHandler(CustomException.class)
     public ResultBody addMember(
             @Valid Member member, BindingResult bindingResult
     ) {
-        try {
-            if (bindingResult.hasErrors()) {
-                throw new CustomException(ErrorInfo.INVALID_PARAMETER, bindingResult.getAllErrors());
-            }
-            return new ResultBody(memberService.addMember(member));
-        } catch (CustomException e) {
-            return new ResultBody(e.getErrorInfo());
-        } catch (Exception e) {
-            return new ResultBody(e.getMessage());
-        }
+        MemberInfo memberInfo = memberService.addMember(member);
+        return new ResultBody(memberInfo);
     }
 
     @ResponseStatus(HttpStatus.OK)

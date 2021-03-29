@@ -1,16 +1,19 @@
 package com.lkimilhol.matchingProject.response;
 
 import com.lkimilhol.matchingProject.exception.ErrorInfo;
-import org.springframework.http.HttpStatus;
+import lombok.Builder;
+import lombok.Getter;
 
 public class ResultBody {
-    private int serverCode;
-    private String serverMsg;
+    private final int serverCode;
+    private final String serverMsg;
     private Object results;
 
-    public ResultBody(ErrorInfo errorInfo) {
-        this.serverCode = errorInfo.getErrorCode();
-        this.serverMsg = errorInfo.getErrorMessage();
+
+    @Builder
+    public ResultBody(int serverCode, String serverMsg) {
+        this.serverCode = serverCode;
+        this.serverMsg = serverMsg;
     }
 
     public ResultBody() {
@@ -21,30 +24,6 @@ public class ResultBody {
     public ResultBody(Object results) {
         this.serverCode = ErrorInfo.SUCCESS.getErrorCode();
         this.serverMsg = ErrorInfo.SUCCESS.getErrorMessage();
-        this.results = results;
-    }
-
-    public int getServerCode() {
-        return serverCode;
-    }
-
-    public void setServerCode(int serverCode) {
-        this.serverCode = serverCode;
-    }
-
-    public String getServerMsg() {
-        return serverMsg;
-    }
-
-    public void setServerMsg(String serverMsg) {
-        this.serverMsg = serverMsg;
-    }
-
-    public Object getResults() {
-        return results;
-    }
-
-    public void setResults(Object results) {
         this.results = results;
     }
 }
