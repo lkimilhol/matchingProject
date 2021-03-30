@@ -7,6 +7,7 @@ import com.lkimilhol.matchingProject.exception.ErrorInfo;
 import com.lkimilhol.matchingProject.response.ResultBody;
 import com.lkimilhol.matchingProject.service.MemberService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,31 +30,21 @@ public class MemberController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/member/new", method = RequestMethod.POST)
     @ResponseBody
-    @ExceptionHandler(CustomException.class)
-    public ResultBody addMember(
+    public ResponseEntity<ResultBody> addMember(
             @Valid Member member
     ) {
         MemberInfo memberInfo = memberService.addMember(member);
-        return new ResultBody(memberInfo);
+        return ResponseEntity.ok(new ResultBody(memberInfo));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/member/{nickname}", method = RequestMethod.GET)
     @ResponseBody
-    public ResultBody getMember(
+    public ResponseEntity<ResultBody> getMember(
             @PathVariable String nickname
     ) {
-        try {
-            //TODO 여기서 empty 체크를 하는게 맞을 것인가?
-            //TODO 테스트케이스 작성을 해보도록 하자.
-            Optional<MemberInfo> member = memberService.findByNickname(nickname);
-            if (member.isEmpty()) {
-                throw new CustomException(ErrorInfo.NOT_EXISTS_MEMBER);
-            }
-            return new ResultBody(member.get());
-        } catch (Exception e) {
-            return new ResultBody(e.getMessage());
-        }
+        Optional<MemberInfo> member = memberService.findByNickname(nickname);
+        return ResponseEntity.ok(new ResultBody(member.get()));
     }
 
 }
