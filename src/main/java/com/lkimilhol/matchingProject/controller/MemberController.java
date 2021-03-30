@@ -31,7 +31,7 @@ public class MemberController {
     @ResponseBody
     @ExceptionHandler(CustomException.class)
     public ResultBody addMember(
-            @Valid Member member, BindingResult bindingResult
+            @Valid Member member
     ) {
         MemberInfo memberInfo = memberService.addMember(member);
         return new ResultBody(memberInfo);
