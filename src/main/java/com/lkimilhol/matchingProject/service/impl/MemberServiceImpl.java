@@ -7,11 +7,13 @@ import com.lkimilhol.matchingProject.exception.ErrorInfo;
 import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
 import com.lkimilhol.matchingProject.service.MemberService;
 import com.mysql.cj.exceptions.ConnectionIsClosedException;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MemberServiceImpl implements MemberService {
     private final MemberInfoRepository memberInfoRepository;
 
@@ -23,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
      회원 가입
      */
     @Override
-    public MemberInfo addMember(Member member) throws CustomException {
+    public MemberInfo addMember(Member member) {
         checkDuplicateMember(member);
         MemberInfo memberInfo = MemberInfo.builder()
                 .nickname(member.getNickname())
@@ -62,7 +64,7 @@ public class MemberServiceImpl implements MemberService {
         return memberInfoRepository.findByNickname(nickname);
     }
 
-    private void checkDuplicateMember(Member member) throws CustomException {
+    private void checkDuplicateMember(Member member) {
         Optional<MemberInfo> memberInfo = findByNickname(member.getNickname());
 
         if (memberInfo.isPresent()) {

@@ -4,6 +4,7 @@ import com.lkimilhol.matchingProject.exception.ErrorInfo;
 import lombok.Builder;
 import lombok.Getter;
 
+@Getter
 public class ResultBody {
     private final int serverCode;
     private final String serverMsg;
