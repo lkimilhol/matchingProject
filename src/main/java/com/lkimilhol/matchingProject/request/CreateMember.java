@@ -1,4 +1,4 @@
-package com.lkimilhol.matchingProject.dto;
+package com.lkimilhol.matchingProject.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class Member {
+public class CreateMember {
     @NotNull
     @NotEmpty
     private String nickname;
@@ -25,4 +25,12 @@ public class Member {
     @NotNull
     @NotEmpty
     private String country;
+
+    @NotNull
+    @NotEmpty
+    private String city;
+
+    @NotNull
+    @NotEmpty
+    private String district;
 }
