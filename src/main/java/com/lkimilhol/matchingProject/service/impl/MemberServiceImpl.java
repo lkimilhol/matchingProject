@@ -1,10 +1,12 @@
 package com.lkimilhol.matchingProject.service.impl;
 
+import com.lkimilhol.matchingProject.domain.Address;
 import com.lkimilhol.matchingProject.domain.Member;
-import com.lkimilhol.matchingProject.dto.MemberDto;
+import com.lkimilhol.matchingProject.repository.AddressRepository;
+import com.lkimilhol.matchingProject.request.CreateMember;
 import com.lkimilhol.matchingProject.exception.CustomException;
 import com.lkimilhol.matchingProject.exception.ErrorInfo;
-import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
+import com.lkimilhol.matchingProject.repository.MemberRepository;
 import com.lkimilhol.matchingProject.service.MemberService;
 import org.springframework.stereotype.Service;
 
@@ -14,27 +16,38 @@ import java.util.Optional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-    private final MemberInfoRepository memberInfoRepository;
+    private final MemberRepository memberRepository;
+    private final AddressRepository addressRepository;
 
-    public MemberServiceImpl(MemberInfoRepository memberInfoRepository) {
-        this.memberInfoRepository = memberInfoRepository;
+    public MemberServiceImpl(MemberRepository memberRepository, AddressRepository addressRepository) {
+        this.memberRepository = memberRepository;
+        this.addressRepository = addressRepository;
     }
 
     /*
      회원 가입
      */
     @Override
-    public Member addMember(MemberDto memberDto) {
-        checkDuplicateMember(memberDto);
+    public Member addMember(CreateMember createMember) {
+        checkDuplicateMember(createMember);
         Member member = Member.builder()
-                .nickname(memberDto.getNickname())
-                .age(memberDto.getAge())
-                .sex(memberDto.getSex())
-                .country(memberDto.getCountry())
+                .nickname(createMember.getNickname())
+                .age(createMember.getAge())
+                .sex(createMember.getSex())
+                .country(createMember.getCountry())
                 .insertTime(LocalDateTime.now())
                 .updateTime(LocalDateTime.now())
                 .build();
-        memberInfoRepository.save(member);
+        memberRepository.save(member);
+
+        Address address = Address.builder()
+                .member(member)
+                .city(createMember.getCity())
+                .district(createMember.getDistrict())
+                .build()
+                ;
+        addressRepository.save(address);
+
         return member;
     }
 
@@ -43,7 +56,7 @@ public class MemberServiceImpl implements MemberService {
      */
     @Override
     public List<Member> findMembers() {
-        return memberInfoRepository.findAll();
+        return memberRepository.findAll();
     }
 
     /*
@@ -51,20 +64,16 @@ public class MemberServiceImpl implements MemberService {
      */
     @Override
     public Optional<Member> findById(Long id) {
-        return memberInfoRepository.findById(id);
+        return memberRepository.findById(id);
     }
 
     @Override
     public Optional<Member> findByNickname(String nickname) {
-        Optional<Member> memberInfoByNickname = memberInfoRepository.findByNickname(nickname);
-
-        memberInfoByNickname.orElseThrow();
-
-        return memberInfoRepository.findByNickname(nickname);
+        return memberRepository.findByNickname(nickname);
     }
 
-    private void checkDuplicateMember(MemberDto memberDto) {
-        Optional<Member> memberInfo = findByNickname(memberDto.getNickname());
+    private void checkDuplicateMember(CreateMember createMember) {
+        Optional<Member> memberInfo = findByNickname(createMember.getNickname());
 
         if (memberInfo.isPresent()) {
             throw new CustomException(ErrorInfo.DUPLICATED_NICKNAME);

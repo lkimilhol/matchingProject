@@ -25,10 +25,6 @@ public class Member {
 
     private String country;
 
-    @OneToOne
-    private Address address;
-
-
     @Column(name = "update_time", columnDefinition = "DATETIME")
     private LocalDateTime updateTime;
 

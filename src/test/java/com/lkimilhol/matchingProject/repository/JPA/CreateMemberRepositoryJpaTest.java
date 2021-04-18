@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(false)
-public class MemberDtoInfoRepositoryJPATest {
+public class CreateMemberRepositoryJpaTest {
 
     @Autowired
     private EntityManager em;

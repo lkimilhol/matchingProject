@@ -1,7 +1,10 @@
 package com.lkimilhol.matchingProject;
 
-import com.lkimilhol.matchingProject.repository.JPA.MemberInfoRepositoryJPA;
-import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
+import com.lkimilhol.matchingProject.domain.Address;
+import com.lkimilhol.matchingProject.repository.AddressRepository;
+import com.lkimilhol.matchingProject.repository.JPA.AddressRepositoryJpa;
+import com.lkimilhol.matchingProject.repository.JPA.MemberRepositoryJpa;
+import com.lkimilhol.matchingProject.repository.MemberRepository;
 import com.lkimilhol.matchingProject.service.impl.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,12 +25,16 @@ public class SpringConfig {
 
     @Bean
     public MemberServiceImpl memberService() {
-        return new MemberServiceImpl(memberRepository());
+        return new MemberServiceImpl(memberRepository(), addressRepository());
     }
 
     @Bean
-    public MemberInfoRepository memberRepository() {
-        return new MemberInfoRepositoryJPA(em);
+    public MemberRepository memberRepository() {
+        return new MemberRepositoryJpa(em);
     }
 
+    @Bean
+    public AddressRepository addressRepository() {
+        return new AddressRepositoryJpa(em);
+    }
 }

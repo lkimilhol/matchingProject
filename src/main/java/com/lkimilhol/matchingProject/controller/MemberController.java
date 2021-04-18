@@ -1,7 +1,7 @@
 package com.lkimilhol.matchingProject.controller;
 
 import com.lkimilhol.matchingProject.domain.Member;
-import com.lkimilhol.matchingProject.dto.MemberDto;
+import com.lkimilhol.matchingProject.request.CreateMember;
 import com.lkimilhol.matchingProject.response.ResultBody;
 import com.lkimilhol.matchingProject.service.MemberService;
 import org.springframework.http.HttpStatus;
@@ -28,9 +28,9 @@ public class MemberController {
     @RequestMapping(value = "/member/new", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<ResultBody> addMember(
-            @Valid MemberDto memberDto
+            @Valid CreateMember createMember
     ) {
-        Member member = memberService.addMember(memberDto);
+        Member member = memberService.addMember(createMember);
         return ResponseEntity.ok(new ResultBody(member));
     }
 

@@ -2,7 +2,7 @@ package com.lkimilhol.matchingProject.repository.JPA;
 
 
 import com.lkimilhol.matchingProject.domain.Member;
-import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
+import com.lkimilhol.matchingProject.repository.MemberRepository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Transactional
-public class MemberInfoRepositoryJPA implements MemberInfoRepository {
-    public MemberInfoRepositoryJPA(EntityManager em) {
+public class MemberRepositoryJpa implements MemberRepository {
+    public MemberRepositoryJpa(EntityManager em) {
         this.em = em;
     }
 
