@@ -2,10 +2,7 @@ package com.lkimilhol.matchingProject.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ADDRESS")
@@ -16,6 +13,7 @@ import javax.persistence.Table;
 public class Address {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
 
     private String city;        //시 ex) 서울시, 부산광역시, 광주광역시
