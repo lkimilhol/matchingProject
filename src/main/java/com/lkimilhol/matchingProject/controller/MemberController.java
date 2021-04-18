@@ -1,14 +1,11 @@
 package com.lkimilhol.matchingProject.controller;
 
-import com.lkimilhol.matchingProject.domain.MemberInfo;
-import com.lkimilhol.matchingProject.dto.Member;
-import com.lkimilhol.matchingProject.exception.CustomException;
-import com.lkimilhol.matchingProject.exception.ErrorInfo;
+import com.lkimilhol.matchingProject.domain.Member;
+import com.lkimilhol.matchingProject.dto.MemberDto;
 import com.lkimilhol.matchingProject.response.ResultBody;
 import com.lkimilhol.matchingProject.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,10 +28,10 @@ public class MemberController {
     @RequestMapping(value = "/member/new", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<ResultBody> addMember(
-            @Valid Member member
+            @Valid MemberDto memberDto
     ) {
-        MemberInfo memberInfo = memberService.addMember(member);
-        return ResponseEntity.ok(new ResultBody(memberInfo));
+        Member member = memberService.addMember(memberDto);
+        return ResponseEntity.ok(new ResultBody(member));
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -43,7 +40,7 @@ public class MemberController {
     public ResponseEntity<ResultBody> getMember(
             @PathVariable String nickname
     ) {
-        Optional<MemberInfo> member = memberService.findByNickname(nickname);
+        Optional<Member> member = memberService.findByNickname(nickname);
         return ResponseEntity.ok(new ResultBody(member.get()));
     }
 

@@ -1,7 +1,7 @@
 package com.lkimilhol.matchingProject.repository.JPA;
 
 
-import com.lkimilhol.matchingProject.domain.MemberInfo;
+import com.lkimilhol.matchingProject.domain.Member;
 import com.lkimilhol.matchingProject.repository.MemberInfoRepository;
 
 import javax.persistence.EntityManager;
@@ -15,23 +15,22 @@ public class MemberInfoRepositoryJPA implements MemberInfoRepository {
         this.em = em;
     }
 
-
     private final EntityManager em;
 
     @Override
-    public MemberInfo save(MemberInfo memberInfo) {
-        em.persist(memberInfo);
-        return memberInfo;
+    public Member save(Member member) {
+        em.persist(member);
+        return member;
     }
 
     @Override
-    public Optional<MemberInfo> findById(Long id) {
+    public Optional<Member> findById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<MemberInfo> findByNickname(String nickname) {
-        List<MemberInfo> result = em.createQuery("select m from MemberInfo m where m.nickname = :nickname", MemberInfo.class)
+    public Optional<Member> findByNickname(String nickname) {
+        List<Member> result = em.createQuery("select m from Member m where m.nickname = :nickname", Member.class)
                 .setParameter("nickname", nickname)
                 .getResultList();
 
@@ -39,7 +38,7 @@ public class MemberInfoRepositoryJPA implements MemberInfoRepository {
     }
 
     @Override
-    public List<MemberInfo> findAll() {
+    public List<Member> findAll() {
         return null;
     }
 }

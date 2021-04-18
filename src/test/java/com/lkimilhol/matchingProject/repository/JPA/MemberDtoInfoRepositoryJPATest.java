@@ -1,6 +1,6 @@
 package com.lkimilhol.matchingProject.repository.JPA;
 
-import com.lkimilhol.matchingProject.domain.MemberInfo;
+import com.lkimilhol.matchingProject.domain.Member;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(false)
-public class MemberInfoRepositoryJPATest {
+public class MemberDtoInfoRepositoryJPATest {
 
     @Autowired
     private EntityManager em;
@@ -24,7 +24,7 @@ public class MemberInfoRepositoryJPATest {
     @Test
     public void save() {
         //given
-        MemberInfo memberInfo = MemberInfo.builder()
+        Member member = Member.builder()
                 .nickname("test")
                 .age(18)
                 .country("kr")
@@ -35,7 +35,7 @@ public class MemberInfoRepositoryJPATest {
                 ;
 
         //when
-        em.persist(memberInfo);
+        em.persist(member);
 
         //then
     }

@@ -1,7 +1,7 @@
 package com.lkimilhol.matchingProject.service;
 
-import com.lkimilhol.matchingProject.domain.MemberInfo;
-import com.lkimilhol.matchingProject.dto.Member;
+import com.lkimilhol.matchingProject.domain.Member;
+import com.lkimilhol.matchingProject.dto.MemberDto;
 import com.lkimilhol.matchingProject.exception.CustomException;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +10,11 @@ import java.util.Optional;
 
 @Service
 public interface MemberService {
-    MemberInfo addMember(Member member) throws CustomException;
+    Member addMember(MemberDto memberDto) throws CustomException;
 
-    List<MemberInfo> findMembers();
+    List<Member> findMembers();
 
-    Optional<MemberInfo> findById(Long memberId);
+    Optional<Member> findById(Long memberId);
 
-    Optional<MemberInfo> findByNickname(String nickname);
+    Optional<Member> findByNickname(String nickname);
 }

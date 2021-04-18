@@ -6,12 +6,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "MEMBER_INFO")
+@Table(name = "MEMBER")
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class MemberInfo {
+public class Member {
     @Id
     @Column(name = "seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -24,6 +24,9 @@ public class MemberInfo {
     private int age;
 
     private String country;
+
+    @OneToOne
+    private Address address;
 
 
     @Column(name = "update_time", columnDefinition = "DATETIME")
