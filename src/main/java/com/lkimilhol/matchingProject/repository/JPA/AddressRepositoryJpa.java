@@ -5,6 +5,7 @@ import com.lkimilhol.matchingProject.domain.Member;
 import com.lkimilhol.matchingProject.repository.AddressRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -14,10 +15,12 @@ public class AddressRepositoryJpa implements AddressRepository {
         this.em = em;
     }
 
+    @PersistenceContext
     private final EntityManager em;
 
     @Override
-    public void save(Address address) {
+    public Long save(Address address) {
         em.persist(address);
+        return address.getId();
     }
 }
