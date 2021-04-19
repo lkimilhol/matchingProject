@@ -1,10 +1,18 @@
 package com.lkimilhol.matchingProject.dto;
 
 
-import com.lkimilhol.matchingProject.domain.Address;
 import com.lkimilhol.matchingProject.domain.Member;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@Getter
 public class MemberDto {
     Member member;
-    Address address;
+
+    @Builder
+    protected MemberDto(Member member) {
+        this.member = member;
+    }
 }

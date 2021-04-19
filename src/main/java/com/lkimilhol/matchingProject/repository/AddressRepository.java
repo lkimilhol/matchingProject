@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AddressRepository {
     Long save(Address address);
+    Address findById(Long id);
 }

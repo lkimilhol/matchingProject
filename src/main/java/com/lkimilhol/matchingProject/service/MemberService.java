@@ -1,5 +1,6 @@
 package com.lkimilhol.matchingProject.service;
 
+import com.lkimilhol.matchingProject.domain.Address;
 import com.lkimilhol.matchingProject.domain.Member;
 import com.lkimilhol.matchingProject.dto.MemberDto;
 import com.lkimilhol.matchingProject.request.CreateMember;
@@ -20,4 +21,6 @@ public interface MemberService {
     Optional<Member> findById(Long memberId);
 
     Optional<Member> findByNickname(String nickname);
+
+    Address findAddress(Long id);
 }

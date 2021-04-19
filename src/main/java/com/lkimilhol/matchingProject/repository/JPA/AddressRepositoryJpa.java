@@ -23,4 +23,9 @@ public class AddressRepositoryJpa implements AddressRepository {
         em.persist(address);
         return address.getId();
     }
+
+    @Override
+    public Address findById(Long id) {
+        return em.find(Address.class, id);
+    }
 }

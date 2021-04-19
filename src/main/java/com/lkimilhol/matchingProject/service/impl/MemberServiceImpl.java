@@ -31,23 +31,25 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member addMember(CreateMember createMember) {
         checkDuplicateMember(createMember);
+
+        Address address = Address.builder()
+                .city(createMember.getCity())
+                .district(createMember.getDistrict())
+                .build()
+                ;
+
         Member member = Member.builder()
                 .nickname(createMember.getNickname())
                 .age(createMember.getAge())
                 .sex(createMember.getSex())
                 .country(createMember.getCountry())
+                .address(address)
                 .insertTime(LocalDateTime.now())
                 .updateTime(LocalDateTime.now())
                 .build();
-        memberRepository.save(member);
 
-        Address address = Address.builder()
-                .member(member)
-                .city(createMember.getCity())
-                .district(createMember.getDistrict())
-                .build()
-                ;
         addressRepository.save(address);
+        memberRepository.save(member);
 
         return member;
     }
@@ -74,13 +76,21 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Address findAddress(Long id) {
+        return addressRepository.findById(id);
+    }
+
+    @Override
     public MemberDto getMember(String nickname) {
         Optional<Member> member = findByNickname(nickname);
 
         if (member.isEmpty()) {
             throw new CustomException(ErrorInfo.NOT_EXISTS_MEMBER);
         }
-        return null;
+
+        return MemberDto.builder()
+                .member(member.get())
+                .build();
     }
 
     private void checkDuplicateMember(CreateMember createMember) {
