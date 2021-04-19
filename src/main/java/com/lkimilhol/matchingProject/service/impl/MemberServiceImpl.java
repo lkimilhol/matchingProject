@@ -2,6 +2,7 @@ package com.lkimilhol.matchingProject.service.impl;
 
 import com.lkimilhol.matchingProject.domain.Address;
 import com.lkimilhol.matchingProject.domain.Member;
+import com.lkimilhol.matchingProject.dto.MemberDto;
 import com.lkimilhol.matchingProject.repository.AddressRepository;
 import com.lkimilhol.matchingProject.request.CreateMember;
 import com.lkimilhol.matchingProject.exception.CustomException;
@@ -70,6 +71,16 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Optional<Member> findByNickname(String nickname) {
         return memberRepository.findByNickname(nickname);
+    }
+
+    @Override
+    public MemberDto getMember(String nickname) {
+        Optional<Member> member = findByNickname(nickname);
+
+        if (member.isEmpty()) {
+            throw new CustomException(ErrorInfo.NOT_EXISTS_MEMBER);
+        }
+        return null;
     }
 
     private void checkDuplicateMember(CreateMember createMember) {

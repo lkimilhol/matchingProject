@@ -6,6 +6,7 @@ import com.lkimilhol.matchingProject.repository.AddressRepository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Transactional
 public class AddressRepositoryJpa implements AddressRepository {
@@ -19,5 +20,4 @@ public class AddressRepositoryJpa implements AddressRepository {
     public void save(Address address) {
         em.persist(address);
     }
-
 }

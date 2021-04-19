@@ -1,6 +1,7 @@
 package com.lkimilhol.matchingProject.service;
 
 import com.lkimilhol.matchingProject.domain.Member;
+import com.lkimilhol.matchingProject.dto.MemberDto;
 import com.lkimilhol.matchingProject.request.CreateMember;
 import com.lkimilhol.matchingProject.exception.CustomException;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ public interface MemberService {
     Member addMember(CreateMember createMember) throws CustomException;
 
     List<Member> findMembers();
+
+    MemberDto getMember(String nickname);
 
     Optional<Member> findById(Long memberId);
 
