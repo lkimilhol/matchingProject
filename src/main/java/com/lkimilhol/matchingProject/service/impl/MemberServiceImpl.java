@@ -2,6 +2,7 @@ package com.lkimilhol.matchingProject.service.impl;
 
 import com.lkimilhol.matchingProject.domain.Address;
 import com.lkimilhol.matchingProject.domain.Member;
+import com.lkimilhol.matchingProject.dto.MemberDto;
 import com.lkimilhol.matchingProject.repository.AddressRepository;
 import com.lkimilhol.matchingProject.request.CreateMember;
 import com.lkimilhol.matchingProject.exception.CustomException;
@@ -30,23 +31,25 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member addMember(CreateMember createMember) {
         checkDuplicateMember(createMember);
+
+        Address address = Address.builder()
+                .city(createMember.getCity())
+                .district(createMember.getDistrict())
+                .build()
+                ;
+
         Member member = Member.builder()
                 .nickname(createMember.getNickname())
                 .age(createMember.getAge())
                 .sex(createMember.getSex())
                 .country(createMember.getCountry())
+                .address(address)
                 .insertTime(LocalDateTime.now())
                 .updateTime(LocalDateTime.now())
                 .build();
-        memberRepository.save(member);
 
-        Address address = Address.builder()
-                .member(member)
-                .city(createMember.getCity())
-                .district(createMember.getDistrict())
-                .build()
-                ;
         addressRepository.save(address);
+        memberRepository.save(member);
 
         return member;
     }
@@ -70,6 +73,24 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Optional<Member> findByNickname(String nickname) {
         return memberRepository.findByNickname(nickname);
+    }
+
+    @Override
+    public Address findAddress(Long id) {
+        return addressRepository.findById(id);
+    }
+
+    @Override
+    public MemberDto getMember(String nickname) {
+        Optional<Member> member = findByNickname(nickname);
+
+        if (member.isEmpty()) {
+            throw new CustomException(ErrorInfo.NOT_EXISTS_MEMBER);
+        }
+
+        return MemberDto.builder()
+                .member(member.get())
+                .build();
     }
 
     private void checkDuplicateMember(CreateMember createMember) {

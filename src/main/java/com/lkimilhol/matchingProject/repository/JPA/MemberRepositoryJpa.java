@@ -5,6 +5,7 @@ import com.lkimilhol.matchingProject.domain.Member;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -15,12 +16,13 @@ public class MemberRepositoryJpa implements MemberRepository {
         this.em = em;
     }
 
+    @PersistenceContext
     private final EntityManager em;
 
     @Override
-    public Member save(Member member) {
+    public Long save(Member member) {
         em.persist(member);
-        return member;
+        return member.getId();
     }
 
     @Override

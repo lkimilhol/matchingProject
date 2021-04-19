@@ -1,6 +1,7 @@
 package com.lkimilhol.matchingProject.controller;
 
 import com.lkimilhol.matchingProject.domain.Member;
+import com.lkimilhol.matchingProject.dto.MemberDto;
 import com.lkimilhol.matchingProject.request.CreateMember;
 import com.lkimilhol.matchingProject.response.ResultBody;
 import com.lkimilhol.matchingProject.service.MemberService;
@@ -40,8 +41,8 @@ public class MemberController {
     public ResponseEntity<ResultBody> getMember(
             @PathVariable String nickname
     ) {
-        Optional<Member> member = memberService.findByNickname(nickname);
-        return ResponseEntity.ok(new ResultBody(member.get()));
+        MemberDto member = memberService.getMember(nickname);
+        return ResponseEntity.ok(new ResultBody(member));
     }
 
 }
