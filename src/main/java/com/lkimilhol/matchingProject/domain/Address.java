@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ADDRESS")
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
