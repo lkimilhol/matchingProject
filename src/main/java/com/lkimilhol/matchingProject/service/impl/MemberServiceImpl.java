@@ -10,12 +10,14 @@ import com.lkimilhol.matchingProject.exception.ErrorInfo;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
 import com.lkimilhol.matchingProject.service.MemberService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final AddressRepository addressRepository;
@@ -29,6 +31,7 @@ public class MemberServiceImpl implements MemberService {
      회원 가입
      */
     @Override
+    @Transactional
     public Member addMember(CreateMember createMember) {
         checkDuplicateMember(createMember);
 
@@ -54,19 +57,13 @@ public class MemberServiceImpl implements MemberService {
         return member;
     }
 
-    /*
-     전체 회원 조회
-     */
     @Override
     public List<Member> findMembers() {
         return memberRepository.findAll();
     }
 
-    /*
-    회원 정보 by id
-     */
     @Override
-    public Optional<Member> findById(Long id) {
+    public Member findById(Long id) {
         return memberRepository.findById(id);
     }
 

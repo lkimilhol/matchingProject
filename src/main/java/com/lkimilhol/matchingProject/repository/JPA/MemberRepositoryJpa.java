@@ -3,6 +3,7 @@ package com.lkimilhol.matchingProject.repository.JPA;
 
 import com.lkimilhol.matchingProject.domain.Member;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,13 +11,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Transactional
 public class MemberRepositoryJpa implements MemberRepository {
-    public MemberRepositoryJpa(EntityManager em) {
-        this.em = em;
-    }
 
-    @PersistenceContext
     private final EntityManager em;
 
     @Override
@@ -26,8 +24,8 @@ public class MemberRepositoryJpa implements MemberRepository {
     }
 
     @Override
-    public Optional<Member> findById(Long id) {
-        return Optional.empty();
+    public Member findById(Long id) {
+        return em.find(Member.class, id);
     }
 
     @Override

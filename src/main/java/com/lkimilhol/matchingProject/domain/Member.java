@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 @Table(name = "MEMBER")
 @Getter
@@ -25,7 +27,7 @@ public class Member {
 
     private String country;
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "address_id")
     private Address address;
 

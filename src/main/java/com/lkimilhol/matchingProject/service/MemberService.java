@@ -18,7 +18,7 @@ public interface MemberService {
 
     MemberDto getMember(String nickname);
 
-    Optional<Member> findById(Long memberId);
+    Member findById(Long memberId);
 
     Optional<Member> findByNickname(String nickname);
 
