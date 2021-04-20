@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import static javax.persistence.FetchType.*;
 
 @Entity
-@Table(name = "MEMBER")
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

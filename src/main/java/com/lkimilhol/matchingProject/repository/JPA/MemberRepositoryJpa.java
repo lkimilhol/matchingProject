@@ -4,15 +4,13 @@ package com.lkimilhol.matchingProject.repository.JPA;
 import com.lkimilhol.matchingProject.domain.Member;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@Transactional
 public class MemberRepositoryJpa implements MemberRepository {
 
     private final EntityManager em;

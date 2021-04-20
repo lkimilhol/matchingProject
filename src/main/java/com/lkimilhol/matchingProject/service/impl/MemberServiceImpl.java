@@ -9,6 +9,7 @@ import com.lkimilhol.matchingProject.exception.CustomException;
 import com.lkimilhol.matchingProject.exception.ErrorInfo;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
 import com.lkimilhol.matchingProject.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,15 +18,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final AddressRepository addressRepository;
-
-    public MemberServiceImpl(MemberRepository memberRepository, AddressRepository addressRepository) {
-        this.memberRepository = memberRepository;
-        this.addressRepository = addressRepository;
-    }
 
     /*
      회원 가입
