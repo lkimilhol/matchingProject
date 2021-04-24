@@ -1,36 +1,37 @@
 package com.lkimilhol.matchingProject.domain;
 
-import com.lkimilhol.matchingProject.common.CategoryEnum;
+import com.lkimilhol.matchingProject.common.OrderStatusEnum;
 import lombok.*;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+
+import static javax.persistence.EnumType.*;
+import static javax.persistence.FetchType.*;
 
 @Entity
+@Table(name = "Orders")
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Shop {
+public class Order {
+
     @Id
-    @Column(name = "shop_id")
+    @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
-    @Enumerated(EnumType.STRING)
-    private CategoryEnum category;
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "shop_id")
+    private Shop shop;
 
-    private String city;
-
-    private String district;
-
-    @OneToMany(mappedBy = "shop")
-    private List<Order> orders = new ArrayList<>();
+    @Enumerated(STRING)
+    private OrderStatusEnum orderStatus;
 
     @Column(name = "update_time", columnDefinition = "DATETIME")
     private LocalDateTime updateTime;

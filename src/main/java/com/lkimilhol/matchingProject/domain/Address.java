@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+//TODO 회원 테이블과 통합 예정
 public class Address {
 
     @Id

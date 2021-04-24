@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.FetchType.*;
 
@@ -29,6 +31,9 @@ public class Member {
     @OneToOne(fetch = LAZY)
     @JoinColumn(name = "address_id")
     private Address address;
+
+    @OneToMany (mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 
     @Column(name = "update_time", columnDefinition = "DATETIME")
     private LocalDateTime updateTime;
