@@ -12,6 +12,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.transaction.Transactional;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -39,5 +41,28 @@ class ShopServiceTest {
 
         //then
         assertEquals(shop, shopRepository.findById(shopId));
+    }
+
+    @Test
+    @DisplayName("가게 불러오기")
+    void getShop() {
+        //given
+        String name = "성경";
+        Shop shop = Shop.builder()
+                .name(name)
+                .category(CategoryEnum.CHINA)
+                .city("서울")
+                .district("송파")
+                .build();
+
+        //when
+        shopRepository.save(shop);
+        Optional<Shop> getShop = shopRepository.findByName(name);
+        if (getShop.isEmpty()) {
+            fail();
+        }
+
+        //then
+        assertEquals(shop, getShop.get());
     }
 }
