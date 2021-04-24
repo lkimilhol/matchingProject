@@ -8,7 +8,9 @@ public enum ErrorInfo {
     //회원
     , DUPLICATED_NICKNAME(100, "duplicated nickname")
     , NOT_EXISTS_MEMBER(101, "not exists member by nickname")
-    ,
+
+    //가게
+    , NOT_EXISTS_SHOP(200, "not exists shop by nickname")
     ;
 
     int code;

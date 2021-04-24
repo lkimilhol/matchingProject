@@ -10,6 +10,5 @@ import java.util.List;
 @Service
 public interface ShopService {
     Shop addShop(CreateShop createShop) throws CustomException;
-
-    List<Shop> findShops();
+    Shop getShop(String shopName);
 }

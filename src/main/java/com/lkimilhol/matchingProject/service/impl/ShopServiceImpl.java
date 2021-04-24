@@ -2,6 +2,7 @@ package com.lkimilhol.matchingProject.service.impl;
 
 import com.lkimilhol.matchingProject.domain.Shop;
 import com.lkimilhol.matchingProject.exception.CustomException;
+import com.lkimilhol.matchingProject.exception.ErrorInfo;
 import com.lkimilhol.matchingProject.repository.ShopRepository;
 import com.lkimilhol.matchingProject.request.CreateShop;
 import com.lkimilhol.matchingProject.service.ShopService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -35,7 +37,13 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public List<Shop> findShops() {
-        return null;
+    public Shop getShop(String shopName) {
+        Optional<Shop> shop = shopRepository.findByName(shopName);
+
+        if (shop.isEmpty()) {
+            throw new CustomException(ErrorInfo.NOT_EXISTS_SHOP);
+        }
+
+        return shop.get();
     }
 }
