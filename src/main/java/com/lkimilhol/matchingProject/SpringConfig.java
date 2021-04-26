@@ -4,8 +4,10 @@ import com.lkimilhol.matchingProject.domain.Address;
 import com.lkimilhol.matchingProject.repository.AddressRepository;
 import com.lkimilhol.matchingProject.repository.JPA.AddressRepositoryJpa;
 import com.lkimilhol.matchingProject.repository.JPA.MemberRepositoryJpa;
+import com.lkimilhol.matchingProject.repository.JPA.OrderRepositoryJpa;
 import com.lkimilhol.matchingProject.repository.JPA.ShopRepositoryJpa;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
+import com.lkimilhol.matchingProject.repository.OrderRepository;
 import com.lkimilhol.matchingProject.repository.ShopRepository;
 import com.lkimilhol.matchingProject.service.impl.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,11 @@ public class SpringConfig {
     @Bean
     public AddressRepository addressRepository() {
         return new AddressRepositoryJpa(em);
+    }
+
+    @Bean
+    public OrderRepository orderRepository() {
+        return new OrderRepositoryJpa(em);
     }
 
     @Bean

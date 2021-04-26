@@ -4,13 +4,14 @@ import com.lkimilhol.matchingProject.common.OrderStatusEnum;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 import static javax.persistence.EnumType.*;
 import static javax.persistence.FetchType.*;
 
 @Entity
-@Table(name = "Orders")
+@Table(name = "orders")
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,6 +32,7 @@ public class Order {
     private Shop shop;
 
     @Enumerated(STRING)
+    @NotNull
     private OrderStatusEnum orderStatus;
 
     @Column(name = "update_time", columnDefinition = "DATETIME")
