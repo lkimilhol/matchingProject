@@ -3,12 +3,12 @@ package com.lkimilhol.matchingProject.domain;
 import com.lkimilhol.matchingProject.common.OrderStatusEnum;
 import lombok.*;
 
+import static javax.persistence.EnumType.*;
+import static javax.persistence.FetchType.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-
-import static javax.persistence.EnumType.*;
-import static javax.persistence.FetchType.*;
 
 @Entity
 @Table(name = "orders")

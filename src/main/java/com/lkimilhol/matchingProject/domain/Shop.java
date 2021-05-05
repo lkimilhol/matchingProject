@@ -2,7 +2,6 @@ package com.lkimilhol.matchingProject.domain;
 
 import com.lkimilhol.matchingProject.common.CategoryEnum;
 import lombok.*;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

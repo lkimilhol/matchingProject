@@ -47,7 +47,6 @@ class OrderServiceTest {
                 .age(18)
                 .country("kr")
                 .sex("m")
-                .address(address)
                 .insertTime(LocalDateTime.now())
                 .updateTime(LocalDateTime.now())
                 .build()

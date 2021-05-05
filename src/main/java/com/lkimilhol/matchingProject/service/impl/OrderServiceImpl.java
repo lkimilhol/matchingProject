@@ -4,6 +4,7 @@ import com.lkimilhol.matchingProject.common.OrderStatusEnum;
 import com.lkimilhol.matchingProject.domain.Member;
 import com.lkimilhol.matchingProject.domain.Order;
 import com.lkimilhol.matchingProject.domain.Shop;
+import com.lkimilhol.matchingProject.dto.OrderDto;
 import com.lkimilhol.matchingProject.exception.CustomException;
 import com.lkimilhol.matchingProject.exception.ErrorInfo;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
@@ -12,6 +13,8 @@ import com.lkimilhol.matchingProject.repository.ShopRepository;
 import com.lkimilhol.matchingProject.request.CreateOrder;
 import com.lkimilhol.matchingProject.service.OrderService;
 import lombok.RequiredArgsConstructor;
+
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +53,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getOrder(Long orderId) {
-        return orderRepository.findById(orderId);
+    public OrderDto getOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId);
+        return new OrderDto(order);
     }
 }

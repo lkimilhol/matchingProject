@@ -2,6 +2,7 @@ package com.lkimilhol.matchingProject.controller;
 
 import com.lkimilhol.matchingProject.domain.Order;
 import com.lkimilhol.matchingProject.domain.Shop;
+import com.lkimilhol.matchingProject.dto.OrderDto;
 import com.lkimilhol.matchingProject.request.CreateOrder;
 import com.lkimilhol.matchingProject.request.CreateShop;
 import com.lkimilhol.matchingProject.response.ResultBody;
@@ -37,7 +38,6 @@ public class OrderController {
     public ResponseEntity<ResultBody> getOrder(
             @PathVariable Long orderId
     ) {
-        Order order = orderService.getOrder(orderId);
-        return ResponseEntity.ok(new ResultBody(order));
+        return ResponseEntity.ok(new ResultBody(orderService.getOrder(orderId)));
     }
 }
