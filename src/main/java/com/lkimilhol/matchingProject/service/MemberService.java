@@ -16,7 +16,7 @@ public interface MemberService {
 
     List<Member> findMembers();
 
-    MemberDto getMember(String nickname);
+    Member getMember(String nickname);
 
     Member findById(Long memberId);
 

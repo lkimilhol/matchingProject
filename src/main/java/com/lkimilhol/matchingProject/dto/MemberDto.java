@@ -1,5 +1,7 @@
 package com.lkimilhol.matchingProject.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,7 @@ public class MemberDto {
     private String nickname;
     private String sex;
     private int age;
+    private LocalDateTime insertTime;
 
     @Builder
     protected MemberDto(Member member) {
@@ -20,5 +23,6 @@ public class MemberDto {
         this.nickname = member.getNickname();
         this.sex = member.getSex();
         this.age = member.getAge();
+        this.insertTime = member.getInsertTime();
     }
 }

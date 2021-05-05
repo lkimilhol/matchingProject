@@ -74,16 +74,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberDto getMember(String nickname) {
+    public Member getMember(String nickname) {
         Optional<Member> member = findByNickname(nickname);
 
         if (member.isEmpty()) {
             throw new CustomException(ErrorInfo.NOT_EXISTS_MEMBER);
         }
 
-        return MemberDto.builder()
-                .member(member.get())
-                .build();
+        return member.get();
     }
 
     private void checkDuplicateMember(CreateMember createMember) {

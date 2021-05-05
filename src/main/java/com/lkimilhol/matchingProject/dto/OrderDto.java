@@ -2,6 +2,7 @@ package com.lkimilhol.matchingProject.dto;
 
 import java.time.LocalDateTime;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ public class OrderDto {
 	private LocalDateTime updateTime;
 	private LocalDateTime insertTime;
 
+	@Builder
 	public OrderDto(Order order) {
 		this.id = order.getId();
 		this.member = new MemberDto(order.getMember());
