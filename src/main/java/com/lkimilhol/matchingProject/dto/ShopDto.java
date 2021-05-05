@@ -1,11 +1,11 @@
 package com.lkimilhol.matchingProject.dto;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import java.time.LocalDateTime;
 
 import com.lkimilhol.matchingProject.common.CategoryEnum;
 import com.lkimilhol.matchingProject.domain.Shop;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,11 +16,14 @@ public class ShopDto {
 	private CategoryEnum category;
 	private String city;
 	private String district;
+	private LocalDateTime insertTime;
 
+	@Builder
 	public ShopDto(Shop shop) {
 		this.name = shop.getName();
 		this.category = shop.getCategory();
 		this.city = shop.getCity();
 		this.district = shop.getDistrict();
+		this.insertTime = shop.getInsertTime();
 	}
 }

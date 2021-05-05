@@ -37,11 +37,6 @@ class OrderServiceTest {
     @DisplayName("주문 생성 테스트")
     public void createOrder() {
         //given
-        Address address = Address.builder()
-                .city("서울")
-                .district("송파")
-                .build();
-
         Member member = Member.builder()
                 .nickname("test")
                 .age(18)

@@ -1,6 +1,7 @@
 package com.lkimilhol.matchingProject.controller;
 
 import com.lkimilhol.matchingProject.domain.Shop;
+import com.lkimilhol.matchingProject.dto.ShopDto;
 import com.lkimilhol.matchingProject.request.CreateShop;
 import com.lkimilhol.matchingProject.response.ResultBody;
 import com.lkimilhol.matchingProject.service.ShopService;
@@ -25,7 +26,7 @@ public class ShopController {
             @Valid CreateShop createShop
             ) {
         Shop shop = shopService.addShop(createShop);
-        return ResponseEntity.ok(new ResultBody(shop));
+        return ResponseEntity.ok(new ResultBody(getShopDto(shop)));
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -35,6 +36,10 @@ public class ShopController {
             @PathVariable String shopName
     ) {
         Shop shop = shopService.getShop(shopName);
-        return ResponseEntity.ok(new ResultBody(shop));
+        return ResponseEntity.ok(new ResultBody(getShopDto(shop)));
+    }
+
+    private ShopDto getShopDto(Shop shop) {
+        return ShopDto.builder().shop(shop).build();
     }
 }

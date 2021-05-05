@@ -31,7 +31,7 @@ public class MemberController {
             @Valid CreateMember createMember
     ) {
         Member member = memberService.addMember(createMember);
-        return ResponseEntity.ok(new ResultBody(member));
+        return ResponseEntity.ok(new ResultBody(getMemberDto(member)));
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -40,8 +40,11 @@ public class MemberController {
     public ResponseEntity<ResultBody> getMember(
             @PathVariable String nickname
     ) {
-        MemberDto member = memberService.getMember(nickname);
-        return ResponseEntity.ok(new ResultBody(member));
+        Member member = memberService.getMember(nickname);
+        return ResponseEntity.ok(new ResultBody(getMemberDto(member)));
     }
 
+    private MemberDto getMemberDto(Member member) {
+        return MemberDto.builder().member(member).build();
+    }
 }

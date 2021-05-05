@@ -29,7 +29,7 @@ public class OrderController {
             @Valid CreateOrder createOrder
             ) {
         Order order = orderService.addOrder(createOrder);
-        return ResponseEntity.ok(new ResultBody(order));
+        return ResponseEntity.ok(new ResultBody(getOrderDto(order)));
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -38,6 +38,11 @@ public class OrderController {
     public ResponseEntity<ResultBody> getOrder(
             @PathVariable Long orderId
     ) {
-        return ResponseEntity.ok(new ResultBody(orderService.getOrder(orderId)));
+        Order order = orderService.getOrder(orderId);
+        return ResponseEntity.ok(new ResultBody(getOrderDto(order)));
+    }
+
+    private OrderDto getOrderDto(Order order) {
+        return OrderDto.builder().order(order).build();
     }
 }
