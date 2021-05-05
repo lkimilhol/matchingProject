@@ -4,7 +4,6 @@ package com.lkimilhol.matchingProject.repository.JPA;
 import com.lkimilhol.matchingProject.domain.Member;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;

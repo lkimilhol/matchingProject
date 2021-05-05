@@ -1,11 +1,18 @@
 package com.lkimilhol.matchingProject.domain;
 
-import lombok.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
-import static javax.persistence.FetchType.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.lkimilhol.matchingProject.dto.OrderDto;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
@@ -26,9 +33,8 @@ public class Member {
 
     private String country;
 
-    @OneToOne(fetch = LAZY)
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @OneToMany(mappedBy = "member")
+    private List<Order> order;
 
     @Column(name = "update_time", columnDefinition = "DATETIME")
     private LocalDateTime updateTime;

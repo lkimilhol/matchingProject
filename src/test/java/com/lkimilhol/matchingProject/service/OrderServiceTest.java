@@ -1,10 +1,13 @@
 package com.lkimilhol.matchingProject.service;
 
+import com.lkimilhol.matchingProject.common.OrderStatusEnum;
 import com.lkimilhol.matchingProject.domain.Address;
 import com.lkimilhol.matchingProject.domain.Member;
+import com.lkimilhol.matchingProject.domain.Order;
+import com.lkimilhol.matchingProject.domain.Shop;
 import com.lkimilhol.matchingProject.repository.AddressRepository;
 import com.lkimilhol.matchingProject.repository.MemberRepository;
-import org.junit.jupiter.api.Assertions;
+import com.lkimilhol.matchingProject.repository.OrderRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,16 +23,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
-class MemberServiceTest {
+class OrderServiceTest {
     @Autowired
     private MemberRepository memberRepository;
 
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
     @Test
-    @DisplayName("멤버 생성 테스트")
-    public void createMember() {
+    @DisplayName("주문 생성 테스트")
+    public void createOrder() {
         //given
         Address address = Address.builder()
                 .city("서울")
@@ -46,12 +52,25 @@ class MemberServiceTest {
                 .build()
                 ;
 
+        Shop shop = Shop.builder()
+                .name("성경")
+                .city("서울")
+                .district("송파")
+                .insertTime(LocalDateTime.now())
+                .build();
+
+        Order order = Order.builder()
+                .member(member)
+                .shop(shop)
+                .orderStatus(OrderStatusEnum.PROGRESS)
+                .insertTime(LocalDateTime.now())
+                .updateTime(LocalDateTime.now())
+                .build();
+
         //when
-        Long addressId = addressRepository.save(address);
-        Long memberId = memberRepository.save(member);
+        Long orderId = orderRepository.save(order);
 
         //then
-        assertEquals(member, memberRepository.findById(memberId));
-        assertEquals(address, addressRepository.findById(addressId));
+        assertEquals(order, orderRepository.findById(orderId));
     }
 }

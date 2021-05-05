@@ -20,6 +20,7 @@ public class CustomExceptionHandler {
                 .serverCode(e.getErrorInfo().getErrorCode())
                 .serverMsg(e.getErrorInfo().getErrorMessage())
                 .build();
+        System.out.println(e.getErrorInfo().getErrorMessage());
         return new ResponseEntity<>(resultBody, HttpStatus.OK);
     }
 
@@ -30,6 +31,7 @@ public class CustomExceptionHandler {
                 .serverCode(ErrorInfo.NOT_DEFINE_SERVER_ERROR.getErrorCode())
                 .serverMsg(e.getMessage())
                 .build();
+        System.out.println(e.getMessage());
         return new ResponseEntity<>(resultBody, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

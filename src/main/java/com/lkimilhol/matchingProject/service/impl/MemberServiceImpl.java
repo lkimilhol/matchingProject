@@ -43,7 +43,6 @@ public class MemberServiceImpl implements MemberService {
                 .age(createMember.getAge())
                 .sex(createMember.getSex())
                 .country(createMember.getCountry())
-                .address(address)
                 .insertTime(LocalDateTime.now())
                 .updateTime(LocalDateTime.now())
                 .build();

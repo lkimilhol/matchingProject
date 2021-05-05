@@ -10,6 +10,7 @@ public class MatchingProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MatchingProjectApplication.class, args);
+
 	}
 
 }

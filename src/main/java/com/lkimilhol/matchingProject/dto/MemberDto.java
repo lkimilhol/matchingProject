@@ -1,18 +1,24 @@
 package com.lkimilhol.matchingProject.dto;
 
-
-import com.lkimilhol.matchingProject.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.lkimilhol.matchingProject.domain.Member;
+
 @NoArgsConstructor
 @Getter
 public class MemberDto {
-    Member member;
+    private Long id;
+    private String nickname;
+    private String sex;
+    private int age;
 
     @Builder
     protected MemberDto(Member member) {
-        this.member = member;
+        this.id = member.getId();
+        this.nickname = member.getNickname();
+        this.sex = member.getSex();
+        this.age = member.getAge();
     }
 }
