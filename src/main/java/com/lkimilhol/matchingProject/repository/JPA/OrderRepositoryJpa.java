@@ -7,7 +7,10 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 @RequiredArgsConstructor
+@Repository
 public class OrderRepositoryJpa implements OrderRepository {
     private final EntityManager em;
 
