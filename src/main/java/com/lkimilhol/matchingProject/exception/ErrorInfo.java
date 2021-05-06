@@ -13,6 +13,7 @@ public enum ErrorInfo {
     , NOT_EXISTS_SHOP(200, "not exists shop by nickname")
 
     //주문
+
     ;
 
     int code;

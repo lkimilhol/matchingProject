@@ -31,6 +31,9 @@ public class Shop {
     @OneToMany(mappedBy = "shop")
     private List<Order> orders = new ArrayList<>();
 
+    @OneToMany(mappedBy = "shop")
+    private List<Menu> menus = new ArrayList<>();
+
     @Column(name = "update_time", columnDefinition = "DATETIME")
     private LocalDateTime updateTime;
 
