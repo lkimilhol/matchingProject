@@ -9,7 +9,10 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 @RequiredArgsConstructor
+@Repository
 public class MemberRepositoryJpa implements MemberRepository {
 
     private final EntityManager em;

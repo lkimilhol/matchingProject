@@ -3,6 +3,8 @@ package com.lkimilhol.matchingProject.repository.JPA;
 import com.lkimilhol.matchingProject.domain.Shop;
 import com.lkimilhol.matchingProject.repository.ShopRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Repository
 public class ShopRepositoryJpa implements ShopRepository {
     private final EntityManager em;
 

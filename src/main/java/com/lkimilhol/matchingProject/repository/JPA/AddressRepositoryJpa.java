@@ -3,11 +3,14 @@ package com.lkimilhol.matchingProject.repository.JPA;
 import com.lkimilhol.matchingProject.domain.Address;
 import com.lkimilhol.matchingProject.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
 @RequiredArgsConstructor
+@Repository
 public class AddressRepositoryJpa implements AddressRepository {
 
     private final EntityManager em;
