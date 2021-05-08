@@ -31,6 +31,12 @@ public class Order {
     @JoinColumn(name = "shop_id")
     private Shop shop;
 
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "menu_id")
+    private Menu menu;
+
+    private int amount;
+
     @Enumerated(STRING)
     @NotNull
     private OrderStatusEnum orderStatus;
