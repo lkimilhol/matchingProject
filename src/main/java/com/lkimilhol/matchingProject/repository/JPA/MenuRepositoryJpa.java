@@ -24,7 +24,7 @@ public class MenuRepositoryJpa implements MenuRepository {
 
 	@Override
 	public Menu findById(Long id) {
-		return null;
+		return em.find(Menu.class, id);
 	}
 
 	@Override

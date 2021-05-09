@@ -8,4 +8,6 @@ import lombok.Setter;
 public class CreateOrder {
     Long memberId;
     Long shopId;
+    Long menuId;
+    int amount;
 }

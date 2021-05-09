@@ -14,6 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.lkimilhol.matchingProject.domain.Menu;
 import com.lkimilhol.matchingProject.domain.Shop;
+import com.lkimilhol.matchingProject.exception.CustomException;
+import com.lkimilhol.matchingProject.exception.ErrorInfo;
 import com.lkimilhol.matchingProject.request.CreateMenu;
 
 @ExtendWith(SpringExtension.class)
@@ -42,5 +44,19 @@ class MenuServiceTest {
 
 	    //then
 		assertTrue(true);
+	}
+
+	@Test
+	@DisplayName("메뉴의 수량이 음수가 되는 경우")
+	void method() {
+	    //given
+		Menu menu = Menu.builder()
+			.amount(1)
+			.build();
+
+	    //when
+		CustomException customException = assertThrows(CustomException.class, () -> menu.removeAmount(2));
+		//then
+		assertEquals(ErrorInfo.INVALID_AMOUNT.getErrorCode(), customException.getErrorInfo().getErrorCode());
 	}
 }
