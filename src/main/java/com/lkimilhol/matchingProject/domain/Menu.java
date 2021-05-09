@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.lkimilhol.matchingProject.exception.CustomException;
+import com.lkimilhol.matchingProject.exception.ErrorInfo;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,4 +44,15 @@ public class Menu {
 
 	@Column(name = "insert_time", columnDefinition = "DATETIME")
 	private LocalDateTime insertTime;
+
+	public void removeAmount(int amount) {
+		checkNegative(amount);
+		this.amount -= amount;
+	}
+
+	private void checkNegative(int amount) {
+		if (this.amount - amount < 0) {
+			throw new CustomException(ErrorInfo.INVALID_AMOUNT);
+		}
+	}
 }

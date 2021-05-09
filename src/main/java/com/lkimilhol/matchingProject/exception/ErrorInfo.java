@@ -13,7 +13,8 @@ public enum ErrorInfo {
     , NOT_EXISTS_SHOP(200, "not exists shop by nickname")
 
     //주문
-
+    , INVALID_AMOUNT(300, "amount can not be negative")
+    , INVALID_SHOP_MENU(301, "invalid shop menu")
     ;
 
     int code;
