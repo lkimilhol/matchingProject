@@ -29,6 +29,7 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final ShopRepository shopRepository;
     private final MenuRepository menuRepository;
+    private final RedisService redisService;
 
     public Order addOrder(CreateOrder createOrder) {
         Member member = memberRepository.findById(createOrder.getMemberId());
@@ -57,6 +58,7 @@ public class OrderService {
         menu.removeAmount(createOrder.getAmount());
 
         orderRepository.save(order);
+        redisService.addOrder(order);
         return order;
     }
 
