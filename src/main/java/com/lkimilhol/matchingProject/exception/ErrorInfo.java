@@ -4,6 +4,7 @@ public enum ErrorInfo {
     SUCCESS(200, "success")
     , NOT_DEFINE_SERVER_ERROR(-99, "server error")
     , INVALID_PARAMETER(-98, "invalid parameter")
+    , REDIS_CONNECT_ERROR(-97, "redis connect error")
 
     //회원
     , DUPLICATED_NICKNAME(100, "duplicated nickname")
