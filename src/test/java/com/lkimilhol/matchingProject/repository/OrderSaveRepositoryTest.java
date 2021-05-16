@@ -13,28 +13,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.lkimilhol.matchingProject.common.OrderStatusEnum;
-import com.lkimilhol.matchingProject.domain.Order;
+import com.lkimilhol.matchingProject.domain.OrderSave;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
-class RedisRepositoryTest {
+class OrderSaveRepositoryTest {
 	@Autowired
-	RedisRepository redisRepository;
+	OrderSaveRepository orderSaveRepository;
 
 	@Test
 	@DisplayName("redis set test")
-	void method() {
+	void save() {
 	    //given
-		Order order = Order.builder()
-			.id(1L)
-			.orderStatus(OrderStatusEnum.CANCEL)
+		OrderSave order = OrderSave.builder()
+			.memberId(1L)
+			.menuId(1L)
+			.shopId(1L)
 			.build();
 	    //when
-		redisRepository.save(order);
-		Optional<Order> byId = redisRepository.findById(order.getId());
-	    //then
+		orderSaveRepository.save(order);
+		Optional<OrderSave> byId = orderSaveRepository.findById(order.getMemberId());
+		//then
 		assertTrue(byId.isPresent());
 	}
 }
