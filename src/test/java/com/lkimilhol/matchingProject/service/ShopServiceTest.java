@@ -1,8 +1,8 @@
 package com.lkimilhol.matchingProject.service;
 
 import com.lkimilhol.matchingProject.common.CategoryEnum;
-import com.lkimilhol.matchingProject.domain.Shop;
-import com.lkimilhol.matchingProject.repository.ShopRepository;
+import com.lkimilhol.matchingProject.shop.domain.Shop;
+import com.lkimilhol.matchingProject.shop.repository.ShopRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

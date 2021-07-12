@@ -12,10 +12,11 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.lkimilhol.matchingProject.domain.Menu;
-import com.lkimilhol.matchingProject.domain.Shop;
+import com.lkimilhol.matchingProject.menu.domain.Menu;
+import com.lkimilhol.matchingProject.shop.domain.Shop;
 import com.lkimilhol.matchingProject.exception.CustomException;
 import com.lkimilhol.matchingProject.exception.ErrorInfo;
+import com.lkimilhol.matchingProject.menu.application.MenuService;
 import com.lkimilhol.matchingProject.request.CreateMenu;
 
 @ExtendWith(SpringExtension.class)

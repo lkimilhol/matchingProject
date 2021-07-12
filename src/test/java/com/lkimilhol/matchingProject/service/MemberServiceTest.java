@@ -1,10 +1,10 @@
 package com.lkimilhol.matchingProject.service;
 
-import com.lkimilhol.matchingProject.domain.Address;
-import com.lkimilhol.matchingProject.domain.Member;
-import com.lkimilhol.matchingProject.repository.AddressRepository;
-import com.lkimilhol.matchingProject.repository.MemberRepository;
-import org.junit.jupiter.api.Assertions;
+import com.lkimilhol.matchingProject.address.domain.Address;
+import com.lkimilhol.matchingProject.member.domain.Member;
+import com.lkimilhol.matchingProject.address.repository.AddressRepository;
+import com.lkimilhol.matchingProject.member.repository.MemberRepository;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -13,14 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.lkimilhol.matchingProject.domain.OrderSave;
+import com.lkimilhol.matchingProject.ordersave.domain.OrderSave;
+import com.lkimilhol.matchingProject.ordersave.repository.OrderSaveRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
 class OrderSaveRepositoryTest {
 	@Autowired
-	OrderSaveRepository orderSaveRepository;
+    OrderSaveRepository orderSaveRepository;
 
 	@Test
 	@DisplayName("redis set test")

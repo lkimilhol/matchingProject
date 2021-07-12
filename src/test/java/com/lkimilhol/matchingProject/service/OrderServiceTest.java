@@ -1,13 +1,12 @@
 package com.lkimilhol.matchingProject.service;
 
 import com.lkimilhol.matchingProject.common.OrderStatusEnum;
-import com.lkimilhol.matchingProject.domain.Address;
-import com.lkimilhol.matchingProject.domain.Member;
-import com.lkimilhol.matchingProject.domain.Order;
-import com.lkimilhol.matchingProject.domain.Shop;
-import com.lkimilhol.matchingProject.repository.AddressRepository;
-import com.lkimilhol.matchingProject.repository.MemberRepository;
-import com.lkimilhol.matchingProject.repository.OrderRepository;
+import com.lkimilhol.matchingProject.member.domain.Member;
+import com.lkimilhol.matchingProject.order.domain.Order;
+import com.lkimilhol.matchingProject.shop.domain.Shop;
+import com.lkimilhol.matchingProject.address.repository.AddressRepository;
+import com.lkimilhol.matchingProject.member.repository.MemberRepository;
+import com.lkimilhol.matchingProject.order.repository.OrderRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
