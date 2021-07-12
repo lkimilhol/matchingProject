@@ -1,11 +1,8 @@
 package com.lkimilhol.matchingProject.menu.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.lkimilhol.matchingProject.menu.domain.Menu;
 
-public interface MenuRepository {
-	Long save(Menu menu);
-	Menu findById(Long id);
-	List<Menu> findAll(Long shopId);
+public interface MenuRepository extends JpaRepository<Menu, Long> {
 }

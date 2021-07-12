@@ -1,12 +1,8 @@
 package com.lkimilhol.matchingProject.shop.repository;
 
-import com.lkimilhol.matchingProject.shop.domain.Shop;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ShopRepository {
-    Long save(Shop shop);
-    Shop findById(Long id);
-    Optional<Shop> findByName(String name);
-    List<Shop> findAll();
+import com.lkimilhol.matchingProject.shop.domain.Shop;
+
+public interface ShopRepository extends JpaRepository<Shop, Long> {
 }

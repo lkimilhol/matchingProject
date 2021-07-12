@@ -1,8 +1,7 @@
 package com.lkimilhol.matchingProject.address.repository;
 
-import com.lkimilhol.matchingProject.address.domain.Address;
+import org.apache.tomcat.jni.Address;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AddressRepository {
-    Long save(Address address);
-    Address findById(Long id);
+public interface AddressRepository extends JpaRepository<Address, Long> {
 }

@@ -1,11 +1,8 @@
 package com.lkimilhol.matchingProject.order.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.lkimilhol.matchingProject.order.domain.Order;
 
-import java.util.List;
-
-public interface OrderRepository {
-    Long save(Order order);
-    Order findById(Long id);
-    List<Order> findAll();
+public interface OrderRepository extends JpaRepository<Order, Long> {
 }

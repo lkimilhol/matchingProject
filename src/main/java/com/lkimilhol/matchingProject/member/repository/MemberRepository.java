@@ -1,13 +1,9 @@
 package com.lkimilhol.matchingProject.member.repository;
 
 
-import com.lkimilhol.matchingProject.member.domain.Member;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MemberRepository {
-    Long save(Member member);
-    Member findById(Long id);
-    Optional<Member> findByNickname(String name);
-    List<Member> findAll();
+import com.lkimilhol.matchingProject.member.domain.Member;
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
 }
