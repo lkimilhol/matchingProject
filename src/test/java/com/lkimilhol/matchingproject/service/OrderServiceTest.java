@@ -1,8 +1,10 @@
 package com.lkimilhol.matchingproject.service;
 
+import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.common.OrderStatusEnum;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.order.domain.Order;
+import com.lkimilhol.matchingproject.request.CreateShop;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
@@ -47,12 +49,13 @@ class OrderServiceTest {
                 .build()
                 ;
 
-        Shop shop = Shop.builder()
-                .name("성경")
-                .city("서울")
-                .district("송파")
-                .insertTime(LocalDateTime.now())
-                .build();
+        CreateShop createShop = new CreateShop();
+        createShop.setName("성경");
+        createShop.setCategory(CategoryEnum.CHINA);
+        createShop.setCity("서울");
+        createShop.setDistrict("송파구");
+
+        Shop shop = Shop.of(createShop);
 
         Order order = Order.builder()
                 .member(member)

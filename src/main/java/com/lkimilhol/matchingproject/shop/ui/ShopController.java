@@ -20,7 +20,7 @@ public class ShopController {
     private final ShopService shopService;
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/shop/new", method = RequestMethod.POST)
+    @PostMapping(value = "/shops")
     @ResponseBody
     public ResponseEntity<ResultBody> addShop(
             @Valid CreateShop createShop
@@ -29,8 +29,9 @@ public class ShopController {
         return ResponseEntity.ok(new ResultBody(getShopDto(shop)));
     }
 
+    //TODO 리퀘스트 바디로 수정 할 것
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/shop/{shopName}", method = RequestMethod.GET)
+    @GetMapping(value = "/shops/{shopName}")
     @ResponseBody
     public ResponseEntity<ResultBody> getShop(
             @PathVariable String shopName

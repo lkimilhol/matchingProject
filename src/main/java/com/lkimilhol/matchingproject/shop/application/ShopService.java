@@ -19,16 +19,7 @@ public class ShopService {
 
     @Transactional
     public Shop addShop(CreateShop createShop) throws CustomException {
-        var shop = Shop.builder()
-                .name(createShop.getName())
-                .category(createShop.getCategory())
-                .city(createShop.getCity())
-                .district(createShop.getDistrict())
-                .build();
-
-        shopRepository.save(shop);
-
-        return shop;
+        return shopRepository.save(Shop.of(createShop));
     }
 
     public Shop getShop(String shopName) {
