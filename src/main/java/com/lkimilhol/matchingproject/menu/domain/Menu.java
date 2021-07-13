@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.lkimilhol.matchingproject.exception.NegativeValueException;
+import com.lkimilhol.matchingproject.request.CreateMenu;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.exception.CustomException;
 import com.lkimilhol.matchingproject.exception.ErrorInfo;
@@ -23,9 +24,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Menu {
 
 	@Id
@@ -46,6 +45,16 @@ public class Menu {
 
 	@Column(name = "insert_time", columnDefinition = "DATETIME")
 	private LocalDateTime insertTime;
+
+	private Menu(Shop shop, String name, int amount) {
+		this.shop = shop;
+		this.name = name;
+		this.amount = amount;
+	}
+
+	public static Menu of(Shop shop, CreateMenu createMenu) {
+		return new Menu(shop, createMenu.getName(), createMenu.getAmount());
+	}
 
 	public void removeAmount(int amount) {
 		checkNegative(amount);

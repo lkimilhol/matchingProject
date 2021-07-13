@@ -14,16 +14,8 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Shop {
-
-    public Shop(String name, CategoryEnum category, String city, String district) {
-        this.name = name;
-        this.category = category;
-        this.city = city;
-        this.district = district;
-    }
 
     @Id
     @Column(name = "shop_id")
@@ -50,6 +42,14 @@ public class Shop {
 
     @Column(name = "insert_time", columnDefinition = "DATETIME")
     private LocalDateTime insertTime;
+
+
+    private Shop(String name, CategoryEnum category, String city, String district) {
+        this.name = name;
+        this.category = category;
+        this.city = city;
+        this.district = district;
+    }
 
     public static Shop of(CreateShop createShop) {
         return new Shop(createShop.getName(), createShop.getCategory(), createShop.getCity(), createShop.getDistrict());
