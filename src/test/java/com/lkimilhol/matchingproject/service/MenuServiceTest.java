@@ -13,8 +13,10 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.exception.NegativeValueException;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
+import com.lkimilhol.matchingproject.request.CreateShop;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.exception.CustomException;
 import com.lkimilhol.matchingproject.exception.ErrorInfo;
@@ -32,10 +34,13 @@ class MenuServiceTest {
 	@DisplayName("메뉴 추가")
 	void createMenu() {
 	    //given
-		Shop shop = Shop.builder()
-			.id(1L)
-			.name("test")
-			.build();
+		CreateShop createShop = new CreateShop();
+		createShop.setName("성경");
+		createShop.setCategory(CategoryEnum.CHINA);
+		createShop.setCity("서울");
+		createShop.setDistrict("송파구");
+
+		Shop shop = Shop.of(createShop);
 
 		CreateMenu createMenu = new CreateMenu();
 		createMenu.setShopId(1L);

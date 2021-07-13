@@ -1,6 +1,7 @@
 package com.lkimilhol.matchingproject.service;
 
 import com.lkimilhol.matchingproject.common.CategoryEnum;
+import com.lkimilhol.matchingproject.request.CreateShop;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.shop.repository.ShopRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -30,12 +31,14 @@ class ShopServiceTest {
     void createShop() {
         //given
         String name = "성경";
-        Shop shop = Shop.builder()
-                .name(name)
-                .category(CategoryEnum.CHINA)
-                .city("서울")
-                .district("송파")
-                .build();
+
+        CreateShop createShop = new CreateShop();
+        createShop.setName(name);
+        createShop.setCategory(CategoryEnum.CHINA);
+        createShop.setCity("서울");
+        createShop.setDistrict("송파구");
+
+        Shop shop = Shop.of(createShop);
 
         //when
         shopRepository.save(shop);
@@ -49,12 +52,14 @@ class ShopServiceTest {
     void getShop() {
         //given
         String name = "성경";
-        Shop shop = Shop.builder()
-                .name(name)
-                .category(CategoryEnum.CHINA)
-                .city("서울")
-                .district("송파")
-                .build();
+
+        CreateShop createShop = new CreateShop();
+        createShop.setName(name);
+        createShop.setCategory(CategoryEnum.CHINA);
+        createShop.setCity("서울");
+        createShop.setDistrict("송파구");
+
+        Shop shop = Shop.of(createShop);
 
         //when
         shopRepository.save(shop);
