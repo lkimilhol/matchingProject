@@ -9,11 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
-import com.lkimilhol.matchingproject.common.OrderStatus;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+
+import com.lkimilhol.matchingproject.common.OrderStatus;
 
 @Entity
 @Builder
