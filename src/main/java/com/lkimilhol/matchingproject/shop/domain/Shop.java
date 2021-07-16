@@ -51,7 +51,7 @@ public class Shop {
         this.district = district;
     }
 
-    public static Shop of(CreateShop createShop) {
-        return new Shop(createShop.getName(), createShop.getCategory(), createShop.getCity(), createShop.getDistrict());
+    public static Shop of(String name, CategoryEnum category, String city, String district) {
+        return new Shop(name, category, city, district);
     }
 }

@@ -52,8 +52,8 @@ public class Menu {
 		this.amount = amount;
 	}
 
-	public static Menu of(Shop shop, CreateMenu createMenu) {
-		return new Menu(shop, createMenu.getName(), createMenu.getAmount());
+	public static Menu of(Shop shop, String name, int amount) {
+		return new Menu(shop, name, amount);
 	}
 
 	public void removeAmount(int amount) {

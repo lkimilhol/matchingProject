@@ -10,4 +10,11 @@ public class CreateOrder {
     Long shopId;
     Long menuId;
     int amount;
+
+    public CreateOrder(Long memberId, Long shopId, Long menuId, int amount) {
+        this.memberId = memberId;
+        this.shopId = shopId;
+        this.menuId = menuId;
+        this.amount = amount;
+    }
 }

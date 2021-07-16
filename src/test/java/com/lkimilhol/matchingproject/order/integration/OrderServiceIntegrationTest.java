@@ -1,4 +1,4 @@
-package com.lkimilhol.matchingproject.service;
+package com.lkimilhol.matchingproject.order.integration;
 
 import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.common.OrderStatusEnum;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
-class OrderServiceTest {
+class OrderServiceIntegrationTest {
     @Autowired
     private MemberRepository memberRepository;
 
@@ -49,13 +49,7 @@ class OrderServiceTest {
                 .build()
                 ;
 
-        CreateShop createShop = new CreateShop();
-        createShop.setName("성경");
-        createShop.setCategory(CategoryEnum.CHINA);
-        createShop.setCity("서울");
-        createShop.setDistrict("송파구");
-
-        Shop shop = Shop.of(createShop);
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
 
         Order order = Order.builder()
                 .member(member)
