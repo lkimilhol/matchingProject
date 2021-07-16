@@ -24,7 +24,7 @@ public class MenuService {
 		//TODO 옵셔널 수정 예정
 		Shop shop = shopRepository.findById(createMenu.getShopId()).orElseThrow(NotFoundMenuException::new);
 
-		Menu menu = Menu.of(shop, createMenu);
+		Menu menu = Menu.of(shop, createMenu.getName(), createMenu.getAmount());
 		menuRepository.save(menu);
 
 		return menu;

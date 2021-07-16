@@ -1,10 +1,9 @@
-package com.lkimilhol.matchingproject.service;
+package com.lkimilhol.matchingproject.order.integration;
 
 import com.lkimilhol.matchingproject.common.CategoryEnum;
-import com.lkimilhol.matchingproject.common.OrderStatusEnum;
+import com.lkimilhol.matchingproject.common.OrderStatus;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.order.domain.Order;
-import com.lkimilhol.matchingproject.request.CreateShop;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
@@ -25,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
-class OrderServiceTest {
+class OrderServiceIntegrationTest {
     @Autowired
     private MemberRepository memberRepository;
 
@@ -49,18 +48,12 @@ class OrderServiceTest {
                 .build()
                 ;
 
-        CreateShop createShop = new CreateShop();
-        createShop.setName("성경");
-        createShop.setCategory(CategoryEnum.CHINA);
-        createShop.setCity("서울");
-        createShop.setDistrict("송파구");
-
-        Shop shop = Shop.of(createShop);
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
 
         Order order = Order.builder()
                 .member(member)
                 .shop(shop)
-                .orderStatus(OrderStatusEnum.PROGRESS)
+                .orderStatus(OrderStatus.PROGRESS)
                 .insertTime(LocalDateTime.now())
                 .updateTime(LocalDateTime.now())
                 .build();

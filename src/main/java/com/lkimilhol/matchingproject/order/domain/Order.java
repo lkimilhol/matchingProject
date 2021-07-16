@@ -1,6 +1,6 @@
 package com.lkimilhol.matchingproject.order.domain;
 
-import com.lkimilhol.matchingproject.common.OrderStatusEnum;
+import com.lkimilhol.matchingproject.common.OrderStatus;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
@@ -43,11 +43,22 @@ public class Order {
 
     @Enumerated(STRING)
     @NotNull
-    private OrderStatusEnum orderStatus;
+    private OrderStatus orderStatus;
 
     @Column(name = "update_time", columnDefinition = "DATETIME")
     private LocalDateTime updateTime;
 
     @Column(name = "insert_time", columnDefinition = "DATETIME")
     private LocalDateTime insertTime;
+
+    private Order(Member member, Shop shop, Menu menu, int amount) {
+        this.member = member;
+        this.shop = shop;
+        this.menu = menu;
+        this.amount = amount;
+    }
+
+    public static Order of(Member member, Shop shop, Menu menu, int amount) {
+        return new Order(member, shop, menu, amount);
+    }
 }

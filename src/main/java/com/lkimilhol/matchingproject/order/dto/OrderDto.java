@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import com.lkimilhol.matchingproject.common.OrderStatusEnum;
+import com.lkimilhol.matchingproject.common.OrderStatus;
 import com.lkimilhol.matchingproject.shop.dto.ShopDto;
 import com.lkimilhol.matchingproject.member.dto.MemberRequest;
 import com.lkimilhol.matchingproject.order.domain.Order;
@@ -17,7 +17,7 @@ public class OrderDto {
 	private Long id;
 	private MemberRequest member;
 	private ShopDto shop;
-	private OrderStatusEnum orderStatus;
+	private OrderStatus orderStatus;
 	private LocalDateTime updateTime;
 	private LocalDateTime insertTime;
 

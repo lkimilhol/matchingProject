@@ -32,13 +32,7 @@ class ShopServiceTest {
         //given
         String name = "성경";
 
-        CreateShop createShop = new CreateShop();
-        createShop.setName(name);
-        createShop.setCategory(CategoryEnum.CHINA);
-        createShop.setCity("서울");
-        createShop.setDistrict("송파구");
-
-        Shop shop = Shop.of(createShop);
+        Shop shop = Shop.of(name, CategoryEnum.CHINA, "서울", "송파구");
 
         //when
         shopRepository.save(shop);
@@ -53,13 +47,7 @@ class ShopServiceTest {
         //given
         String name = "성경";
 
-        CreateShop createShop = new CreateShop();
-        createShop.setName(name);
-        createShop.setCategory(CategoryEnum.CHINA);
-        createShop.setCity("서울");
-        createShop.setDistrict("송파구");
-
-        Shop shop = Shop.of(createShop);
+        Shop shop = Shop.of(name, CategoryEnum.CHINA, "서울", "송파구");
 
         //when
         shopRepository.save(shop);

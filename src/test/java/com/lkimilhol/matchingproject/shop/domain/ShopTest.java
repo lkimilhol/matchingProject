@@ -15,14 +15,8 @@ class ShopTest {
     @Test
     void create() {
         // given
-        CreateShop createShop = new CreateShop();
-        createShop.setName("성경");
-        createShop.setCategory(CategoryEnum.CHINA);
-        createShop.setCity("서울");
-        createShop.setDistrict("송파구");
-
         // when
-        Shop shop = Shop.of(createShop);
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
 
         // then
         assertThat(shop).isNotNull();

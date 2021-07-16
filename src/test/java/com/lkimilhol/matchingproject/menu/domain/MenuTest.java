@@ -25,7 +25,7 @@ class MenuTest {
         createShop.setCity("서울");
         createShop.setDistrict("송파구");
 
-        Shop shop = Shop.of(createShop);
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
 
         CreateMenu createMenu = new CreateMenu();
         createMenu.setShopId(1L);
@@ -33,7 +33,7 @@ class MenuTest {
         createMenu.setAmount(100);
 
         //when
-        Menu menu = Menu.of(shop, createMenu);
+        Menu menu = Menu.of(shop, createMenu.getName(), createMenu.getAmount());
 
         //then
         assertThat(menu).isNotNull();
@@ -48,7 +48,8 @@ class MenuTest {
         createMenu.setName("짜짱면");
         createMenu.setAmount(1);
 
-        Menu menu = Menu.of(new Shop(), createMenu);
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
+        Menu menu = Menu.of(shop, createMenu.getName(), createMenu.getAmount());
 
         //when
         //then

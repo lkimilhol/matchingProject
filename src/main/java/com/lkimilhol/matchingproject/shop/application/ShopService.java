@@ -19,7 +19,12 @@ public class ShopService {
 
     @Transactional
     public Shop addShop(CreateShop createShop) throws CustomException {
-        return shopRepository.save(Shop.of(createShop));
+        return shopRepository.save(Shop.of(
+                createShop.getName(),
+                createShop.getCategory(),
+                createShop.getCity(),
+                createShop.getDistrict()
+        ));
     }
 
     public Shop getShop(String shopName) {
