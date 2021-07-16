@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
+import com.lkimilhol.matchingproject.common.OrderStatus;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,8 @@ public class OrderHistory {
 	private Long menuId;
 
 	private int orderAmount;
+
+	private OrderStatus orderStatus;
 
 	private LocalDateTime insertTime;
 }

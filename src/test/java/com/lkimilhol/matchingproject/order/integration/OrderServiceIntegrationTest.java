@@ -1,10 +1,9 @@
 package com.lkimilhol.matchingproject.order.integration;
 
 import com.lkimilhol.matchingproject.common.CategoryEnum;
-import com.lkimilhol.matchingproject.common.OrderStatusEnum;
+import com.lkimilhol.matchingproject.common.OrderStatus;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.order.domain.Order;
-import com.lkimilhol.matchingproject.request.CreateShop;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
@@ -54,7 +53,7 @@ class OrderServiceIntegrationTest {
         Order order = Order.builder()
                 .member(member)
                 .shop(shop)
-                .orderStatus(OrderStatusEnum.PROGRESS)
+                .orderStatus(OrderStatus.PROGRESS)
                 .insertTime(LocalDateTime.now())
                 .updateTime(LocalDateTime.now())
                 .build();

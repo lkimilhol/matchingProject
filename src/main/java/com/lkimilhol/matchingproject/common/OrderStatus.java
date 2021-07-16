@@ -1,5 +1,5 @@
 package com.lkimilhol.matchingproject.common;
 
-public enum OrderStatusEnum {
+public enum OrderStatus {
     PROGRESS, COMPLETE, CANCEL
 }

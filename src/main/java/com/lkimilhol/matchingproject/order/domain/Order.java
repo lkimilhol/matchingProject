@@ -1,7 +1,6 @@
 package com.lkimilhol.matchingproject.order.domain;
 
-import com.lkimilhol.matchingproject.common.OrderStatusEnum;
-import com.lkimilhol.matchingproject.request.CreateOrder;
+import com.lkimilhol.matchingproject.common.OrderStatus;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
@@ -44,7 +43,7 @@ public class Order {
 
     @Enumerated(STRING)
     @NotNull
-    private OrderStatusEnum orderStatus;
+    private OrderStatus orderStatus;
 
     @Column(name = "update_time", columnDefinition = "DATETIME")
     private LocalDateTime updateTime;
