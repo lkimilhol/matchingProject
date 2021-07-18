@@ -34,13 +34,7 @@ public class MemberService {
     public Member addMember(CreateMember createMember) {
         checkDuplicateMember(createMember);
 
-        Address address = Address.builder()
-                .city(createMember.getCity())
-                .district(createMember.getDistrict())
-                .build()
-                ;
-
-        Member member = Member.builder()
+        var member = Member.builder()
                 .nickname(createMember.getNickname())
                 .age(createMember.getAge())
                 .sex(createMember.getSex())
@@ -48,6 +42,8 @@ public class MemberService {
                 .insertTime(LocalDateTime.now())
                 .updateTime(LocalDateTime.now())
                 .build();
+
+        Address address = Address.of(createMember.getCity(), createMember.getDistrict(), member);
 
         addressRepository.save(address);
         memberRepository.save(member);

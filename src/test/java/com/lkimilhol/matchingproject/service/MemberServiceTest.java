@@ -30,12 +30,8 @@ class MemberServiceTest {
 
     @Test
     @DisplayName("멤버 생성 테스트")
-    public void createMember() {
+    void createMember() {
         //given
-        Address address = Address.builder()
-                .city("서울")
-                .district("송파")
-                .build();
 
         Member member = Member.builder()
                 .nickname("test")
@@ -46,6 +42,8 @@ class MemberServiceTest {
                 .updateTime(LocalDateTime.now())
                 .build()
                 ;
+
+        Address address = Address.of("서울", "송파", member);
 
         //when
         addressRepository.save(address);
