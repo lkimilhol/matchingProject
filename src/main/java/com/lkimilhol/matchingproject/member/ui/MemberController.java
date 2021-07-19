@@ -1,6 +1,7 @@
 package com.lkimilhol.matchingproject.member.ui;
 
 import com.lkimilhol.matchingproject.member.domain.Member;
+import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 import com.lkimilhol.matchingproject.member.dto.MemberRequest;
 import com.lkimilhol.matchingproject.request.CreateMember;
 import com.lkimilhol.matchingproject.response.ResultBody;
@@ -24,8 +25,8 @@ public class MemberController {
         return "";
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @PostMapping(value = "/member/new")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value = "/members/new")
     @ResponseBody
     public ResponseEntity<ResultBody> addMember(
             @Valid CreateMember createMember
@@ -34,12 +35,20 @@ public class MemberController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/member/{nickname}")
+    @GetMapping(value = "/members/{nickname}")
     @ResponseBody
     public ResponseEntity<ResultBody> getMember(
             @PathVariable String nickname
     ) {
         return ResponseEntity.ok(new ResultBody(getMemberDto(memberService.getMember(nickname))));
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(value = "/members/address")
+    @ResponseBody
+    public ResponseEntity<Void> updateAddress(@RequestBody AddressRequest addressRequest) {
+        memberService.updateAddress(addressRequest);
+        return ResponseEntity.noContent().build();
     }
 
     private MemberRequest getMemberDto(Member member) {

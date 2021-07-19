@@ -24,4 +24,20 @@ public class AddressRequest {
     public String getDistrict() {
         return district;
     }
+
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
+    }
+
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
 }
