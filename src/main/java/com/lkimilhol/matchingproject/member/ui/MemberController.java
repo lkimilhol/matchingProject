@@ -25,23 +25,21 @@ public class MemberController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/member/new", method = RequestMethod.POST)
+    @PostMapping(value = "/member/new")
     @ResponseBody
     public ResponseEntity<ResultBody> addMember(
             @Valid CreateMember createMember
     ) {
-        Member member = memberService.addMember(createMember);
-        return ResponseEntity.ok(new ResultBody(getMemberDto(member)));
+        return ResponseEntity.ok(new ResultBody(getMemberDto(memberService.addMember(createMember))));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/member/{nickname}", method = RequestMethod.GET)
+    @GetMapping(value = "/member/{nickname}")
     @ResponseBody
     public ResponseEntity<ResultBody> getMember(
             @PathVariable String nickname
     ) {
-        Member member = memberService.getMember(nickname);
-        return ResponseEntity.ok(new ResultBody(getMemberDto(member)));
+        return ResponseEntity.ok(new ResultBody(getMemberDto(memberService.getMember(nickname))));
     }
 
     private MemberRequest getMemberDto(Member member) {
