@@ -15,6 +15,7 @@ import com.lkimilhol.matchingproject.exception.NotFoundMemberException;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.exception.CustomException;
 import com.lkimilhol.matchingproject.exception.ErrorInfo;
+import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
 import com.lkimilhol.matchingproject.request.CreateMember;
 
@@ -77,5 +78,15 @@ public class MemberService {
         if (memberInfo.isPresent()) {
             throw new NicknameAlreadyExistsException();
         }
+    }
+
+    public void updateAddress(AddressRequest addressRequest) {
+        memberRepository.findById(addressRequest.getMemberId())
+                .orElseThrow(NotFoundMemberException::new);
+
+        Address address = addressRepository.findById(addressRequest.getAddressId())
+                .orElseThrow(NotFoundAddressException::new);
+
+        address.update(addressRequest.getCity(), addressRequest.getDistrict());
     }
 }

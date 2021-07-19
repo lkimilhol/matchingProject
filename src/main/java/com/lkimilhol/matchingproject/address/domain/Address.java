@@ -33,4 +33,9 @@ public class Address {
     public static Address of(String city, String district, Member member) {
         return new Address(city, district, member);
     }
+
+    public void update(String city, String district) {
+        this.city = city;
+        this.district = district;
+    }
 }

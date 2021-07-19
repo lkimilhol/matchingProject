@@ -1,6 +1,7 @@
 package com.lkimilhol.matchingproject.member.ui;
 
 import com.lkimilhol.matchingproject.member.domain.Member;
+import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 import com.lkimilhol.matchingproject.member.dto.MemberRequest;
 import com.lkimilhol.matchingproject.request.CreateMember;
 import com.lkimilhol.matchingproject.response.ResultBody;
@@ -24,24 +25,30 @@ public class MemberController {
         return "";
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/member/new", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value = "/members/new")
     @ResponseBody
     public ResponseEntity<ResultBody> addMember(
             @Valid CreateMember createMember
     ) {
-        Member member = memberService.addMember(createMember);
-        return ResponseEntity.ok(new ResultBody(getMemberDto(member)));
+        return ResponseEntity.ok(new ResultBody(getMemberDto(memberService.addMember(createMember))));
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/member/{nickname}", method = RequestMethod.GET)
+    @GetMapping(value = "/members/{nickname}")
     @ResponseBody
     public ResponseEntity<ResultBody> getMember(
             @PathVariable String nickname
     ) {
-        Member member = memberService.getMember(nickname);
-        return ResponseEntity.ok(new ResultBody(getMemberDto(member)));
+        return ResponseEntity.ok(new ResultBody(getMemberDto(memberService.getMember(nickname))));
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(value = "/members/address")
+    @ResponseBody
+    public ResponseEntity<Void> updateAddress(@RequestBody AddressRequest addressRequest) {
+        memberService.updateAddress(addressRequest);
+        return ResponseEntity.noContent().build();
     }
 
     private MemberRequest getMemberDto(Member member) {
