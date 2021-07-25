@@ -10,17 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.lkimilhol.matchingproject.exception.NegativeValueException;
-import com.lkimilhol.matchingproject.request.CreateMenu;
-import com.lkimilhol.matchingproject.shop.domain.Shop;
-import com.lkimilhol.matchingproject.exception.CustomException;
-import com.lkimilhol.matchingproject.exception.ErrorInfo;
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import com.lkimilhol.matchingproject.exception.NegativeValueException;
+import com.lkimilhol.matchingproject.shop.domain.Shop;
 
 @Entity
 @Getter

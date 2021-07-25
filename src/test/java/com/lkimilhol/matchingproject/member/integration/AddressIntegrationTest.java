@@ -36,16 +36,7 @@ public class AddressIntegrationTest {
     @Test
     void update() {
         // given
-        Member member = Member.builder()
-                .nickname("test")
-                .age(18)
-                .country("kr")
-                .sex("m")
-                .insertTime(LocalDateTime.now())
-                .updateTime(LocalDateTime.now())
-                .build()
-        ;
-
+        Member member = Member.of("test", "m", 18, "kr");
         memberRepository.save(member);
 
         Address address = Address.of("서울", "송파", member);

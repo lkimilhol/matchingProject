@@ -51,9 +51,7 @@ class OrderServiceTest {
         // given
         CreateOrder createOrder = new CreateOrder(1L, 1L, 1L, 1);
 
-        Member member = Member.builder()
-                .id(1L)
-                .build();
+        Member member = new Member(1L);
 
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
         Menu menu = Menu.of(shop, "짜장면", 200);
