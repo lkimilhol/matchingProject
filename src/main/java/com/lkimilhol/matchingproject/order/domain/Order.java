@@ -1,18 +1,31 @@
 package com.lkimilhol.matchingproject.order.domain;
 
+import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
+
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import com.lkimilhol.matchingproject.common.OrderStatus;
-import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
-
-import lombok.*;
-
-import static javax.persistence.EnumType.*;
-import static javax.persistence.FetchType.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import com.lkimilhol.matchingproject.shop.domain.Shop;
 
 @Entity
 @Table(name = "orders")

@@ -32,17 +32,7 @@ class MemberServiceTest {
     @DisplayName("멤버 생성 테스트")
     void createMember() {
         //given
-
-        Member member = Member.builder()
-                .nickname("test")
-                .age(18)
-                .country("kr")
-                .sex("m")
-                .insertTime(LocalDateTime.now())
-                .updateTime(LocalDateTime.now())
-                .build()
-                ;
-
+        Member member = Member.of("test", "m", 18, "kr");
         Address address = Address.of("서울", "송파", member);
 
         //when

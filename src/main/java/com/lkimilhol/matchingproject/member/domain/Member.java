@@ -3,22 +3,23 @@ package com.lkimilhol.matchingproject.member.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-import com.lkimilhol.matchingproject.order.domain.Order;
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.lkimilhol.matchingproject.order.domain.Order;
+
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class Member {
+
     @Id
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +41,23 @@ public class Member {
 
     @Column(name = "insert_time", columnDefinition = "DATETIME")
     private LocalDateTime insertTime;
+
+    public Member(long id) {
+        this.id = id;
+    }
+
+    private Member (String nickname, String sex, int age, String country) {
+        this.nickname = nickname;
+        this.sex = sex;
+        this.age = age;
+        this.country = country;
+        this.updateTime = LocalDateTime.now();
+        this.insertTime = LocalDateTime.now();
+    }
+
+    public static Member of(String nickname, String sex, int age, String country) {
+        return new Member(nickname, sex, age, country);
+    }
 }
 
 

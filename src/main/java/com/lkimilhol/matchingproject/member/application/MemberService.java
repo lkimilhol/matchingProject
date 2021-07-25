@@ -7,19 +7,17 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+
 import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
 import com.lkimilhol.matchingproject.exception.NicknameAlreadyExistsException;
 import com.lkimilhol.matchingproject.exception.NotFoundAddressException;
 import com.lkimilhol.matchingproject.exception.NotFoundMemberException;
 import com.lkimilhol.matchingproject.member.domain.Member;
-import com.lkimilhol.matchingproject.exception.CustomException;
-import com.lkimilhol.matchingproject.exception.ErrorInfo;
 import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
 import com.lkimilhol.matchingproject.request.CreateMember;
-
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -35,15 +33,7 @@ public class MemberService {
     public Member addMember(CreateMember createMember) {
         checkDuplicateMember(createMember);
 
-        var member = Member.builder()
-                .nickname(createMember.getNickname())
-                .age(createMember.getAge())
-                .sex(createMember.getSex())
-                .country(createMember.getCountry())
-                .insertTime(LocalDateTime.now())
-                .updateTime(LocalDateTime.now())
-                .build();
-
+        var member = Member.of(createMember.getNickname(), createMember.getSex(), createMember.getAge(), createMember.getCountry());
         Address address = Address.of(createMember.getCity(), createMember.getDistrict(), member);
 
         addressRepository.save(address);

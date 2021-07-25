@@ -18,15 +18,7 @@ class AddressTest {
 
     @BeforeEach
     void setup() {
-        member = Member.builder()
-                .nickname("test")
-                .age(18)
-                .country("kr")
-                .sex("m")
-                .insertTime(LocalDateTime.now())
-                .updateTime(LocalDateTime.now())
-                .build()
-                ;
+        member = Member.of("test", "m", 18, "kr");
     }
 
     @DisplayName("생성")

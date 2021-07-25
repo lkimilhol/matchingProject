@@ -1,16 +1,24 @@
 package com.lkimilhol.matchingproject.shop.domain;
 
-import com.lkimilhol.matchingproject.common.CategoryEnum;
-import com.lkimilhol.matchingproject.menu.domain.Menu;
-import com.lkimilhol.matchingproject.order.domain.Order;
-import com.lkimilhol.matchingproject.request.CreateShop;
-
-import lombok.*;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import com.lkimilhol.matchingproject.common.CategoryEnum;
+import com.lkimilhol.matchingproject.menu.domain.Menu;
+import com.lkimilhol.matchingproject.order.domain.Order;
 
 @Entity
 @Getter

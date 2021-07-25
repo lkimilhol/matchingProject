@@ -38,16 +38,7 @@ class OrderServiceIntegrationTest {
     @DisplayName("주문 생성 테스트")
     public void createOrder() {
         //given
-        Member member = Member.builder()
-                .nickname("test")
-                .age(18)
-                .country("kr")
-                .sex("m")
-                .insertTime(LocalDateTime.now())
-                .updateTime(LocalDateTime.now())
-                .build()
-                ;
-
+        Member member = Member.of("test", "m", 18, "kr");
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
 
         Order order = Order.builder()
