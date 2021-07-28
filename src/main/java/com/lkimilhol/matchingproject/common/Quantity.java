@@ -1,5 +1,7 @@
 package com.lkimilhol.matchingproject.common;
 
+import java.util.Objects;
+
 import javax.persistence.Embeddable;
 
 import com.lkimilhol.matchingproject.exception.NegativeValueException;
@@ -25,5 +27,18 @@ public class Quantity {
         if (amount < 0) {
             throw new NegativeValueException();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Quantity quantity = (Quantity) o;
+        return amount == quantity.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount);
     }
 }

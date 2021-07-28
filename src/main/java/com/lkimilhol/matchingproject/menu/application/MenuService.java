@@ -3,6 +3,7 @@ package com.lkimilhol.matchingproject.menu.application;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.exception.NotFoundMenuException;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
@@ -24,7 +25,7 @@ public class MenuService {
 		//TODO 옵셔널 수정 예정
 		Shop shop = shopRepository.findById(createMenu.getShopId()).orElseThrow(NotFoundMenuException::new);
 
-		Menu menu = Menu.of(shop, createMenu.getName(), createMenu.getAmount());
+		Menu menu = Menu.of(shop, createMenu.getName(), new Quantity(createMenu.getAmount()));
 		menuRepository.save(menu);
 
 		return menu;

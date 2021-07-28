@@ -1,9 +1,8 @@
 package com.lkimilhol.matchingproject.service;
 
-import com.lkimilhol.matchingproject.address.domain.Address;
-import com.lkimilhol.matchingproject.member.domain.Member;
-import com.lkimilhol.matchingproject.address.repository.AddressRepository;
-import com.lkimilhol.matchingproject.member.repository.MemberRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,11 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.lkimilhol.matchingproject.address.domain.Address;
+import com.lkimilhol.matchingproject.address.repository.AddressRepository;
+import com.lkimilhol.matchingproject.member.domain.Member;
+import com.lkimilhol.matchingproject.member.repository.MemberRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
