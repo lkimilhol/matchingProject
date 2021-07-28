@@ -2,7 +2,9 @@ package com.lkimilhol.matchingproject.order.integration;
 
 import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.common.OrderStatus;
+import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.member.domain.Member;
+import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.order.domain.Order;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
@@ -40,14 +42,9 @@ class OrderServiceIntegrationTest {
         //given
         Member member = Member.of("test", "m", 18, "kr");
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
+        Menu menu = Menu.of(shop, "짜장면", new Quantity(10));
 
-        Order order = Order.builder()
-                .member(member)
-                .shop(shop)
-                .orderStatus(OrderStatus.PROGRESS)
-                .insertTime(LocalDateTime.now())
-                .updateTime(LocalDateTime.now())
-                .build();
+        Order order = Order.of(member, shop, menu, new Quantity(100));
 
         //when
         orderRepository.save(order);

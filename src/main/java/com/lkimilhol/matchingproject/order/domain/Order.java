@@ -6,6 +6,7 @@ import static javax.persistence.FetchType.LAZY;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.lkimilhol.matchingproject.common.OrderStatus;
+import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
@@ -52,7 +54,8 @@ public class Order {
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
-    private int amount;
+    @Embedded
+    private Quantity quantity;
 
     @Enumerated(STRING)
     @NotNull
@@ -64,14 +67,16 @@ public class Order {
     @Column(name = "insert_time", columnDefinition = "DATETIME")
     private LocalDateTime insertTime;
 
-    private Order(Member member, Shop shop, Menu menu, int amount) {
+    private Order(Member member, Shop shop, OrderStatus orderStatus, Menu menu, Quantity quantity) {
         this.member = member;
         this.shop = shop;
+        this.orderStatus = orderStatus;
         this.menu = menu;
-        this.amount = amount;
+        this.quantity = quantity;
     }
 
-    public static Order of(Member member, Shop shop, Menu menu, int amount) {
-        return new Order(member, shop, menu, amount);
+    public static Order of(Member member, Shop shop, Menu menu, Quantity amount) {
+        return new Order(member, shop, OrderStatus.PROGRESS, menu, amount);
     }
+
 }

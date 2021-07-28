@@ -3,6 +3,7 @@ package com.lkimilhol.matchingproject.menu.domain;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.exception.NegativeValueException;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 
@@ -32,7 +34,8 @@ public class Menu {
 
 	private String name;
 
-	private int amount;
+	@Embedded
+	private Quantity quantity;
 
 	@Column(name = "update_time", columnDefinition = "DATETIME")
 	private LocalDateTime updateTime;
@@ -40,24 +43,17 @@ public class Menu {
 	@Column(name = "insert_time", columnDefinition = "DATETIME")
 	private LocalDateTime insertTime;
 
-	private Menu(Shop shop, String name, int amount) {
+	private Menu(Shop shop, String name, Quantity quantity) {
 		this.shop = shop;
 		this.name = name;
-		this.amount = amount;
+		this.quantity = quantity;
 	}
 
-	public static Menu of(Shop shop, String name, int amount) {
-		return new Menu(shop, name, amount);
+	public static Menu of(Shop shop, String name, Quantity quantity) {
+		return new Menu(shop, name, quantity);
 	}
 
-	public void removeAmount(int amount) {
-		checkNegative(amount);
-		this.amount -= amount;
-	}
-
-	private void checkNegative(int amount) {
-		if (this.amount - amount < 0) {
-			throw new NegativeValueException();
-		}
+	public void removeAmount(Quantity quantity) {
+		this.quantity = this.quantity.sub(quantity);
 	}
 }

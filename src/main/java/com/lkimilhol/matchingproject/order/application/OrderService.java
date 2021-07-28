@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.exception.NotFoundMemberException;
 import com.lkimilhol.matchingproject.exception.NotFoundMenuException;
 import com.lkimilhol.matchingproject.exception.NotFoundOrderException;
@@ -35,8 +36,8 @@ public class OrderService {
 		var shop = shopRepository.findById(createOrder.getShopId()).orElseThrow(NotFoundShopException::new);
 		var menu = menuRepository.findById(createOrder.getMenuId()).orElseThrow(NotFoundMenuException::new);
 
-		var order = Order.of(member, shop, menu, createOrder.getAmount());
-		menu.removeAmount(createOrder.getAmount());
+		var order = Order.of(member, shop, menu, new Quantity(createOrder.getAmount()));
+		menu.removeAmount(new Quantity(createOrder.getAmount()));
 
 		OrderHistory newOrderHistory = OrderHistory.builder()
 				.memberId(member.getId())

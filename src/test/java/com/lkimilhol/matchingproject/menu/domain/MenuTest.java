@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.lkimilhol.matchingproject.common.CategoryEnum;
+import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.exception.NegativeValueException;
 import com.lkimilhol.matchingproject.request.CreateMenu;
 import com.lkimilhol.matchingproject.request.CreateShop;
@@ -33,7 +34,7 @@ class MenuTest {
         createMenu.setAmount(100);
 
         //when
-        Menu menu = Menu.of(shop, createMenu.getName(), createMenu.getAmount());
+        Menu menu = Menu.of(shop, createMenu.getName(), new Quantity(createMenu.getAmount()));
 
         //then
         assertThat(menu).isNotNull();
@@ -49,11 +50,11 @@ class MenuTest {
         createMenu.setAmount(1);
 
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
-        Menu menu = Menu.of(shop, createMenu.getName(), createMenu.getAmount());
+        Menu menu = Menu.of(shop, createMenu.getName(), new Quantity(createMenu.getAmount()));
 
         //when
         //then
-        assertThatThrownBy(() -> menu.removeAmount(2))
+        assertThatThrownBy(() -> menu.removeAmount(new Quantity(2)))
                 .isInstanceOf(NegativeValueException.class);
     }
 }
