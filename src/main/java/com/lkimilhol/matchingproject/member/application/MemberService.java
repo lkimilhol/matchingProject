@@ -16,6 +16,7 @@ import com.lkimilhol.matchingproject.exception.NotFoundAddressException;
 import com.lkimilhol.matchingproject.exception.NotFoundMemberException;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.dto.AddressRequest;
+import com.lkimilhol.matchingproject.member.dto.MemberResponse;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
 import com.lkimilhol.matchingproject.request.CreateMember;
 
@@ -58,8 +59,10 @@ public class MemberService {
         return addressRepository.findById(id).orElseThrow(NotFoundAddressException::new);
     }
 
-    public Member getMember(String nickname) {
-        return findByNickname(nickname).orElseThrow(NotFoundMemberException::new);
+    public MemberResponse getMember(String nickname) {
+        Member member = findByNickname(nickname).orElseThrow(NotFoundMemberException::new);
+        List<Address> addresses = addressRepository.findAddressesByMember(member);
+        return MemberResponse.of(member, addresses);
     }
 
     private void checkDuplicateMember(CreateMember createMember) {

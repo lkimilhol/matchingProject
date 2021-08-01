@@ -1,8 +1,12 @@
 package com.lkimilhol.matchingproject.member.ui;
 
+import java.util.List;
+
+import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 import com.lkimilhol.matchingproject.member.dto.MemberRequest;
+import com.lkimilhol.matchingproject.member.dto.MemberResponse;
 import com.lkimilhol.matchingproject.request.CreateMember;
 import com.lkimilhol.matchingproject.response.ResultBody;
 import com.lkimilhol.matchingproject.member.application.MemberService;
@@ -26,7 +30,7 @@ public class MemberController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/members/new")
+    @PostMapping(value = "/members")
     @ResponseBody
     public ResponseEntity<ResultBody> addMember(
             @Valid CreateMember createMember
@@ -40,7 +44,7 @@ public class MemberController {
     public ResponseEntity<ResultBody> getMember(
             @PathVariable String nickname
     ) {
-        return ResponseEntity.ok(new ResultBody(getMemberDto(memberService.getMember(nickname))));
+        return ResponseEntity.ok(new ResultBody(memberService.getMember(nickname)));
     }
 
     @ResponseStatus(HttpStatus.OK)
