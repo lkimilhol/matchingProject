@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password:
-    url: jdbc:mysql://localhost:3306/MATCHING?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    password: masterpw
+    url: jdbc:mysql://localhost:13306/matching?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
   jpa:
     database: mysql

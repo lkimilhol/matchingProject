@@ -15,8 +15,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
+import com.lkimilhol.matchingproject.member.application.MemberService;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.dto.AddressRequest;
+import com.lkimilhol.matchingproject.member.dto.MemberResponse;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -28,6 +30,9 @@ public class AddressIntegrationTest {
 
     @Autowired
     private AddressRepository addressRepository;
+
+    @Autowired
+    private MemberService memberService;
 
     @DisplayName("주소 수정 통합 테스트")
     @Test
@@ -54,5 +59,24 @@ public class AddressIntegrationTest {
         assertThat(findAddress.get().getId()).isEqualTo(address.getId());
         assertThat(findAddress.get().getCity()).isEqualTo(city);
         assertThat(findAddress.get().getDistrict()).isEqualTo(district);
+    }
+
+    @DisplayName("멤버 주소까지 조회")
+    @Test
+    void getMember() {
+        // given
+        Member member = Member.of("test", "m", 18, "kr");
+        Address 송파 = Address.of("서울", "송파", member);
+        Address 강남 = Address.of("서울", "강남", member);
+        Address 서초 = Address.of("서울", "서초", member);
+
+        memberRepository.save(member);
+        addressRepository.save(송파);
+        addressRepository.save(강남);
+        addressRepository.save(서초);
+        // when
+        MemberResponse memberResponse = memberService.getMember(member.getNickname());
+        // then
+        assertThat(memberResponse.getAddresses().size()).isEqualTo(3);
     }
 }

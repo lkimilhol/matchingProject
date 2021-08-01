@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.order.domain.Order;
 
 @Entity
