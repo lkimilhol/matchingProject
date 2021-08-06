@@ -1,6 +1,7 @@
 package com.lkimilhol.matchingproject.order.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -67,4 +68,23 @@ class OrderServiceTest {
         assertThat(order).isNotNull();
     }
 
+    @DisplayName("삭제")
+    @Test
+    void delete() {
+        // given
+        Member member = new Member(1L);
+
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
+        Menu menu = Menu.of(shop, "짜장면", new Quantity(200));
+        Order order = Order.of(member, shop, menu, new Quantity(100));
+
+        // when
+        when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+        when(menuRepository.findById(any())).thenReturn(Optional.of(menu));
+
+        orderService.deleteOrder(1L);
+
+        // then
+        assertThat(menu.getQuantity()).isEqualTo(new Quantity(300));
+    }
 }

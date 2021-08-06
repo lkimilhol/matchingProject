@@ -79,4 +79,7 @@ public class Order {
         return new Order(member, shop, OrderStatus.PROGRESS, menu, amount);
     }
 
+    public void updateStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 }

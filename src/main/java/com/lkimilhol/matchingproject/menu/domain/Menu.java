@@ -56,4 +56,8 @@ public class Menu {
 	public void removeAmount(Quantity quantity) {
 		this.quantity = this.quantity.sub(quantity);
 	}
+
+	public void increaseAmount(Quantity quantity) {
+		this.quantity = this.quantity.add(quantity);
+	}
 }
