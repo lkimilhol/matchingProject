@@ -1,5 +1,7 @@
 package com.lkimilhol.matchingproject.order.ui;
 
+import java.net.URI;
+
 import com.lkimilhol.matchingproject.order.domain.Order;
 import com.lkimilhol.matchingproject.order.dto.OrderDto;
 import com.lkimilhol.matchingproject.request.CreateOrder;
@@ -20,24 +22,29 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/order/new", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value = "/orders/")
     @ResponseBody
     public ResponseEntity<ResultBody> addShop(
             @Valid CreateOrder createOrder
             ) {
         Order order = orderService.addOrder(createOrder);
-        return ResponseEntity.ok(new ResultBody(getOrderDto(order)));
+        return ResponseEntity.created(URI.create("/orders/" + order.getId())).build();
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
+    @GetMapping(value = "/orders/{orderId}")
     @ResponseBody
-    public ResponseEntity<ResultBody> getOrder(
-            @PathVariable Long orderId
-    ) {
+    public ResponseEntity<ResultBody> getOrder(@PathVariable Long orderId) {
         Order order = orderService.getOrder(orderId);
         return ResponseEntity.ok(new ResultBody(getOrderDto(order)));
+    }
+
+    @DeleteMapping(value = "/orders/{orderId}")
+    @ResponseBody
+    public ResponseEntity<ResultBody> deleteOrder(@PathVariable Long orderId) {
+        orderService.deleteOrder(orderId);
+        return ResponseEntity.noContent().build();
     }
 
     private OrderDto getOrderDto(Order order) {

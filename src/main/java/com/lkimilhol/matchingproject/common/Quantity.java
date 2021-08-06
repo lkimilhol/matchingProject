@@ -23,6 +23,10 @@ public class Quantity {
         return new Quantity(this.amount - quantity.amount);
     }
 
+    public Quantity add(Quantity quantity) {
+        return new Quantity(this.amount + quantity.amount);
+    }
+
     private void checkNegative(int amount) {
         if (amount < 0) {
             throw new NegativeValueException();

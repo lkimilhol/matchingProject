@@ -41,4 +41,16 @@ class QuantityTest {
         assertThatThrownBy(() -> new Quantity(-10))
                 .isInstanceOf(NegativeValueException.class);
     }
+
+    @DisplayName("추가")
+    @Test
+    void add() {
+        // given
+        Quantity quantity = new Quantity(10);
+        Quantity target = new Quantity(5);
+        // when
+        Quantity actual = quantity.add(target);
+        // then
+        assertThat(actual).isEqualTo(new Quantity(15));
+    }
 }

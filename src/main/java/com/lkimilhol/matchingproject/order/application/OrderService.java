@@ -1,16 +1,19 @@
 package com.lkimilhol.matchingproject.order.application;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lkimilhol.matchingproject.common.OrderStatus;
 import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.exception.NotFoundMemberException;
 import com.lkimilhol.matchingproject.exception.NotFoundMenuException;
 import com.lkimilhol.matchingproject.exception.NotFoundOrderException;
 import com.lkimilhol.matchingproject.exception.NotFoundShopException;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
+import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
 import com.lkimilhol.matchingproject.order.domain.Order;
 import com.lkimilhol.matchingproject.order.repository.OrderRepository;
@@ -56,5 +59,13 @@ public class OrderService {
 	@Transactional(readOnly = true)
 	public Order getOrder(Long orderId) {
 		return orderRepository.findById(orderId).orElseThrow(NotFoundOrderException::new);
+	}
+
+	public void deleteOrder(Long orderId) {
+		var order = orderRepository.findById(orderId).orElseThrow(NotFoundOrderException::new);
+		Menu menu = menuRepository.findById(order.getMenu().getId()).orElseThrow(NotFoundMenuException::new);
+		menu.increaseAmount(order.getQuantity());
+
+		order.updateStatus(OrderStatus.CANCEL);
 	}
 }
