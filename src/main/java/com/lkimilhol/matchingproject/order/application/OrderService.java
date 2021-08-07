@@ -1,7 +1,6 @@
 package com.lkimilhol.matchingproject.order.application;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,16 +41,16 @@ public class OrderService {
 		var order = Order.of(member, shop, menu, new Quantity(createOrder.getAmount()));
 		menu.removeAmount(new Quantity(createOrder.getAmount()));
 
-		OrderHistory newOrderHistory = OrderHistory.builder()
+		OrderHistory orderHistory = OrderHistory.builder()
 				.memberId(member.getId())
 				.shopId(shop.getId())
 				.menuId(menu.getId())
-				.orderAmount(createOrder.getAmount())
+				.quantity(new Quantity(createOrder.getAmount()))
 				.insertTime(LocalDateTime.now())
 				.build();
 
 		orderRepository.save(order);
-		orderHistoryRepository.save(newOrderHistory);
+		orderHistoryRepository.save(orderHistory);
 
 		return order;
 	}
@@ -66,6 +65,15 @@ public class OrderService {
 		Menu menu = menuRepository.findById(order.getMenu().getId()).orElseThrow(NotFoundMenuException::new);
 		menu.increaseAmount(order.getQuantity());
 
+		OrderHistory orderHistory = OrderHistory.builder()
+				.memberId(order.getMember().getId())
+				.shopId(order.getShop().getId())
+				.menuId(menu.getId())
+				.quantity(order.getQuantity())
+				.insertTime(LocalDateTime.now())
+				.build();
+
 		order.updateStatus(OrderStatus.CANCEL);
+		orderHistoryRepository.save(orderHistory);
 	}
 }
