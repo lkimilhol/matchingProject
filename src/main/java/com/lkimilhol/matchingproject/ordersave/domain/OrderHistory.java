@@ -14,6 +14,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import com.lkimilhol.matchingproject.common.OrderStatus;
+import com.lkimilhol.matchingproject.common.Quantity;
 
 @Entity
 @Builder
@@ -31,7 +32,7 @@ public class OrderHistory {
 
 	private Long menuId;
 
-	private int orderAmount;
+	private Quantity quantity;
 
 	private OrderStatus orderStatus;
 
