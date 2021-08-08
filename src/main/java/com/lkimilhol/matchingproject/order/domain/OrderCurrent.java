@@ -2,11 +2,16 @@ package com.lkimilhol.matchingproject.order.domain;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "domain")
+@Document(collection = "current")
 public class OrderCurrent {
 
     private String name;
     private String job;
+
+    public OrderCurrent(String name, String job) {
+        this.name = name;
+        this.job = job;
+    }
 
     @Override
     public String toString() {
