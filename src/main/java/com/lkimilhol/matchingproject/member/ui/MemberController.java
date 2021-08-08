@@ -41,9 +41,7 @@ public class MemberController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/members/{nickname}")
     @ResponseBody
-    public ResponseEntity<ResultBody> getMember(
-            @PathVariable String nickname
-    ) {
+    public ResponseEntity<ResultBody> getMember(@PathVariable String nickname) {
         return ResponseEntity.ok(new ResultBody(memberService.getMember(nickname)));
     }
 
