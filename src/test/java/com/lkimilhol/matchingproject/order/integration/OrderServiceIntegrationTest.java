@@ -3,6 +3,7 @@ package com.lkimilhol.matchingproject.order.integration;
 import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.common.OrderStatus;
 import com.lkimilhol.matchingproject.common.Quantity;
+import com.lkimilhol.matchingproject.config.MongoDBConfig;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.order.domain.Order;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -23,16 +25,9 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
 class OrderServiceIntegrationTest {
-    @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
-    private AddressRepository addressRepository;
-
     @Autowired
     private OrderRepository orderRepository;
 
