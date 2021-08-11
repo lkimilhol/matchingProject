@@ -1,7 +1,5 @@
 package com.lkimilhol.matchingproject.order.application;
 
-import java.time.LocalDateTime;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +14,8 @@ import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
 import com.lkimilhol.matchingproject.order.domain.Order;
 import com.lkimilhol.matchingproject.order.repository.OrderRepository;
-import com.lkimilhol.matchingproject.ordersave.domain.OrderHistory;
-import com.lkimilhol.matchingproject.ordersave.repository.OrderHistoryRepository;
+import com.lkimilhol.matchingproject.order.domain.OrderHistory;
+import com.lkimilhol.matchingproject.order.repository.OrderHistoryRepository;
 import com.lkimilhol.matchingproject.request.CreateOrder;
 import com.lkimilhol.matchingproject.shop.repository.ShopRepository;
 
@@ -41,13 +39,14 @@ public class OrderService {
 		var order = Order.of(member, shop, menu, new Quantity(createOrder.getAmount()));
 		menu.removeAmount(new Quantity(createOrder.getAmount()));
 
-		OrderHistory orderHistory = OrderHistory.builder()
-				.memberId(member.getId())
-				.shopId(shop.getId())
-				.menuId(menu.getId())
-				.quantity(new Quantity(createOrder.getAmount()))
-				.insertTime(LocalDateTime.now())
-				.build();
+		OrderHistory orderHistory = OrderHistory.of(
+				member.getId(),
+				shop.getId(),
+				order.getId(),
+				menu.getId(),
+				new Quantity(createOrder.getAmount()),
+				OrderStatus.PROGRESS
+		);
 
 		orderRepository.save(order);
 		orderHistoryRepository.save(orderHistory);
@@ -65,13 +64,14 @@ public class OrderService {
 		Menu menu = menuRepository.findById(order.getMenu().getId()).orElseThrow(NotFoundMenuException::new);
 		menu.increaseAmount(order.getQuantity());
 
-		OrderHistory orderHistory = OrderHistory.builder()
-				.memberId(order.getMember().getId())
-				.shopId(order.getShop().getId())
-				.menuId(menu.getId())
-				.quantity(order.getQuantity())
-				.insertTime(LocalDateTime.now())
-				.build();
+		OrderHistory orderHistory = OrderHistory.of(
+				order.getMember().getId(),
+				order.getShop().getId(),
+				orderId,
+				order.getMenu().getId(),
+				order.getQuantity(),
+				OrderStatus.CANCEL
+		);
 
 		order.updateStatus(OrderStatus.CANCEL);
 		orderHistoryRepository.save(orderHistory);
