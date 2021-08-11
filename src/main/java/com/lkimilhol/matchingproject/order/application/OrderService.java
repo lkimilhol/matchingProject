@@ -1,7 +1,5 @@
 package com.lkimilhol.matchingproject.order.application;
 
-import java.time.LocalDateTime;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +14,8 @@ import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
 import com.lkimilhol.matchingproject.order.domain.Order;
 import com.lkimilhol.matchingproject.order.repository.OrderRepository;
-import com.lkimilhol.matchingproject.ordersave.domain.OrderHistory;
-import com.lkimilhol.matchingproject.ordersave.repository.OrderHistoryRepository;
+import com.lkimilhol.matchingproject.order.domain.OrderHistory;
+import com.lkimilhol.matchingproject.order.repository.OrderHistoryRepository;
 import com.lkimilhol.matchingproject.request.CreateOrder;
 import com.lkimilhol.matchingproject.shop.repository.ShopRepository;
 
@@ -44,6 +42,7 @@ public class OrderService {
 		OrderHistory orderHistory = OrderHistory.of(
 				member.getId(),
 				shop.getId(),
+				order.getId(),
 				menu.getId(),
 				new Quantity(createOrder.getAmount()),
 				OrderStatus.PROGRESS
@@ -68,6 +67,7 @@ public class OrderService {
 		OrderHistory orderHistory = OrderHistory.of(
 				order.getMember().getId(),
 				order.getShop().getId(),
+				orderId,
 				order.getMenu().getId(),
 				order.getQuantity(),
 				OrderStatus.CANCEL

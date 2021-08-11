@@ -21,7 +21,7 @@ import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
 import com.lkimilhol.matchingproject.order.domain.Order;
 import com.lkimilhol.matchingproject.order.repository.OrderRepository;
-import com.lkimilhol.matchingproject.ordersave.repository.OrderHistoryRepository;
+import com.lkimilhol.matchingproject.order.repository.OrderHistoryRepository;
 import com.lkimilhol.matchingproject.request.CreateOrder;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.shop.repository.ShopRepository;
