@@ -41,13 +41,13 @@ public class OrderService {
 		var order = Order.of(member, shop, menu, new Quantity(createOrder.getAmount()));
 		menu.removeAmount(new Quantity(createOrder.getAmount()));
 
-		OrderHistory orderHistory = OrderHistory.builder()
-				.memberId(member.getId())
-				.shopId(shop.getId())
-				.menuId(menu.getId())
-				.quantity(new Quantity(createOrder.getAmount()))
-				.insertTime(LocalDateTime.now())
-				.build();
+		OrderHistory orderHistory = OrderHistory.of(
+				member.getId(),
+				shop.getId(),
+				menu.getId(),
+				new Quantity(createOrder.getAmount()),
+				OrderStatus.PROGRESS
+		);
 
 		orderRepository.save(order);
 		orderHistoryRepository.save(orderHistory);
@@ -65,13 +65,13 @@ public class OrderService {
 		Menu menu = menuRepository.findById(order.getMenu().getId()).orElseThrow(NotFoundMenuException::new);
 		menu.increaseAmount(order.getQuantity());
 
-		OrderHistory orderHistory = OrderHistory.builder()
-				.memberId(order.getMember().getId())
-				.shopId(order.getShop().getId())
-				.menuId(menu.getId())
-				.quantity(order.getQuantity())
-				.insertTime(LocalDateTime.now())
-				.build();
+		OrderHistory orderHistory = OrderHistory.of(
+				order.getMember().getId(),
+				order.getShop().getId(),
+				order.getMenu().getId(),
+				order.getQuantity(),
+				OrderStatus.CANCEL
+		);
 
 		order.updateStatus(OrderStatus.CANCEL);
 		orderHistoryRepository.save(orderHistory);
