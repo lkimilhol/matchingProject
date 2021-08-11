@@ -2,11 +2,14 @@ package com.lkimilhol.matchingproject.common;
 
 import java.util.Objects;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 
 import com.lkimilhol.matchingproject.exception.NegativeValueException;
 
 @Embeddable
+@Access(AccessType.FIELD)
 public class Quantity {
     private final int amount;
 
@@ -17,6 +20,10 @@ public class Quantity {
     public Quantity(int amount) {
         checkNegative(amount);
         this.amount = amount;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     public Quantity sub(Quantity quantity) {
