@@ -8,6 +8,13 @@ public class OrderRequest {
     private Long menuId;
     private OrderStatus orderStatus;
 
+    public OrderRequest(Long memberId, Long shopId, Long menuId, OrderStatus orderStatus) {
+        this.memberId = memberId;
+        this.shopId = shopId;
+        this.menuId = menuId;
+        this.orderStatus = orderStatus;
+    }
+
     public Long getMemberId() {
         return memberId;
     }
