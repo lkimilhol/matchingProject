@@ -3,7 +3,8 @@ package com.lkimilhol.matchingproject.order.ui;
 import java.net.URI;
 
 import com.lkimilhol.matchingproject.order.domain.Order;
-import com.lkimilhol.matchingproject.order.dto.OrderDto;
+import com.lkimilhol.matchingproject.order.dto.OrderResponse;
+import com.lkimilhol.matchingproject.order.dto.OrderRequest;
 import com.lkimilhol.matchingproject.request.CreateOrder;
 import com.lkimilhol.matchingproject.response.ResultBody;
 import com.lkimilhol.matchingproject.order.application.OrderService;
@@ -40,14 +41,14 @@ public class OrderController {
         return ResponseEntity.ok(new ResultBody(getOrderDto(order)));
     }
 
-    @DeleteMapping(value = "/orders/{orderId}")
+    @PatchMapping(value = "/orders/{orderId}")
     @ResponseBody
-    public ResponseEntity<ResultBody> deleteOrder(@PathVariable Long orderId) {
-        orderService.deleteOrder(orderId);
+    public ResponseEntity<ResultBody> deleteOrder(@PathVariable Long orderId, @RequestBody OrderRequest orderRequest) {
+        orderService.updateOrderStatus(orderId, orderRequest);
         return ResponseEntity.noContent().build();
     }
 
-    private OrderDto getOrderDto(Order order) {
-        return OrderDto.builder().order(order).build();
+    private OrderResponse getOrderDto(Order order) {
+        return OrderResponse.builder().order(order).build();
     }
 }
