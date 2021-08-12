@@ -2,16 +2,11 @@ package com.lkimilhol.matchingproject.order.dto;
 
 import com.lkimilhol.matchingproject.common.OrderStatus;
 
-public class UpdateOrderStatusRequest {
-    private Long orderId;
+public class OrderRequest {
     private Long memberId;
     private Long shopId;
     private Long menuId;
     private OrderStatus orderStatus;
-
-    public Long getOrderId() {
-        return orderId;
-    }
 
     public Long getMemberId() {
         return memberId;
