@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -14,12 +16,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.lkimilhol.matchingproject.common.CategoryEnum;
+import com.lkimilhol.matchingproject.common.OrderStatus;
 import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
 import com.lkimilhol.matchingproject.order.domain.Order;
+import com.lkimilhol.matchingproject.order.domain.OrderHistory;
 import com.lkimilhol.matchingproject.order.repository.OrderRepository;
 import com.lkimilhol.matchingproject.order.repository.OrderHistoryRepository;
 import com.lkimilhol.matchingproject.request.CreateOrder;
@@ -86,5 +90,19 @@ class OrderServiceTest {
 
         // then
         assertThat(menu.getQuantity()).isEqualTo(new Quantity(300));
+    }
+
+    @DisplayName("주문 기록 불러오기")
+    @Test
+    void getOrderHistory() {
+        // given
+        Long shopId = 1L;
+        List<OrderHistory> orderHistories = new ArrayList<>();
+        orderHistories.add(OrderHistory.of(1L, shopId, 1L, 1L, new Quantity(1), OrderStatus.COMPLETE));
+        // when
+        when(orderHistoryRepository.findAllByShopId(1L)).thenReturn(orderHistories);
+        List<OrderHistory> orderHistory = orderService.getOrderHistory(shopId);
+        // then
+        assertThat(orderHistory.size()).isEqualTo(1);
     }
 }
