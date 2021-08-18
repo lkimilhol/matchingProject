@@ -24,6 +24,7 @@ import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
 import com.lkimilhol.matchingproject.order.domain.Order;
 import com.lkimilhol.matchingproject.order.domain.OrderHistory;
+import com.lkimilhol.matchingproject.order.dto.OrderRequest;
 import com.lkimilhol.matchingproject.order.repository.OrderRepository;
 import com.lkimilhol.matchingproject.order.repository.OrderHistoryRepository;
 import com.lkimilhol.matchingproject.request.CreateOrder;
@@ -72,9 +73,9 @@ class OrderServiceTest {
         assertThat(order).isNotNull();
     }
 
-    @DisplayName("삭제")
+    @DisplayName("취소")
     @Test
-    void delete() {
+    void cancel() {
         // given
         Member member = new Member(1L);
 
@@ -82,11 +83,15 @@ class OrderServiceTest {
         Menu menu = Menu.of(shop, "짜장면", new Quantity(200));
         Order order = Order.of(member, shop, menu, new Quantity(100));
 
+        OrderRequest orderRequest = new OrderRequest(1L, 1L, 1L, OrderStatus.CANCEL);
+
         // when
         when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
         when(menuRepository.findById(any())).thenReturn(Optional.of(menu));
+        when(memberRepository.findById(any())).thenReturn(Optional.of(member));
+        when(shopRepository.findById(any())).thenReturn(Optional.of(shop));
 
-        orderService.deleteOrder(1L);
+        orderService.updateOrderStatus(1L, orderRequest);
 
         // then
         assertThat(menu.getQuantity()).isEqualTo(new Quantity(300));

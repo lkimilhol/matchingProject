@@ -15,6 +15,7 @@ import com.lkimilhol.matchingproject.member.repository.MemberRepository;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
 import com.lkimilhol.matchingproject.order.domain.Order;
+import com.lkimilhol.matchingproject.order.dto.OrderRequest;
 import com.lkimilhol.matchingproject.order.repository.OrderRepository;
 import com.lkimilhol.matchingproject.order.domain.OrderHistory;
 import com.lkimilhol.matchingproject.order.repository.OrderHistoryRepository;
@@ -61,9 +62,12 @@ public class OrderService {
 		return orderRepository.findById(orderId).orElseThrow(NotFoundOrderException::new);
 	}
 
-	public void deleteOrder(Long orderId) {
+	public void updateOrderStatus(Long orderId, OrderRequest orderRequest) {
+		var member = memberRepository.findById(orderRequest.getMemberId()).orElseThrow(NotFoundMemberException::new);
+		var shop = shopRepository.findById(orderRequest.getShopId()).orElseThrow(NotFoundShopException::new);
 		var order = orderRepository.findById(orderId).orElseThrow(NotFoundOrderException::new);
-		Menu menu = menuRepository.findById(order.getMenu().getId()).orElseThrow(NotFoundMenuException::new);
+
+		Menu menu = menuRepository.findById(orderRequest.getShopId()).orElseThrow(NotFoundMenuException::new);
 		menu.increaseAmount(order.getQuantity());
 
 		OrderHistory orderHistory = OrderHistory.of(
@@ -72,10 +76,10 @@ public class OrderService {
 				orderId,
 				order.getMenu().getId(),
 				order.getQuantity(),
-				OrderStatus.CANCEL
+				orderRequest.getOrderStatus()
 		);
 
-		order.updateStatus(OrderStatus.CANCEL);
+		order.updateStatus(orderRequest.getOrderStatus());
 		orderHistoryRepository.save(orderHistory);
 	}
 

@@ -13,7 +13,7 @@ import com.lkimilhol.matchingproject.order.domain.Order;
 
 @NoArgsConstructor
 @Getter
-public class OrderDto {
+public class OrderResponse {
 	private Long id;
 	private MemberRequest member;
 	private ShopDto shop;
@@ -22,7 +22,7 @@ public class OrderDto {
 	private LocalDateTime insertTime;
 
 	@Builder
-	public OrderDto(Order order) {
+	public OrderResponse(Order order) {
 		this.id = order.getId();
 		this.member = new MemberRequest(order.getMember());
 		this.shop = new ShopDto(order.getShop());
