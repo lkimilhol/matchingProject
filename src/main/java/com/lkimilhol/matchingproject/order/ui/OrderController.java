@@ -48,6 +48,12 @@ public class OrderController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(value = "/orders/history/shop/{shopId}")
+    @ResponseBody
+    public ResponseEntity<ResultBody> getOrderHistory(@PathVariable Long shopId) {
+        return ResponseEntity.ok(new ResultBody(orderService.getOrderHistory(shopId)));
+    }
+
     private OrderResponse getOrderDto(Order order) {
         return OrderResponse.builder().order(order).build();
     }

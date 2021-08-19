@@ -1,5 +1,7 @@
 package com.lkimilhol.matchingproject.order.application;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -79,5 +81,10 @@ public class OrderService {
 
 		order.updateStatus(orderRequest.getOrderStatus());
 		orderHistoryRepository.save(orderHistory);
+	}
+
+	//트랜잭셔날 애노테이션을 붙여야 할까?
+	public List<OrderHistory> getOrderHistory(Long shopId) {
+		return orderHistoryRepository.findAllByShopId(shopId);
 	}
 }
