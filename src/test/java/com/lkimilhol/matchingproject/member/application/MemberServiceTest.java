@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.address.domain.City;
+import com.lkimilhol.matchingproject.address.domain.District;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.dto.MemberResponse;
@@ -38,9 +39,9 @@ class MemberServiceTest {
     void getMember() {
         // given
         Member member = Member.of("test", "m", 18, "kr");
-        Address 송파 = Address.of(City.get("서울"), "송파", member);
-        Address 강남 = Address.of(City.get("서울"), "강남", member);
-        Address 서초 = Address.of(City.get("서울"), "서초", member);
+        Address 송파 = Address.of(City.get("서울"), new District("송파"), member);
+        Address 강남 = Address.of(City.get("서울"), new District("강남"), member);
+        Address 서초 = Address.of(City.get("서울"), new District("서초"), member);
         // when
         when(memberRepository.findByNickname(member.getNickname())).thenReturn(Optional.of(member));
         when(addressRepository.findAddressesByMember(member)).thenReturn(Arrays.asList(송파, 강남, 서초));

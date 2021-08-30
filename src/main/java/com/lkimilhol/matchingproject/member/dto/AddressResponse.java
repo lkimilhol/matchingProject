@@ -25,7 +25,7 @@ public class AddressResponse {
     }
 
     public static AddressResponse of(Address address) {
-        return new AddressResponse(address.getId(), address.getMember().getId(), address.getCity().toString(), address.getDistrict());
+        return new AddressResponse(address.getId(), address.getMember().getId(), address.getCity().toString(), address.getDistrict().getName());
     }
 
     public static List<AddressResponse> listOf(List<Address> addresses) {

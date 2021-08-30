@@ -7,12 +7,13 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class District {
+    public static final String DEFAULT = "주소없음";
 
-    @Column
+    @Column(name = "district")
     private final String name;
 
-    protected District() {
-        throw new IllegalArgumentException();
+    public District() {
+        this.name = DEFAULT;
     }
 
     public District(String name) {
