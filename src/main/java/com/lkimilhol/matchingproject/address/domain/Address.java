@@ -16,6 +16,7 @@ public class Address {
     @Column(name = "address_id")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private City city;        //시 ex) 서울시, 부산광역시, 광주광역시
 
     private String district;    //구 ex) 송파구, 강동
