@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.lkimilhol.matchingproject.address.domain.Address;
+import com.lkimilhol.matchingproject.address.domain.City;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
@@ -31,7 +32,7 @@ class MemberServiceTest {
     void createMember() {
         //given
         Member member = Member.of("test", "m", 18, "kr");
-        Address address = Address.of("서울", "송파", member);
+        Address address = Address.of(City.get("서울"), "송파", member);
 
         //when
         addressRepository.save(address);

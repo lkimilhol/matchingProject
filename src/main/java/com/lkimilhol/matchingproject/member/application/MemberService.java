@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import com.lkimilhol.matchingproject.address.domain.Address;
+import com.lkimilhol.matchingproject.address.domain.City;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
 import com.lkimilhol.matchingproject.exception.NicknameAlreadyExistsException;
 import com.lkimilhol.matchingproject.exception.NotFoundAddressException;
@@ -35,7 +36,7 @@ public class MemberService {
         checkDuplicateMember(createMember);
 
         var member = Member.of(createMember.getNickname(), createMember.getSex(), createMember.getAge(), createMember.getCountry());
-        Address address = Address.of(createMember.getCity(), createMember.getDistrict(), member);
+        Address address = Address.of(City.get(createMember.getCity()), createMember.getDistrict(), member);
 
         addressRepository.save(address);
         memberRepository.save(member);
@@ -80,6 +81,6 @@ public class MemberService {
         Address address = addressRepository.findById(addressRequest.getAddressId())
                 .orElseThrow(NotFoundAddressException::new);
 
-        address.update(addressRequest.getCity(), addressRequest.getDistrict());
+        address.update(City.get(addressRequest.getCity()), addressRequest.getDistrict());
     }
 }

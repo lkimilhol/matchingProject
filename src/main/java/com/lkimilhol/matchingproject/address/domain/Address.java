@@ -16,7 +16,7 @@ public class Address {
     @Column(name = "address_id")
     private Long id;
 
-    private String city;        //시 ex) 서울시, 부산광역시, 광주광역시
+    private City city;        //시 ex) 서울시, 부산광역시, 광주광역시
 
     private String district;    //구 ex) 송파구, 강동
 
@@ -24,17 +24,17 @@ public class Address {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Address(String city, String district, Member member) {
+    public Address(City city, String district, Member member) {
         this.city = city;
         this.district = district;
         this.member = member;
     }
 
-    public static Address of(String city, String district, Member member) {
+    public static Address of(City city, String district, Member member) {
         return new Address(city, district, member);
     }
 
-    public void update(String city, String district) {
+    public void update(City city, String district) {
         this.city = city;
         this.district = district;
     }
