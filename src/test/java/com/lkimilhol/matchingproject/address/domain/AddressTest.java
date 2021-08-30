@@ -26,7 +26,7 @@ class AddressTest {
     void create() {
         // given
         // when
-        Address address = Address.of(City.get("서울"), "송파", member);
+        Address address = Address.of(City.get("서울"), new District("송파"), member);
 
         // then
         assertThat(address).isNotNull();
@@ -37,18 +37,18 @@ class AddressTest {
     @Test
     void update() {
         // given
-        Address address = Address.of(City.get("서울"), "송파", member);
+        Address address = Address.of(City.get("서울"), new District("송파"), member);
 
         AddressRequest addressRequest = new AddressRequest();
         addressRequest.setCity("성남");
         addressRequest.setDistrict("수정");
 
         // when
-        address.update(City.get(addressRequest.getCity()), addressRequest.getDistrict());
+        address.update(City.get(addressRequest.getCity()), new District(addressRequest.getDistrict()));
 
         // then
         assertThat(address).isNotNull();
         assertThat(address.getCity().toName()).isEqualTo("성남");
-        assertThat(address.getDistrict()).isEqualTo("수정");
+        assertThat(address.getDistrict().getName()).isEqualTo("수정");
     }
 }
