@@ -12,6 +12,8 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
     show-sql: true
+    hibernate:
+      ddl-auto: create-drop
   data:
     mongodb:
       uri: mongodb://127.0.0.1:27017/matching
