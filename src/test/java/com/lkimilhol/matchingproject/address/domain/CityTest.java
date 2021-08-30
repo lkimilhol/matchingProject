@@ -14,7 +14,7 @@ class CityTest {
     @Test
     void get() {
         // given
-        String name = "서울시";
+        String name = "서울";
         // when
         // then
         assertThat(City.get(name)).isEqualTo(City.SEOUL);

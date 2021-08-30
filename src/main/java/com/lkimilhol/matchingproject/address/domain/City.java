@@ -3,7 +3,8 @@ package com.lkimilhol.matchingproject.address.domain;
 import com.lkimilhol.matchingproject.exception.NotFoundCityException;
 
 public enum City {
-    SEOUL("서울시"),
+    SEOUL("서울"),
+    SUNGNAM("성남"),
     ;
 
     private String name;
@@ -14,10 +15,16 @@ public enum City {
 
     static public City get(String name) {
         switch (name) {
-            case "서울시":
+            case "서울":
                 return SEOUL;
+            case "성남":
+                return SUNGNAM;
         }
 
         throw new NotFoundCityException();
+    }
+
+    public String toName() {
+        return this.name;
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.lkimilhol.matchingproject.address.domain.Address;
+import com.lkimilhol.matchingproject.address.domain.City;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
 import com.lkimilhol.matchingproject.member.application.MemberService;
 import com.lkimilhol.matchingproject.member.domain.Member;
@@ -41,7 +42,7 @@ public class AddressIntegrationTest {
         Member member = Member.of("test", "m", 18, "kr");
         memberRepository.save(member);
 
-        Address address = Address.of("서울", "송파", member);
+        Address address = Address.of(City.get("서울"), "송파", member);
         addressRepository.save(address);
         String city = "성남";
         String district = "수정";
@@ -50,14 +51,14 @@ public class AddressIntegrationTest {
         AddressRequest addressRequest = new AddressRequest();
         addressRequest.setCity(city);
         addressRequest.setDistrict(district);
-        address.update(addressRequest.getCity(), addressRequest.getDistrict());
+        address.update(City.get(addressRequest.getCity()), addressRequest.getDistrict());
 
         Optional<Address> findAddress = addressRepository.findById(address.getId());
 
         // then
         assertThat(findAddress).isPresent();
         assertThat(findAddress.get().getId()).isEqualTo(address.getId());
-        assertThat(findAddress.get().getCity()).isEqualTo(city);
+        assertThat(findAddress.get().getCity().toName()).isEqualTo(city);
         assertThat(findAddress.get().getDistrict()).isEqualTo(district);
     }
 
@@ -66,9 +67,9 @@ public class AddressIntegrationTest {
     void getMember() {
         // given
         Member member = Member.of("test", "m", 18, "kr");
-        Address 송파 = Address.of("서울", "송파", member);
-        Address 강남 = Address.of("서울", "강남", member);
-        Address 서초 = Address.of("서울", "서초", member);
+        Address 송파 = Address.of(City.get("서울"), "송파", member);
+        Address 강남 = Address.of(City.get("서울"), "강남", member);
+        Address 서초 = Address.of(City.get("서울"), "서초", member);
 
         memberRepository.save(member);
         addressRepository.save(송파);

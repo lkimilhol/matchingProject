@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.lkimilhol.matchingproject.address.domain.Address;
+import com.lkimilhol.matchingproject.address.domain.City;
 
 @Getter
 @NoArgsConstructor
@@ -24,7 +25,7 @@ public class AddressResponse {
     }
 
     public static AddressResponse of(Address address) {
-        return new AddressResponse(address.getId(), address.getMember().getId(), address.getCity(), address.getDistrict());
+        return new AddressResponse(address.getId(), address.getMember().getId(), address.getCity().toString(), address.getDistrict());
     }
 
     public static List<AddressResponse> listOf(List<Address> addresses) {
