@@ -19,14 +19,14 @@ class DistrictTest {
         assertThat(name).isEqualTo("송파구");
     }
 
-    @DisplayName("생성실패-이름없음")
+    @DisplayName("생성-이름없음")
     @Test
     void createFailedByName() {
         // given
+        District district = new District();
         // when
+        String name = district.getName();
         // then
-        assertThatThrownBy(() -> {
-            new District();
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThat(name).isEqualTo(District.DEFAULT);
     }
 }
