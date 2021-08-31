@@ -12,11 +12,15 @@ public class Age {
     private final int amount;
 
     public Age() {
-        throw new IllegalArgumentException();
+        this.amount = 0;
     }
 
     public Age(int amount) {
         this.amount = amount;
+    }
+
+    public int amount() {
+        return amount;
     }
 
     @Override

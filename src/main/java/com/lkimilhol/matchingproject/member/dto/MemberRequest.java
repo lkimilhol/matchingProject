@@ -22,7 +22,7 @@ public class MemberRequest {
         this.id = member.getId();
         this.nickname = member.getNickname();
         this.sex = member.getSex();
-        this.age = member.getAge();
+        this.age = member.getAge().amount();
         this.insertTime = member.getInsertTime();
     }
 }

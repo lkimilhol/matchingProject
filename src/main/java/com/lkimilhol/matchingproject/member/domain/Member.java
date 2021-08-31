@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +32,8 @@ public class Member {
 
     private String sex;
 
-    private int age;
+    @Embedded
+    private Age age;
 
     private String country;
 
@@ -47,7 +50,7 @@ public class Member {
         this.id = id;
     }
 
-    private Member (String nickname, String sex, int age, String country) {
+    private Member (String nickname, String sex, Age age, String country) {
         this.nickname = nickname;
         this.sex = sex;
         this.age = age;
@@ -56,7 +59,7 @@ public class Member {
         this.insertTime = LocalDateTime.now();
     }
 
-    public static Member of(String nickname, String sex, int age, String country) {
+    public static Member of(String nickname, String sex, Age age, String country) {
         return new Member(nickname, sex, age, country);
     }
 }
