@@ -18,6 +18,7 @@ import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.address.domain.City;
 import com.lkimilhol.matchingproject.address.domain.District;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
+import com.lkimilhol.matchingproject.member.domain.Age;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.dto.MemberResponse;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
@@ -38,7 +39,7 @@ class MemberServiceTest {
     @Test
     void getMember() {
         // given
-        Member member = Member.of("test", "m", 18, "kr");
+        Member member = Member.of("test", "m", new Age(18), "kr");
         Address 송파 = Address.of(City.get("서울"), new District("송파"), member);
         Address 강남 = Address.of(City.get("서울"), new District("강남"), member);
         Address 서초 = Address.of(City.get("서울"), new District("서초"), member);

@@ -4,6 +4,7 @@ import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.common.OrderStatus;
 import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.config.MongoDBConfig;
+import com.lkimilhol.matchingproject.member.domain.Age;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.order.domain.Order;
@@ -35,7 +36,7 @@ class OrderServiceIntegrationTest {
     @DisplayName("주문 생성 테스트")
     public void createOrder() {
         //given
-        Member member = Member.of("test", "m", 18, "kr");
+        Member member = Member.of("test", "m", new Age(18), "kr");
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
         Menu menu = Menu.of(shop, "짜장면", new Quantity(10));
 

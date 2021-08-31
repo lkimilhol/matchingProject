@@ -16,6 +16,7 @@ import com.lkimilhol.matchingproject.address.repository.AddressRepository;
 import com.lkimilhol.matchingproject.exception.NicknameAlreadyExistsException;
 import com.lkimilhol.matchingproject.exception.NotFoundAddressException;
 import com.lkimilhol.matchingproject.exception.NotFoundMemberException;
+import com.lkimilhol.matchingproject.member.domain.Age;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 import com.lkimilhol.matchingproject.member.dto.MemberResponse;
@@ -36,7 +37,7 @@ public class MemberService {
     public Member addMember(CreateMember createMember) {
         checkDuplicateMember(createMember);
 
-        var member = Member.of(createMember.getNickname(), createMember.getSex(), createMember.getAge(), createMember.getCountry());
+        var member = Member.of(createMember.getNickname(), createMember.getSex(), new Age(createMember.getAge()), createMember.getCountry());
         Address address = Address.of(City.get(createMember.getCity()), new District(createMember.getDistrict()), member);
 
         addressRepository.save(address);
