@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +37,8 @@ public class Member {
     @Embedded
     private Age age;
 
-    private String country;
+    @Enumerated(EnumType.STRING)
+    private Country country;
 
     @OneToMany(mappedBy = "member")
     private List<Order> order;
@@ -50,7 +53,7 @@ public class Member {
         this.id = id;
     }
 
-    private Member (String nickname, String sex, Age age, String country) {
+    private Member (String nickname, String sex, Age age, Country country) {
         this.nickname = nickname;
         this.sex = sex;
         this.age = age;
@@ -59,7 +62,7 @@ public class Member {
         this.insertTime = LocalDateTime.now();
     }
 
-    public static Member of(String nickname, String sex, Age age, String country) {
+    public static Member of(String nickname, String sex, Age age, Country country) {
         return new Member(nickname, sex, age, country);
     }
 }
