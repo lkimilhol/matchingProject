@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.member.domain.Member;
+import com.lkimilhol.matchingproject.member.domain.Nickname;
 import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 import com.lkimilhol.matchingproject.member.dto.MemberRequest;
 import com.lkimilhol.matchingproject.member.dto.MemberResponse;
@@ -42,7 +43,7 @@ public class MemberController {
     @GetMapping(value = "/members/{nickname}")
     @ResponseBody
     public ResponseEntity<ResultBody> getMember(@PathVariable String nickname) {
-        return ResponseEntity.ok(new ResultBody(memberService.getMember(nickname)));
+        return ResponseEntity.ok(new ResultBody(memberService.getMember(new Nickname(nickname))));
     }
 
     @ResponseStatus(HttpStatus.OK)

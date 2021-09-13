@@ -15,4 +15,8 @@ public class Nickname {
     public Nickname(String contents) {
         this.contents = contents;
     }
+
+    public String toString() {
+        return this.contents;
+    }
 }
