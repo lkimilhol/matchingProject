@@ -30,7 +30,8 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nickname;
+    @Embedded
+    private Nickname nickname;
 
     private String sex;
 
@@ -53,7 +54,7 @@ public class Member {
         this.id = id;
     }
 
-    private Member (String nickname, String sex, Age age, Country country) {
+    private Member (Nickname nickname, String sex, Age age, Country country) {
         this.nickname = nickname;
         this.sex = sex;
         this.age = age;
@@ -62,7 +63,7 @@ public class Member {
         this.insertTime = LocalDateTime.now();
     }
 
-    public static Member of(String nickname, String sex, Age age, Country country) {
+    public static Member of(Nickname nickname, String sex, Age age, Country country) {
         return new Member(nickname, sex, age, country);
     }
 }

@@ -19,6 +19,7 @@ import com.lkimilhol.matchingproject.exception.NotFoundMemberException;
 import com.lkimilhol.matchingproject.member.domain.Age;
 import com.lkimilhol.matchingproject.member.domain.Country;
 import com.lkimilhol.matchingproject.member.domain.Member;
+import com.lkimilhol.matchingproject.member.domain.Nickname;
 import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 import com.lkimilhol.matchingproject.member.dto.MemberResponse;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
@@ -38,7 +39,7 @@ public class MemberService {
     public Member addMember(CreateMember createMember) {
         checkDuplicateMember(createMember);
 
-        var member = Member.of(createMember.getNickname(), createMember.getSex(), new Age(createMember.getAge()), Country.get(createMember.getCountry()));
+        var member = Member.of(new Nickname(createMember.getNickname()), createMember.getSex(), new Age(createMember.getAge()), Country.get(createMember.getCountry()));
         Address address = Address.of(City.get(createMember.getCity()), new District(createMember.getDistrict()), member);
 
         addressRepository.save(address);
@@ -55,7 +56,7 @@ public class MemberService {
         return memberRepository.findById(id).orElseThrow(NotFoundMemberException::new);
     }
 
-    public Optional<Member> findByNickname(String nickname) {
+    public Optional<Member> findByNickname(Nickname nickname) {
         return memberRepository.findByNickname(nickname);
     }
 
@@ -63,14 +64,14 @@ public class MemberService {
         return addressRepository.findById(id).orElseThrow(NotFoundAddressException::new);
     }
 
-    public MemberResponse getMember(String nickname) {
+    public MemberResponse getMember(Nickname nickname) {
         Member member = findByNickname(nickname).orElseThrow(NotFoundMemberException::new);
         List<Address> addresses = addressRepository.findAddressesByMember(member);
         return MemberResponse.of(member, addresses);
     }
 
     private void checkDuplicateMember(CreateMember createMember) {
-        Optional<Member> memberInfo = findByNickname(createMember.getNickname());
+        Optional<Member> memberInfo = findByNickname(new Nickname(createMember.getNickname()));
 
         if (memberInfo.isPresent()) {
             throw new NicknameAlreadyExistsException();

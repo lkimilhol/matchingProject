@@ -6,7 +6,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.lkimilhol.matchingproject.member.domain.Member;
+import com.lkimilhol.matchingproject.member.domain.Nickname;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    Optional<Member> findByNickname(String nickname);
+    Optional<Member> findByNickname(Nickname nickname);
 }

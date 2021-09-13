@@ -20,7 +20,7 @@ public class MemberRequest {
     @Builder
     public MemberRequest(Member member) {
         this.id = member.getId();
-        this.nickname = member.getNickname();
+        this.nickname = member.getNickname().toString();
         this.sex = member.getSex();
         this.age = member.getAge().amount();
         this.insertTime = member.getInsertTime();

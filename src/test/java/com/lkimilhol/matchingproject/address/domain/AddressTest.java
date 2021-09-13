@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import com.lkimilhol.matchingproject.member.domain.Age;
 import com.lkimilhol.matchingproject.member.domain.Country;
 import com.lkimilhol.matchingproject.member.domain.Member;
+import com.lkimilhol.matchingproject.member.domain.Nickname;
 import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 
 class AddressTest {
@@ -20,7 +21,7 @@ class AddressTest {
 
     @BeforeEach
     void setup() {
-        member = Member.of("test", "m", new Age(18), Country.KR);
+        member = Member.of(new Nickname("test"), "m", new Age(18), Country.KR);
     }
 
     @DisplayName("생성")
