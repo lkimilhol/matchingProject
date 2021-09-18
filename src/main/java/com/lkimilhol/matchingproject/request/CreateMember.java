@@ -16,7 +16,7 @@ public class CreateMember {
 
     @NotNull
     @NotEmpty
-    private String sex;
+    private String gender;
 
     @NotNull
     @Min(0)

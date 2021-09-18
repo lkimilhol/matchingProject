@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.member.domain.Member;
-import com.lkimilhol.matchingproject.member.domain.Nickname;
 
 @Getter
 @NoArgsConstructor
@@ -30,6 +29,6 @@ public class MemberResponse {
     }
 
     public static MemberResponse of(Member member, List<Address> addresses) {
-        return new MemberResponse(member.getId(), member.getNickname().toString(), member.getSex(), member.getAge().amount(), member.getInsertTime(), AddressResponse.listOf(addresses));
+        return new MemberResponse(member.getId(), member.getNickname().toString(), member.getGender().toString(), member.getAge().amount(), member.getInsertTime(), AddressResponse.listOf(addresses));
     }
 }

@@ -21,7 +21,7 @@ public class MemberRequest {
     public MemberRequest(Member member) {
         this.id = member.getId();
         this.nickname = member.getNickname().toString();
-        this.sex = member.getSex();
+        this.sex = member.getGender().toString();
         this.age = member.getAge().amount();
         this.insertTime = member.getInsertTime();
     }

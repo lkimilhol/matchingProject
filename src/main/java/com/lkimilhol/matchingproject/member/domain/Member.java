@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,7 +16,6 @@ import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.order.domain.Order;
 
 @Entity
@@ -33,7 +31,7 @@ public class Member {
     @Embedded
     private Nickname nickname;
 
-    private String sex;
+    private Gender gender;
 
     @Embedded
     private Age age;
@@ -54,17 +52,17 @@ public class Member {
         this.id = id;
     }
 
-    private Member (Nickname nickname, String sex, Age age, Country country) {
+    private Member (Nickname nickname, Gender gender, Age age, Country country) {
         this.nickname = nickname;
-        this.sex = sex;
+        this.gender = gender;
         this.age = age;
         this.country = country;
         this.updateTime = LocalDateTime.now();
         this.insertTime = LocalDateTime.now();
     }
 
-    public static Member of(Nickname nickname, String sex, Age age, Country country) {
-        return new Member(nickname, sex, age, country);
+    public static Member of(Nickname nickname, Gender gender, Age age, Country country) {
+        return new Member(nickname, gender, age, country);
     }
 }
 
