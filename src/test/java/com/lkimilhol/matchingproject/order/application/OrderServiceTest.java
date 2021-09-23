@@ -21,6 +21,7 @@ import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.repository.MemberRepository;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
+import com.lkimilhol.matchingproject.menu.domain.Name;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
 import com.lkimilhol.matchingproject.order.domain.Order;
 import com.lkimilhol.matchingproject.order.domain.OrderHistory;
@@ -61,7 +62,7 @@ class OrderServiceTest {
         Member member = new Member(1L);
 
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
-        Menu menu = Menu.of(shop, "짜장면", new Quantity(200));
+        Menu menu = Menu.of(shop, new Name("짜장면"), new Quantity(200));
 
         // when
         when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
@@ -80,7 +81,7 @@ class OrderServiceTest {
         Member member = new Member(1L);
 
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
-        Menu menu = Menu.of(shop, "짜장면", new Quantity(200));
+        Menu menu = Menu.of(shop, new Name("짜장면"), new Quantity(200));
         Order order = Order.of(member, shop, menu, new Quantity(100));
 
         OrderRequest orderRequest = new OrderRequest(1L, 1L, 1L, OrderStatus.CANCEL);

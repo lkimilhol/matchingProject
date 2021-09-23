@@ -21,7 +21,7 @@ public class MenuDto {
 	@Builder
 	public MenuDto(Menu menu) {
 		this.id = menu.getId();
-		this.name = menu.getName();
+		this.name = menu.getName().getContents();
 		this.shop = new ShopDto(menu.getShop());
 		this.insertTime = menu.getInsertTime();
 		this.updateTime = menu.getUpdateTime();

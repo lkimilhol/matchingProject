@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.exception.NotFoundMenuException;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
+import com.lkimilhol.matchingproject.menu.domain.Name;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
 import com.lkimilhol.matchingproject.request.CreateMenu;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
@@ -25,7 +26,7 @@ public class MenuService {
 		//TODO 옵셔널 수정 예정
 		Shop shop = shopRepository.findById(createMenu.getShopId()).orElseThrow(NotFoundMenuException::new);
 
-		Menu menu = Menu.of(shop, createMenu.getName(), new Quantity(createMenu.getAmount()));
+		Menu menu = Menu.of(shop, new Name(createMenu.getName()), new Quantity(createMenu.getAmount()));
 		menuRepository.save(menu);
 
 		return menu;

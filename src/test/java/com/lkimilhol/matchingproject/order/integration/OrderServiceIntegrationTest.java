@@ -10,6 +10,7 @@ import com.lkimilhol.matchingproject.member.domain.Gender;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.domain.Nickname;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
+import com.lkimilhol.matchingproject.menu.domain.Name;
 import com.lkimilhol.matchingproject.order.domain.Order;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
@@ -41,7 +42,7 @@ class OrderServiceIntegrationTest {
         //given
         Member member = Member.of(new Nickname("test"), Gender.M, new Age(18), Country.KR);
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
-        Menu menu = Menu.of(shop, "짜장면", new Quantity(10));
+        Menu menu = Menu.of(shop, new Name("짜장면"), new Quantity(10));
 
         Order order = Order.of(member, shop, menu, new Quantity(100));
 

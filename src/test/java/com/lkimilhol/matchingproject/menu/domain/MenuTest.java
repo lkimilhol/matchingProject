@@ -34,7 +34,7 @@ class MenuTest {
         createMenu.setAmount(100);
 
         //when
-        Menu menu = Menu.of(shop, createMenu.getName(), new Quantity(createMenu.getAmount()));
+        Menu menu = Menu.of(shop, new Name(createMenu.getName()), new Quantity(createMenu.getAmount()));
 
         //then
         assertThat(menu).isNotNull();
@@ -50,7 +50,7 @@ class MenuTest {
         createMenu.setAmount(1);
 
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
-        Menu menu = Menu.of(shop, createMenu.getName(), new Quantity(createMenu.getAmount()));
+        Menu menu = Menu.of(shop, new Name(createMenu.getName()), new Quantity(createMenu.getAmount()));
 
         //when
         //then

@@ -32,7 +32,8 @@ public class Menu {
 	@JoinColumn(name = "shop_id")
 	private Shop shop;
 
-	private String name;
+	@Embedded
+	private Name name;
 
 	@Embedded
 	private Quantity quantity;
@@ -43,13 +44,13 @@ public class Menu {
 	@Column(name = "insert_time", columnDefinition = "DATETIME")
 	private LocalDateTime insertTime;
 
-	private Menu(Shop shop, String name, Quantity quantity) {
+	private Menu(Shop shop, Name name, Quantity quantity) {
 		this.shop = shop;
 		this.name = name;
 		this.quantity = quantity;
 	}
 
-	public static Menu of(Shop shop, String name, Quantity quantity) {
+	public static Menu of(Shop shop, Name name, Quantity quantity) {
 		return new Menu(shop, name, quantity);
 	}
 
