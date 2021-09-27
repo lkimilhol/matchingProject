@@ -12,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.lkimilhol.matchingproject.address.domain.City;
+import com.lkimilhol.matchingproject.address.domain.District;
 import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.menu.repository.MenuRepository;
 import com.lkimilhol.matchingproject.request.CreateMenu;
@@ -45,7 +47,7 @@ class MenuServiceTest {
 		createShop.setCity("서울");
 		createShop.setDistrict("송파구");
 
-		Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
+		Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
 
 		// when
 		when(shopRepository.findById(any())).thenReturn(Optional.of(shop));

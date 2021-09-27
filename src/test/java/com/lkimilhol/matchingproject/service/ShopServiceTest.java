@@ -1,5 +1,7 @@
 package com.lkimilhol.matchingproject.service;
 
+import com.lkimilhol.matchingproject.address.domain.City;
+import com.lkimilhol.matchingproject.address.domain.District;
 import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.request.CreateShop;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
@@ -32,7 +34,7 @@ class ShopServiceTest {
         //given
         String name = "성경";
 
-        Shop shop = Shop.of(name, CategoryEnum.CHINA, "서울", "송파구");
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
 
         //when
         shopRepository.save(shop);
@@ -47,7 +49,7 @@ class ShopServiceTest {
         //given
         String name = "성경";
 
-        Shop shop = Shop.of(name, CategoryEnum.CHINA, "서울", "송파구");
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
 
         //when
         shopRepository.save(shop);

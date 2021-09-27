@@ -22,8 +22,8 @@ public class ShopDto {
 	public ShopDto(Shop shop) {
 		this.name = shop.getName();
 		this.category = shop.getCategory();
-		this.city = shop.getCity();
-		this.district = shop.getDistrict();
+		this.city = shop.getCity().toName();
+		this.district = shop.getDistrict().getName();
 		this.insertTime = shop.getInsertTime();
 	}
 }

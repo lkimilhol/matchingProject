@@ -15,6 +15,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.lkimilhol.matchingproject.address.domain.City;
+import com.lkimilhol.matchingproject.address.domain.District;
 import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.common.OrderStatus;
 import com.lkimilhol.matchingproject.common.Quantity;
@@ -61,7 +63,7 @@ class OrderServiceTest {
 
         Member member = new Member(1L);
 
-        Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
         Menu menu = Menu.of(shop, new Name("짜장면"), new Quantity(200));
 
         // when
@@ -80,7 +82,7 @@ class OrderServiceTest {
         // given
         Member member = new Member(1L);
 
-        Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
         Menu menu = Menu.of(shop, new Name("짜장면"), new Quantity(200));
         Order order = Order.of(member, shop, menu, new Quantity(100));
 

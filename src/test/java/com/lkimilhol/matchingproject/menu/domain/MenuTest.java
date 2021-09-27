@@ -8,6 +8,8 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.lkimilhol.matchingproject.address.domain.City;
+import com.lkimilhol.matchingproject.address.domain.District;
 import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.common.Quantity;
 import com.lkimilhol.matchingproject.exception.NegativeValueException;
@@ -26,7 +28,7 @@ class MenuTest {
         createShop.setCity("서울");
         createShop.setDistrict("송파구");
 
-        Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
 
         CreateMenu createMenu = new CreateMenu();
         createMenu.setShopId(1L);
@@ -49,7 +51,7 @@ class MenuTest {
         createMenu.setName("짜짱면");
         createMenu.setAmount(1);
 
-        Shop shop = Shop.of("성경", CategoryEnum.CHINA, "서울", "송파구");
+        Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
         Menu menu = Menu.of(shop, new Name(createMenu.getName()), new Quantity(createMenu.getAmount()));
 
         //when

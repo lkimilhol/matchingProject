@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.lkimilhol.matchingproject.address.domain.City;
+import com.lkimilhol.matchingproject.address.domain.District;
 import com.lkimilhol.matchingproject.common.CategoryEnum;
 import com.lkimilhol.matchingproject.menu.domain.Menu;
 import com.lkimilhol.matchingproject.order.domain.Order;
@@ -35,9 +37,9 @@ public class Shop {
     @Enumerated(EnumType.STRING)
     private CategoryEnum category;
 
-    private String city;
+    private City city;
 
-    private String district;
+    private District district;
 
     @OneToMany(mappedBy = "shop")
     private List<Order> orders = new ArrayList<>();
@@ -52,14 +54,14 @@ public class Shop {
     private LocalDateTime insertTime;
 
 
-    private Shop(String name, CategoryEnum category, String city, String district) {
+    private Shop(String name, CategoryEnum category, City city, District district) {
         this.name = name;
         this.category = category;
         this.city = city;
         this.district = district;
     }
 
-    public static Shop of(String name, CategoryEnum category, String city, String district) {
+    public static Shop of(String name, CategoryEnum category, City city, District district) {
         return new Shop(name, category, city, district);
     }
 }

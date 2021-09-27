@@ -3,6 +3,8 @@ package com.lkimilhol.matchingproject.shop.application;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lkimilhol.matchingproject.address.domain.City;
+import com.lkimilhol.matchingproject.address.domain.District;
 import com.lkimilhol.matchingproject.exception.CustomException;
 import com.lkimilhol.matchingproject.exception.NotFoundShopException;
 import com.lkimilhol.matchingproject.request.CreateShop;
@@ -22,9 +24,10 @@ public class ShopService {
         return shopRepository.save(Shop.of(
                 createShop.getName(),
                 createShop.getCategory(),
-                createShop.getCity(),
-                createShop.getDistrict()
-        ));
+                City.valueOf(createShop.getCity()),
+                new District(createShop.getDistrict()
+                ))
+        );
     }
 
     public Shop getShop(String shopName) {
