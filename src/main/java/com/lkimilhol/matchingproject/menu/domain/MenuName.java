@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor
 @Getter
-public class Name {
+public class MenuName {
     private String contents;
 
-    public Name(String contents) {
+    public MenuName(String contents) {
         this.contents = contents;
     }
 }

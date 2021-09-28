@@ -2,8 +2,6 @@ package com.lkimilhol.matchingproject.menu.domain;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,7 +34,7 @@ class MenuTest {
         createMenu.setAmount(100);
 
         //when
-        Menu menu = Menu.of(shop, new Name(createMenu.getName()), new Quantity(createMenu.getAmount()));
+        Menu menu = Menu.of(shop, new MenuName(createMenu.getName()), new Quantity(createMenu.getAmount()));
 
         //then
         assertThat(menu).isNotNull();
@@ -52,7 +50,7 @@ class MenuTest {
         createMenu.setAmount(1);
 
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
-        Menu menu = Menu.of(shop, new Name(createMenu.getName()), new Quantity(createMenu.getAmount()));
+        Menu menu = Menu.of(shop, new MenuName(createMenu.getName()), new Quantity(createMenu.getAmount()));
 
         //when
         //then

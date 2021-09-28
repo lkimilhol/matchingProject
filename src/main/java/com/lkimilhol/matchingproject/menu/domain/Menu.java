@@ -15,7 +15,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.lkimilhol.matchingproject.common.Quantity;
-import com.lkimilhol.matchingproject.exception.NegativeValueException;
 import com.lkimilhol.matchingproject.shop.domain.Shop;
 
 @Entity
@@ -33,7 +32,7 @@ public class Menu {
 	private Shop shop;
 
 	@Embedded
-	private Name name;
+	private MenuName name;
 
 	@Embedded
 	private Quantity quantity;
@@ -44,14 +43,14 @@ public class Menu {
 	@Column(name = "insert_time", columnDefinition = "DATETIME")
 	private LocalDateTime insertTime;
 
-	private Menu(Shop shop, Name name, Quantity quantity) {
+	private Menu(Shop shop, MenuName name, Quantity quantity) {
 		this.shop = shop;
 		this.name = name;
 		this.quantity = quantity;
 	}
 
-	public static Menu of(Shop shop, Name name, Quantity quantity) {
-		return new Menu(shop, name, quantity);
+	public static Menu of(Shop shop, MenuName menuName, Quantity quantity) {
+		return new Menu(shop, menuName, quantity);
 	}
 
 	public void removeAmount(Quantity quantity) {
