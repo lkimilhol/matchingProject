@@ -39,7 +39,7 @@ public class MemberService {
     public Member addMember(CreateMember createMember) {
         checkDuplicateMember(createMember);
 
-        var member = Member.of(new Nickname(createMember.getNickname()), Gender.valueOf(createMember.getGender()), new Age(createMember.getAge()), Country.get(createMember.getCountry()));
+        var member = new Member(new Nickname(createMember.getNickname()), Gender.valueOf(createMember.getGender()), new Age(createMember.getAge()), Country.get(createMember.getCountry()));
         Address address = Address.of(City.get(createMember.getCity()), new District(createMember.getDistrict()), member);
 
         addressRepository.save(address);
