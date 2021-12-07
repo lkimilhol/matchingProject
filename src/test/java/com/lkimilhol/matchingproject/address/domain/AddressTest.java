@@ -1,9 +1,6 @@
 package com.lkimilhol.matchingproject.address.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +19,7 @@ class AddressTest {
 
     @BeforeEach
     void setup() {
-        member = Member.of(new Nickname("test"), Gender.M, new Age(18), Country.KR);
+        member = new Member(new Nickname("test"), Gender.M, new Age(18), Country.KR);
     }
 
     @DisplayName("생성")

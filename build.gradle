@@ -35,8 +35,11 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+	//kotlin
+	compile group:'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8'
 	runtimeOnly group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: '1.6.0'
+	testImplementation "com.ninja-squad:springmockk:3.0.1"
+	testImplementation 'io.kotlintest:kotlintest-runner-junit5:3.3.0'
 }
 
 test {

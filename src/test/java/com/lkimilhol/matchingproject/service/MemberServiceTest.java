@@ -36,7 +36,7 @@ class MemberServiceTest {
     @DisplayName("멤버 생성 테스트")
     void createMember() {
         //given
-        Member member = Member.of(new Nickname("test"), Gender.M, new Age(18), Country.KR);
+        Member member = new Member(new Nickname("test"), Gender.M, new Age(18), Country.KR);
         Address address = Address.of(City.get("서울"), new District("송파"), member);
 
         //when
