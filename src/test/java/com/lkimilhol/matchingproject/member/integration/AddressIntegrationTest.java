@@ -44,7 +44,7 @@ public class AddressIntegrationTest {
     @Test
     void update() {
         // given
-        Member member = Member.of(new Nickname("test"), Gender.M, new Age(18), Country.KR);
+        Member member = new Member(new Nickname("test"), Gender.M, new Age(18), Country.KR);
         memberRepository.save(member);
 
         Address address = Address.of(City.get("서울"), new District("송파"), member);
@@ -71,7 +71,7 @@ public class AddressIntegrationTest {
     @Test
     void getMember() {
         // given
-        Member member = Member.of(new Nickname("test"), Gender.M, new Age(18), Country.KR);
+        Member member = new Member(new Nickname("test"), Gender.M, new Age(18), Country.KR);
         Address 송파 = Address.of(City.get("서울"), new District("송파"), member);
         Address 강남 = Address.of(City.get("서울"), new District("강남"), member);
         Address 서초 = Address.of(City.get("서울"), new District("서초"), member);

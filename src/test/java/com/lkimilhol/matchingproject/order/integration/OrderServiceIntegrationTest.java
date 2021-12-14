@@ -34,7 +34,7 @@ class OrderServiceIntegrationTest {
     @DisplayName("주문 생성 테스트")
     public void createOrder() {
         //given
-        Member member = Member.of(new Nickname("test"), Gender.M, new Age(18), Country.KR);
+        Member member = new Member(new Nickname("test"), Gender.M, new Age(18), Country.KR);
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
         Menu menu = Menu.of(shop, new MenuName("짜장면"), new Quantity(10));
 

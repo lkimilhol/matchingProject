@@ -61,7 +61,7 @@ class OrderServiceTest {
         // given
         CreateOrder createOrder = new CreateOrder(1L, 1L, 1L, 1);
 
-        Member member = new Member(1L);
+        Member member = new Member();
 
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
         Menu menu = Menu.of(shop, new MenuName("짜장면"), new Quantity(200));
@@ -80,7 +80,7 @@ class OrderServiceTest {
     @Test
     void cancel() {
         // given
-        Member member = new Member(1L);
+        Member member = new Member();
 
         Shop shop = Shop.of("성경", CategoryEnum.CHINA, City.SEOUL, new District("송파구"));
         Menu menu = Menu.of(shop, new MenuName("짜장면"), new Quantity(200));
