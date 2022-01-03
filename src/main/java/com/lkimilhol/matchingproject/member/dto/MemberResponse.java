@@ -29,6 +29,6 @@ public class MemberResponse {
     }
 
     public static MemberResponse of(Member member, List<Address> addresses) {
-        return new MemberResponse(member.getId(), member.getNickname().toString(), member.getGender().toString(), member.getAge().amount(), member.getInsertTime(), AddressResponse.listOf(addresses));
+        return new MemberResponse(member.getId(), member.getNickname().toString(), member.getGender().toString(), member.getAge().getAmount(), member.getInsertTime(), AddressResponse.listOf(addresses));
     }
 }
