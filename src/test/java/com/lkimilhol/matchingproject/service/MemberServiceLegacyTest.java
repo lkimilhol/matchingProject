@@ -25,7 +25,7 @@ import com.lkimilhol.matchingproject.member.repository.MemberRepository;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
-class MemberServiceTest {
+class MemberServiceLegacyTest {
     @Autowired
     private MemberRepository memberRepository;
 

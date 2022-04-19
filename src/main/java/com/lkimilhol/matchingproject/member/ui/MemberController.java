@@ -1,16 +1,12 @@
 package com.lkimilhol.matchingproject.member.ui;
 
-import java.util.List;
-
-import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.member.domain.Member;
 import com.lkimilhol.matchingproject.member.domain.Nickname;
 import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 import com.lkimilhol.matchingproject.member.dto.MemberRequest;
-import com.lkimilhol.matchingproject.member.dto.MemberResponse;
 import com.lkimilhol.matchingproject.request.CreateMember;
 import com.lkimilhol.matchingproject.response.ResultBody;
-import com.lkimilhol.matchingproject.member.application.MemberService;
+import com.lkimilhol.matchingproject.member.application.MemberServiceLegacy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +19,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class MemberController {
 
-    private final MemberService memberService;
+    private final MemberServiceLegacy memberServiceLegacy;
 
     @PostMapping("/")
     public String getMember() {
@@ -36,21 +32,21 @@ public class MemberController {
     public ResponseEntity<ResultBody> addMember(
             @Valid CreateMember createMember
     ) {
-        return ResponseEntity.ok(new ResultBody(getMemberDto(memberService.addMember(createMember))));
+        return ResponseEntity.ok(new ResultBody(getMemberDto(memberServiceLegacy.addMember(createMember))));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/members/{nickname}")
     @ResponseBody
     public ResponseEntity<ResultBody> getMember(@PathVariable String nickname) {
-        return ResponseEntity.ok(new ResultBody(memberService.getMember(new Nickname(nickname))));
+        return ResponseEntity.ok(new ResultBody(memberServiceLegacy.getMember(new Nickname(nickname))));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/members/address")
     @ResponseBody
     public ResponseEntity<Void> updateAddress(@RequestBody AddressRequest addressRequest) {
-        memberService.updateAddress(addressRequest);
+        memberServiceLegacy.updateAddress(addressRequest);
         return ResponseEntity.noContent().build();
     }
 

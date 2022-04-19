@@ -16,12 +16,16 @@ import org.mockito.junit.jupiter.MockitoExtension
 import java.util.*
 
 @ExtendWith(MockitoExtension::class)
-class MemberServiceTest {
+class MemberServiceLegacyTest {
 
     private val memberRepository = mockk<MemberRepository>()
     private val addressRepository = mockk<AddressRepository>()
 
-    private val memberService = MemberService(memberRepository, addressRepository)
+    private val memberServiceLegacy =
+        MemberServiceLegacy(
+            memberRepository,
+            addressRepository
+        )
 
     @DisplayName("멤버 조회")
     @Test
@@ -36,7 +40,7 @@ class MemberServiceTest {
         every { memberRepository.findByNickname(member.nickname) } returns Optional.of(member)
         every { addressRepository.findAddressesByMember(member) } returns listOf(송파, 강남, 서초)
 
-        val memberResponse = memberService.getMember(member.nickname)
+        val memberResponse = memberServiceLegacy.getMember(member.nickname)
 
         // then
         memberResponse.addresses.size shouldBe 3

@@ -1,7 +1,6 @@
 package com.lkimilhol.matchingproject.member.application;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -29,7 +28,7 @@ import com.lkimilhol.matchingproject.request.CreateMember;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class MemberService {
+public class MemberServiceLegacy {
     private final MemberRepository memberRepository;
     private final AddressRepository addressRepository;
 
