@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class CreateMember {
+public class CreateMemberLegacy {
     @NotNull
     @NotEmpty
     private String nickname;
