@@ -37,9 +37,8 @@ class MemberServiceTest {
             addressRepository
         )
 
-    @DisplayName("멤버 조회")
     @Test
-    fun getMember() {
+    fun `멤버 조회`() {
         // given
         val member = Member(Nickname(NICKNAME), Gender.M, Age(AGE), Country.KR)
         val 송파 = Address.of(City.get(CITY), District(DISTRICT), member)
@@ -81,6 +80,8 @@ class MemberServiceTest {
         addMember.age shouldBe Age(AGE)
         addMember.country shouldBe Country.KR
 
-        verify { memberRepository }
+        verify (exactly = 1) { memberRepository.findByNickname(any()) }
+        verify (exactly = 1) { memberRepository.save(any()) }
+        verify (exactly = 1) { addressRepository.save(any()) }
     }
 }
