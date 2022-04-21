@@ -1,5 +1,7 @@
 package com.lkimilhol.matchingproject.address.domain;
 
+import java.util.Objects;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -39,5 +41,18 @@ public class Address {
     public void update(City city, District district) {
         this.city = city;
         this.district = district;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(id, address.id) && city == address.city && Objects.equals(district, address.district) && Objects.equals(member, address.member);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, city, district, member);
     }
 }

@@ -7,17 +7,15 @@ import com.lkimilhol.matchingproject.address.repository.AddressRepository
 import com.lkimilhol.matchingproject.member.domain.*
 import com.lkimilhol.matchingproject.member.repository.MemberRepository
 import com.lkimilhol.matchingproject.request.CreateMember
-import io.kotlintest.should
 import io.kotlintest.shouldBe
 import io.mockk.every
+import io.mockk.junit5.MockKExtension
 import io.mockk.mockk
-import io.mockk.runs
-import org.assertj.core.api.Assertions.assertThat
+import io.mockk.verify
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.Mockito.`when`
-import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.ArgumentMatchers.any
 import java.util.*
 
 private const val NICKNAME = "닉네임"
@@ -27,7 +25,7 @@ private const val COUNTRY = "KR"
 private const val CITY = "서울"
 private const val DISTRICT = "송파"
 
-@ExtendWith(MockitoExtension::class)
+@ExtendWith(MockKExtension::class)
 class MemberServiceTest {
 
     private val memberRepository = mockk<MemberRepository>()
@@ -72,17 +70,17 @@ class MemberServiceTest {
         val member = Member(Nickname(NICKNAME), Gender.M, Age(AGE), Country.KR)
         val address = Address.of(City.get(CITY), District(DISTRICT), member)
 
-        // TODO 테스트 수정 필요
         every { memberRepository.findByNickname(member.nickname) } returns Optional.empty()
-        `when` { addressRepository.save(address) }.thenReturn { address }
-        `when` { memberRepository.save(member) }.thenReturn { member }
+        every { addressRepository.save(address) } returns any()
+        every { memberRepository.save(member) } returns any()
 
         val addMember = memberService.addMember(createMember)
 
-        assertThat(addMember.id).isNotNull
         addMember.nickname shouldBe Nickname(NICKNAME)
         addMember.gender shouldBe Gender.M
         addMember.age shouldBe Age(AGE)
         addMember.country shouldBe Country.KR
+
+        verify { memberRepository }
     }
 }
