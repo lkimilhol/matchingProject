@@ -5,8 +5,10 @@ import com.lkimilhol.matchingproject.address.domain.City
 import com.lkimilhol.matchingproject.address.domain.District
 import com.lkimilhol.matchingproject.address.repository.AddressRepository
 import com.lkimilhol.matchingproject.exception.NicknameAlreadyExistsException
+import com.lkimilhol.matchingproject.exception.NotFoundAddressException
 import com.lkimilhol.matchingproject.exception.NotFoundMemberException
 import com.lkimilhol.matchingproject.member.domain.*
+import com.lkimilhol.matchingproject.member.dto.AddressRequest
 import com.lkimilhol.matchingproject.member.dto.MemberResponse
 import com.lkimilhol.matchingproject.member.repository.MemberRepository
 import com.lkimilhol.matchingproject.request.CreateMember
@@ -35,6 +37,16 @@ class MemberService(val memberRepository: MemberRepository, val addressRepositor
         memberRepository.save(member)
 
         return member
+    }
+
+    fun updateAddress(addressRequest: AddressRequest) {
+        memberRepository.findById(addressRequest.memberId)
+            .orElseThrow { NotFoundMemberException() }
+
+        val address = addressRepository.findById(addressRequest.addressId)
+            .orElseThrow { NotFoundAddressException() }
+
+        address.update(City.get(addressRequest.city), District(addressRequest.district))
     }
 
     fun findByNickname(nickname: Nickname): Optional<Member> {

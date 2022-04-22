@@ -5,8 +5,10 @@ import com.lkimilhol.matchingproject.address.domain.City
 import com.lkimilhol.matchingproject.address.domain.District
 import com.lkimilhol.matchingproject.address.repository.AddressRepository
 import com.lkimilhol.matchingproject.member.domain.*
+import com.lkimilhol.matchingproject.member.dto.AddressRequest
 import com.lkimilhol.matchingproject.member.repository.MemberRepository
 import com.lkimilhol.matchingproject.request.CreateMember
+import io.kotlintest.should
 import io.kotlintest.shouldBe
 import io.mockk.every
 import io.mockk.junit5.MockKExtension
@@ -83,5 +85,25 @@ class MemberServiceTest {
         verify (exactly = 1) { memberRepository.findByNickname(any()) }
         verify (exactly = 1) { memberRepository.save(any()) }
         verify (exactly = 1) { addressRepository.save(any()) }
+    }
+
+    @Test
+    fun `주소변경`() {
+        val addressRequest = AddressRequest()
+        addressRequest.city = CITY
+        addressRequest.district = DISTRICT
+
+        val member = Member(Nickname(NICKNAME), Gender.M, Age(AGE), Country.KR)
+        val address = Address.of(City.SUNGNAM, District("강남"), member)
+
+        // when
+        every { memberRepository.findById(any()) } returns Optional.of(member)
+        every { addressRepository.findById(any()) } returns Optional.of(address)
+
+        memberService.updateAddress(addressRequest)
+
+        // then
+        address.city shouldBe City.SEOUL
+        address.district.name shouldBe DISTRICT
     }
 }
