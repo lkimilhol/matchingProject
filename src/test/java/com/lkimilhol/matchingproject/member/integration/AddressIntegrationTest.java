@@ -17,7 +17,7 @@ import com.lkimilhol.matchingproject.address.domain.Address;
 import com.lkimilhol.matchingproject.address.domain.City;
 import com.lkimilhol.matchingproject.address.domain.District;
 import com.lkimilhol.matchingproject.address.repository.AddressRepository;
-import com.lkimilhol.matchingproject.member.application.MemberServiceLegacy;
+import com.lkimilhol.matchingproject.member.application.MemberService;
 import com.lkimilhol.matchingproject.member.domain.Age;
 import com.lkimilhol.matchingproject.member.domain.Country;
 import com.lkimilhol.matchingproject.member.domain.Gender;
@@ -38,7 +38,7 @@ public class AddressIntegrationTest {
     private AddressRepository addressRepository;
 
     @Autowired
-    private MemberServiceLegacy memberServiceLegacy;
+    private MemberService memberService;
 
     @DisplayName("주소 수정 통합 테스트")
     @Test
@@ -81,7 +81,7 @@ public class AddressIntegrationTest {
         addressRepository.save(강남);
         addressRepository.save(서초);
         // when
-        MemberResponse memberResponse = memberServiceLegacy.getMember(member.getNickname());
+        MemberResponse memberResponse = memberService.getMember(member.getNickname());
         // then
         assertThat(memberResponse.getAddresses().size()).isEqualTo(3);
     }
