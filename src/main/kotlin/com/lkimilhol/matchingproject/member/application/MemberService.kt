@@ -39,6 +39,7 @@ class MemberService(val memberRepository: MemberRepository, val addressRepositor
         return member
     }
 
+    @Transactional
     fun updateAddress(addressRequest: AddressRequest) {
         memberRepository.findById(addressRequest.memberId)
             .orElseThrow { NotFoundMemberException() }
