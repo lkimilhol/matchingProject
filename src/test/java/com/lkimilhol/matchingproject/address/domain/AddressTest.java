@@ -1,6 +1,8 @@
 package com.lkimilhol.matchingproject.address.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +17,8 @@ import com.lkimilhol.matchingproject.member.dto.AddressRequest;
 
 class AddressTest {
 
+    public static final String CITY = "서울";
+    public static final String DISTRICT = "송파";
     private Member member;
 
     @BeforeEach
@@ -27,7 +31,7 @@ class AddressTest {
     void create() {
         // given
         // when
-        Address address = Address.of(City.get("서울"), new District("송파"), member);
+        Address address = Address.of(City.get(CITY), new District(DISTRICT), member);
 
         // then
         assertThat(address).isNotNull();
@@ -38,11 +42,14 @@ class AddressTest {
     @Test
     void update() {
         // given
-        Address address = Address.of(City.get("서울"), new District("송파"), member);
+        Address address = Address.of(City.get(CITY), new District(DISTRICT), member);
 
-        AddressRequest addressRequest = new AddressRequest();
-        addressRequest.setCity("성남");
-        addressRequest.setDistrict("수정");
+        AddressRequest addressRequest = new AddressRequest(
+                1L,
+                1L,
+                "성남",
+                "수정"
+        );
 
         // when
         address.update(City.get(addressRequest.getCity()), new District(addressRequest.getDistrict()));

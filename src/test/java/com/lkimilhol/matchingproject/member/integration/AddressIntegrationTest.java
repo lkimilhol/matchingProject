@@ -53,9 +53,12 @@ public class AddressIntegrationTest {
         String district = "수정";
 
         // when
-        AddressRequest addressRequest = new AddressRequest();
-        addressRequest.setCity(city);
-        addressRequest.setDistrict(district);
+        AddressRequest addressRequest = new AddressRequest(
+                1L,
+                1L,
+                city,
+                district
+        );
         address.update(City.get(addressRequest.getCity()), new District(addressRequest.getDistrict()));
 
         Optional<Address> findAddress = addressRepository.findById(address.getId());

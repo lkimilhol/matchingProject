@@ -89,9 +89,12 @@ class MemberServiceTest {
 
     @Test
     fun `주소변경`() {
-        val addressRequest = AddressRequest()
-        addressRequest.city = CITY
-        addressRequest.district = DISTRICT
+        val addressRequest = AddressRequest(
+            1L,
+            1L,
+            CITY,
+            DISTRICT
+        )
 
         val member = Member(Nickname(NICKNAME), Gender.M, Age(AGE), Country.KR)
         val address = Address.of(City.SUNGNAM, District("강남"), member)
