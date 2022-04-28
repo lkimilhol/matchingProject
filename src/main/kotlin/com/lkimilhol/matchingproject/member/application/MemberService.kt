@@ -9,12 +9,14 @@ import com.lkimilhol.matchingproject.exception.NotFoundAddressException
 import com.lkimilhol.matchingproject.exception.NotFoundMemberException
 import com.lkimilhol.matchingproject.member.domain.*
 import com.lkimilhol.matchingproject.member.dto.AddressRequest
+import com.lkimilhol.matchingproject.member.dto.AddressResponse
 import com.lkimilhol.matchingproject.member.dto.MemberResponse
 import com.lkimilhol.matchingproject.member.repository.MemberRepository
 import com.lkimilhol.matchingproject.request.CreateMember
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
+import java.util.stream.Collectors
 
 @Service
 @Transactional(readOnly = true)
@@ -31,7 +33,7 @@ class MemberService(val memberRepository: MemberRepository, val addressRepositor
             Country.valueOf(createMember.country)
         )
 
-        val address = Address.of(City.get(createMember.city), District(createMember.district), member)
+        val address = Address(City.get(createMember.city), District(createMember.district), member)
 
         addressRepository.save(address)
         memberRepository.save(member)
@@ -56,8 +58,11 @@ class MemberService(val memberRepository: MemberRepository, val addressRepositor
 
     fun getMember(nickname: Nickname): MemberResponse {
         val member = findByNickname(nickname).orElseThrow { NotFoundMemberException() }
-        val addresses = addressRepository.findAddressesByMember(member)
-        return MemberResponse.of(member, addresses)
+        val addressResponses = addressRepository.findAddressesByMember(member)
+            .stream()
+            .map { AddressResponse(it.id, it.member?.id, it.city.name, it.district.name) }
+            .collect(Collectors.toList())
+        return MemberResponse.of(member, addressResponses)
     }
 
     private fun checkDuplicateMember(createMember: CreateMember) {

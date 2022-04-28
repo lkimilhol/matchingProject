@@ -47,7 +47,7 @@ public class AddressIntegrationTest {
         Member member = new Member(new Nickname("test"), Gender.M, new Age(18), Country.KR);
         memberRepository.save(member);
 
-        Address address = Address.of(City.get("서울"), new District("송파"), member);
+        Address address = new Address(City.get("서울"), new District("송파"), member);
         addressRepository.save(address);
         String city = "성남";
         String district = "수정";
@@ -75,9 +75,9 @@ public class AddressIntegrationTest {
     void getMember() {
         // given
         Member member = new Member(new Nickname("test"), Gender.M, new Age(18), Country.KR);
-        Address 송파 = Address.of(City.get("서울"), new District("송파"), member);
-        Address 강남 = Address.of(City.get("서울"), new District("강남"), member);
-        Address 서초 = Address.of(City.get("서울"), new District("서초"), member);
+        Address 송파 = new Address(City.get("서울"), new District("송파"), member);
+        Address 강남 = new Address(City.get("서울"), new District("강남"), member);
+        Address 서초 = new Address(City.get("서울"), new District("서초"), member);
 
         memberRepository.save(member);
         addressRepository.save(송파);

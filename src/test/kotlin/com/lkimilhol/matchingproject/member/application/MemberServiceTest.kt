@@ -43,9 +43,9 @@ class MemberServiceTest {
     fun `멤버 조회`() {
         // given
         val member = Member(Nickname(NICKNAME), Gender.M, Age(AGE), Country.KR)
-        val 송파 = Address.of(City.get(CITY), District(DISTRICT), member)
-        val 강남 = Address.of(City.get(CITY), District("강남"), member)
-        val 서초 = Address.of(City.get(CITY), District("서초"), member)
+        val 송파 = Address(City.get(CITY), District(DISTRICT), member)
+        val 강남 = Address(City.get(CITY), District("강남"), member)
+        val 서초 = Address(City.get(CITY), District("서초"), member)
 
         // when
         every { memberRepository.findByNickname(member.nickname) } returns Optional.of(member)
@@ -69,7 +69,7 @@ class MemberServiceTest {
         )
 
         val member = Member(Nickname(NICKNAME), Gender.M, Age(AGE), Country.KR)
-        val address = Address.of(City.get(CITY), District(DISTRICT), member)
+        val address = Address(City.get(CITY), District(DISTRICT), member)
 
         every { memberRepository.findByNickname(member.nickname) } returns Optional.empty()
         every { addressRepository.save(address) } returns any()
@@ -97,7 +97,7 @@ class MemberServiceTest {
         )
 
         val member = Member(Nickname(NICKNAME), Gender.M, Age(AGE), Country.KR)
-        val address = Address.of(City.SUNGNAM, District("강남"), member)
+        val address = Address(City.SUNGNAM, District("강남"), member)
 
         // when
         every { memberRepository.findById(any()) } returns Optional.of(member)

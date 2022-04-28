@@ -37,7 +37,7 @@ class MemberServiceLegacyTest {
     void createMember() {
         //given
         Member member = new Member(new Nickname("test"), Gender.M, new Age(18), Country.KR);
-        Address address = Address.of(City.get("서울"), new District("송파"), member);
+        Address address = new Address(City.get("서울"), new District("송파"), member);
 
         //when
         addressRepository.save(address);

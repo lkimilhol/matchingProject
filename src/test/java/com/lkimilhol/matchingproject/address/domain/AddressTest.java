@@ -31,7 +31,7 @@ class AddressTest {
     void create() {
         // given
         // when
-        Address address = Address.of(City.get(CITY), new District(DISTRICT), member);
+        Address address = new Address(City.get(CITY), new District(DISTRICT), member);
 
         // then
         assertThat(address).isNotNull();
@@ -42,7 +42,7 @@ class AddressTest {
     @Test
     void update() {
         // given
-        Address address = Address.of(City.get(CITY), new District(DISTRICT), member);
+        Address address = new Address(City.get(CITY), new District(DISTRICT), member);
 
         AddressRequest addressRequest = new AddressRequest(
                 1L,
